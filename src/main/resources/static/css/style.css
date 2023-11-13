@@ -514,7 +514,6 @@ html, body{ height: 100%; }
           animation-timing-function: ease;
   will-change: transform;
 }
-
 @-webkit-keyframes scrollWheel {
   from {
     -webkit-transform: translate(-50%, 0);
