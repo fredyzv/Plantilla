@@ -15,6 +15,6 @@ public class Liga {
 	@ManyToOne
 	@JoinColumn(name="ubigeo1", insertable = false, updatable = false)
 	private Ubigeo ubi;
-	private int ubigeo1;
+	private String ubigeo1;
 
 }
