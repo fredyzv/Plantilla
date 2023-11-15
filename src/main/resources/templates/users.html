@@ -155,15 +155,12 @@
                         <script type="text/javascript">
 
                             $.getJSON("listaDepartamentos",{},function (data) {
-                                console.log(data);
                                 $.each(data, function (i, obj){
                                     $("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
-                                    console.log("Termino departamentos");
                                 });
                             });
 
-                            $('id_departamento').onchange(function (){
-                                console.log("cambio");
+                            $('#id_departamento').change(function (){
 
                                 $("#id_provincia").empty();
                                 $("#id_distrito").empty();
@@ -171,16 +168,33 @@
                                 $("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
                                 $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
 
-                                var var_dep = $('id_departamento').val();
-                                var var_pro = $('id_provincia').val();
+                                var var_dep = $('#id_departamento').val();
+                                var var_pro = $('#id_provincia').val();
 
                                 $.getJSON("listaProvincias",{"dpto":var_dep},function (data) {
-                                    console.log(data);
                                     $.each(data, function (i, obj){
                                         $("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");
                                     });
                                 });
+                            });
 
+                            $('#id_provincia').change(function (){
+
+                                $("#id_distrito").empty();
+
+                                $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
+
+                                var var_dep = $('#id_departamento').val();
+                                var var_pro = $('#id_provincia').val();
+                                var var_dis = $('#id_distrito').val();
+
+                                console.log("Provincia: " + var_pro);
+
+                                $.getJSON("listaDistritos",{"prov":var_pro},function (data) {
+                                    $.each(data, function (i, obj){
+                                        $("#id_distrito").append("<option value='" + obj + "'>" + obj + "</option>");
+                                    });
+                                });
                             });
 
 

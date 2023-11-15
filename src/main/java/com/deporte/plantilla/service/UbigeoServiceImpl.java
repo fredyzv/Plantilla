@@ -23,5 +23,10 @@ public class UbigeoServiceImpl implements UbigeoService{
 		return repoUbi.traeProvincias(ubigeo);
 	}
 
+	@Override
+	public List<String> traeDistritos(Ubigeo ubigeo) {
+		return repoUbi.traeDistritos(ubigeo);
+	}
+
 
 }

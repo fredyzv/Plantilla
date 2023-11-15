@@ -33,6 +33,12 @@ public class PrincipalController {
         return servicio.traeProvincias(ubigeo);
     }
 
+    @RequestMapping("/listaDistritos")
+    @ResponseBody
+    public List<String> listaDistritos(Ubigeo ubigeo){
+        return servicio.traeDistritos(ubigeo);
+    }
+
     @GetMapping("/users")
     public String abrirLoginUsuarios(Model model) {
 

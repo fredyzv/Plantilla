@@ -10,4 +10,6 @@ public interface UbigeoService {
 
 	public abstract List<String> traeProvincias(Ubigeo ubigeo);
 
+	public abstract List<String> traeDistritos(Ubigeo ubigeo);
+
 }
