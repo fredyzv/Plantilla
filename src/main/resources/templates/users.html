@@ -137,7 +137,7 @@
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Provincia</label>
+                                    <label>Provincia</label>
                                     <select id="id_provincia" class="form-control">
                                         <option value=" ">[Seleccione Provincia]</option>
                                     </select>
@@ -153,7 +153,8 @@
                         </div>
 
                         <script type="text/javascript">
-                            $.getJSON("/listaDepartamentos",{},function (data) {
+
+                            $.getJSON("listaDepartamentos",{},function (data) {
                                 console.log(data);
                                 $.each(data, function (i, obj){
                                     $("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
@@ -161,17 +162,19 @@
                                 });
                             });
 
-                            $("id_departamento").change(function (){
-
+                            $('id_departamento').onchange(function (){
                                 console.log("cambio");
 
-                                var var_dep = $("id_departamento").val();
-                                console.log(var_dep);
-
                                 $("#id_provincia").empty();
-                                $("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
+                                $("#id_distrito").empty();
 
-                                $.getJSON("/listaProvincias",{"dpto":var_dep},function (data) {
+                                $("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
+                                $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
+
+                                var var_dep = $('id_departamento').val();
+                                var var_pro = $('id_provincia').val();
+
+                                $.getJSON("listaProvincias",{"dpto":var_dep},function (data) {
                                     console.log(data);
                                     $.each(data, function (i, obj){
                                         $("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");

@@ -12,7 +12,7 @@ public interface IUbigeoRepository extends JpaRepository<Ubigeo, String>{
 	@Query("select distinct x.dpto from Ubigeo x")
 	public abstract List<String> traeDepartamentos();
 	
-	@Query("select distinct x.prov from Ubigeo x where x.dpto = :var_dep")
-	public abstract List<String> traeProvincias(@Param("var_dep")String dpto);
+	@Query("select distinct x.prov from Ubigeo x where x.dpto = :#{#obj.dpto}")
+	public abstract List<String> traeProvincias(Ubigeo obj);
 
 }

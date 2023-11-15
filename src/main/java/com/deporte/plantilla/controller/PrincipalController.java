@@ -1,6 +1,7 @@
 package com.deporte.plantilla.controller;
 
 
+import com.deporte.plantilla.model.Ubigeo;
 import com.deporte.plantilla.model.Usuario;
 import com.deporte.plantilla.service.UbigeoService;
 import jakarta.servlet.http.HttpSession;
@@ -28,8 +29,8 @@ public class PrincipalController {
 
     @RequestMapping("/listaProvincias")
     @ResponseBody
-    public List<String> listaProv(String dpto){
-        return servicio.traeProvincias(dpto);
+    public List<String> listaProv(Ubigeo ubigeo){
+        return servicio.traeProvincias(ubigeo);
     }
 
     @GetMapping("/users")
