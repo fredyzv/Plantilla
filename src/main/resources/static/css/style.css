@@ -383,11 +383,12 @@ html, body{ height: 100%; }
 -------------------------------------------------------------------*/
 
 .banner{
-	background:url(../images/banner.jpg) no-repeat center top;
+	background:url(../images/) no-repeat center top;
 	background-attachment:fixed;
 	background-size:cover;
-	height:100vh;
+	height:1100px;
 	min-height:100%;
+    background-color:  #686565;
 }
 
 .banner .container, .banner .banner-static, .banner .col-lg-12 {
@@ -529,7 +530,7 @@ html, body{ height: 100%; }
     transform: translate(-50%, 20px);
     transform: translate3d(-50%, 20px, 0);
     opacity: 0;
-  }
+  }}
   @media (min-width: 768px) {
     from {
       -webkit-transform: translate(-50%, 0);
@@ -546,7 +547,7 @@ html, body{ height: 100%; }
       opacity: 0;
     }
   }
-}
+
 
 @keyframes scrollWheel {
   from {
@@ -562,7 +563,7 @@ html, body{ height: 100%; }
     transform: translate(-50%, 20px);
     transform: translate3d(-50%, 20px, 0);
     opacity: 0;
-  }
+  }}
   @media (min-width: 768px) {
     from {
       -webkit-transform: translate(-50%, 0);
@@ -579,7 +580,7 @@ html, body{ height: 100%; }
       opacity: 0;
     }
   }
-}
+
 	
 /*------------------------------------------------------------------
     ABOUT AREA
@@ -912,7 +913,7 @@ html, body{ height: 100%; }
 -------------------------------------------------------------------*/
 
 .team-main{
-	background:url(../images/team_bg.jpg) no-repeat center;
+	background:url(../images/vertical5.jpg) no-repeat center;
 	background-attachment:fixed;
 	background-size:cover;
 	position:relative;
@@ -1170,7 +1171,7 @@ html, body{ height: 100%; }
 -------------------------------------------------------------------*/
 
 .blog-main{
-	background:url(../images/blog_bg.jpg) no-repeat center;
+	background:url(../images/portada7.jpg) no-repeat center;
 	background-attachment:fixed;
 	background-size:cover;
 	position:relative;
@@ -1553,7 +1554,7 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 
 .footer-main{}
 .footer-news{
-	background:url(../images/newsletter-bg.jpg) no-repeat center;
+	background:url(../images/balon1.jpg) no-repeat center;
 	background-attachment:fixed;
 	background-size:cover;
 	position:relative;
@@ -1657,10 +1658,10 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
     padding: 4px;
 }
 .footer-box {
-	background-image:-moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.57) 0%,rgba(0, 0, 0, 0.87) 100%), url(..images/footer_background.jpg);
-	background-image:-webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.57) 0%,rgba(0, 0, 0, 0.87) 100%), url(../images/footer_background.jpg);
-	background-image:radial-gradient(ellipse at center, rgba(0, 0, 0, 0.57) 0%,rgba(0, 0, 0, 0.87) 100%), url(../images/footer_background.jpg);
-	background-color:#111;background-position:center;background-repeat:no-repeat;background-size:cover
+	background-image:-moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.57) 0%,rgba(0, 0, 0, 0.87) 100%), url(..images/.jpg);
+	background-image:-webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.57) 0%,rgba(0, 0, 0, 0.87) 100%), url(../images/.jpg);
+	background-image:radial-gradient(ellipse at center, rgba(0, 0, 0, 0.57) 0%,rgba(0, 0, 0, 0.87) 100%), url(../images/.jpg);
+	background-color:#625555;background-position:center;background-repeat:no-repeat;background-size:cover;
 	}
 .socials-box li {
     display: inline-block;

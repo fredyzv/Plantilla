@@ -47,6 +47,18 @@ public class PrincipalController {
         return "users";
     }
 
+    /*SOLO PARA GUARDAR Y PROBAR EL UBIGEO Y DASHBOARD*/
+    @GetMapping("/ubi")
+    public String abrirUbiPrueba(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "ubigeo";
+    }
+    @GetMapping("/dash")
+    public String abrirDash(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "dashboard";
+    }
+    /*SOLO PARA GUARDAR Y PROBAR EL UBIGEO Y DASHBOARD*/
     @GetMapping("/logout")
     public String salir(@ModelAttribute Usuario usuario, HttpSession session, Model model) {
 

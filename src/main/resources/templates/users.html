@@ -71,16 +71,8 @@
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li ><a href="/">Home</a></li>
-                                    <li><a href="/#about">About us</a></li>
-                                    <li><a href="/#menu">Menu</a></li>
-                                    <li><a href="/#our_team">Team</a></li>
-                                    <li><a href="/#gallery">Gallery</a></li>
-                                    <li><a href="/#blog">Blog</a></li>
-                                    <li><a href="/#pricing">pricing</a></li>
-                                    <li><a href="/#reservation">Reservaion</a></li>
-                                    <li><a href="/#contact">Contact us</a></li>
-                                    <li class="active"><a href="/users">Users</a></li>
+                                    <li ><a href="/">Regresar</a></li>
+
                                 </ul>
                             </div>
                             <!-- end nav-collapse -->
@@ -92,164 +84,99 @@
             </div>
             <!-- end container-fluid -->
         </header>
+
         <!-- end header -->
     </div>
 	<!-- end site-header -->
-	
+
+
     <div id="banner" class="banner full-screen-mode parallax">
+
         <div class="container pr">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="banner-static">
-                    <div class="banner-text">
+            <div style="display: flex; flex-direction: row; width: 100%; padding-top: 10%" >
+                <div class="fondologin">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                        <div class="banner-static">
+                            <div class="banner-text">
 
-                        <div class="login">
-                            <h1>Inicio de Sesión</h1>
-                            <div class="form-group">
-                                <form action="/usuarios/validar" method="post"
-                                      th:object="${usuario}">
-
+                                <div class="login">
+                                    <h2 class="block-title text-center">Iniciar Sesion</h2>
                                     <div class="form-group">
-                                        <label for="inputUsuario">Usuario</label> <input type="email"
-                                                                                         th:field="*{correo}" class="form-control" id="inputEmail4"
-                                                                                         placeholder="Ingrese su Correo">
+                                        <form action="/usuarios/validar" method="post"
+                                              th:object="${usuario}">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-box">
+                                                     <input type="email"th:field="*{correo}" class="form-control" id="inputEmail4"placeholder="Correo">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="password" th:field="*{clave}" class="form-control" id="inputPassword4" placeholder="Contraseña">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="reserve-book-btn text-center">
+                                                    <a href="/dash"><button type="button" class="hvr-underline-from-center">Ingresar</button></a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- -->
+                                        <br>
+
+                                        <div th:if="${mensaje} != null" class="alert alert-danger">
+                                            <strong th:text="${mensaje}"></strong>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword">Contraseña</label> <input
-                                            type="password" th:field="*{clave}" class="form-control"
-                                            id="inputPassword4" placeholder="Ingrese su Password">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Ingresar</button>
-                                </form>
-                                <!-- -->
-                                <br>
 
-                                <div th:if="${mensaje} != null" class="alert alert-danger">
-                                    <strong th:text="${mensaje}"></strong>
+
                                 </div>
+
+
+                                <!-- end banner-cell -->
+
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label>Departamento</label>
-                                    <select id="id_departamento" class="form-control">
-                                        <option value=" ">[Seleccione Departamento]</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    <label>Provincia</label>
-                                    <select id="id_provincia" class="form-control">
-                                        <option value=" ">[Seleccione Provincia]</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Distrito</label>
-                                    <select id="id_distrito" class="form-control">
-                                        <option value=" ">[Seleccione Distrito]</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <!-- end banner-text -->
                         </div>
-
-                        <script type="text/javascript">
-
-                            $.getJSON("listaDepartamentos",{},function (data) {
-                                $.each(data, function (i, obj){
-                                    $("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
-                                });
-                            });
-
-                            $('#id_departamento').change(function (){
-
-                                $("#id_provincia").empty();
-                                $("#id_distrito").empty();
-
-                                $("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
-                                $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
-
-                                var var_dep = $('#id_departamento').val();
-                                var var_pro = $('#id_provincia').val();
-
-                                $.getJSON("listaProvincias",{"dpto":var_dep},function (data) {
-                                    $.each(data, function (i, obj){
-                                        $("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");
-                                    });
-                                });
-                            });
-
-                            $('#id_provincia').change(function (){
-
-                                $("#id_distrito").empty();
-
-                                $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
-
-                                var var_dep = $('#id_departamento').val();
-                                var var_pro = $('#id_provincia').val();
-                                var var_dis = $('#id_distrito').val();
-
-                                console.log("Provincia: " + var_pro);
-
-                                $.getJSON("listaDistritos",{"prov":var_pro},function (data) {
-                                    $.each(data, function (i, obj){
-                                        $("#id_distrito").append("<option value='" + obj + "'>" + obj + "</option>");
-                                    });
-                                });
-                            });
-
-
-                        </script>
-                        <!-- end banner-cell -->
+                        <!-- end banner-static -->
                     </div>
-                    <!-- end banner-text -->
+
+                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="background:url(../images/portada7.jpg) no-repeat center center; height:100%;">
+                        <div class="banner-static">
+                            <div class="banner-text">
+
+                                <div class="login">
+
+                                </div>
+
+
+                                <!-- end banner-cell -->
+
+                            </div>
+                            <!-- end banner-text -->
+                        </div>
+                        <!-- end banner-static -->
+                    </div>
                 </div>
-                <!-- end banner-static -->
+
             </div>
+
+
+            <!-- end reservations-main -->
             <!-- end col -->
+
         </div>
+
         <!-- end container -->
     </div>
 
 
     <!-- end banner -->
 
-    <div id="footer" class="footer-main">
-
-            <!-- end container -->
-            <div id="copyright" class="copyright-main" style="margin-top: -45px">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h6 class="copy-title"> Copyright &copy; 2017 Food Funday is powered by <a href="#" target="_blank"></a> </h6>
-                        </div>
-
-                    </div>
-                    <!-- end row -->
-
-                </div>
-                <!-- end container -->
-            </div>
-            <!-- end copyright-main -->
-        </div>
-        <!-- end footer-box -->
-    </div>
-    <!-- end footer-main -->
 
 
 
     <a href="#" class="scrollup" style="margin-top: -50px">Scroll</a>
 
-    <section id="color-panel" class="close-color-panel">
-        <a class="panel-button gray2"><i class="fa fa-cog fa-spin fa-2x"></i></a>
-        <!-- Colors -->
-        <div class="segment">
-            <h4 class="gray2 normal no-padding">Color Scheme</h4>
-            <a title="orange" class="switcher orange-bg"></a>
-            <a title="strong-blue" class="switcher strong-blue-bg"></a>
-            <a title="moderate-green" class="switcher moderate-green-bg"></a>
-            <a title="vivid-yellow" class="switcher vivid-yellow-bg"></a>
-        </div>
-    </section>
 
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>

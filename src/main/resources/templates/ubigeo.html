@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+
+    <!-- Site Metas -->
+    <title>Ubigeo</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/images/favicon.ico}" type="static/image/x-icon" />
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/images/apple-touch-icon.png}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
+
+    <!-- Modernizer -->
+    <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
+
+    <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div style="width: 800px; height: 400px; background-color: red;">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>Departamento</label>
+                <select id="id_departamento" class="form-control">
+                    <option value=" ">[Seleccione Departamento]</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label>Provincia</label>
+                <select id="id_provincia" class="form-control">
+                    <option value=" ">[Seleccione Provincia]</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label>Distrito</label>
+                <select id="id_distrito" class="form-control">
+                    <option value=" ">[Seleccione Distrito]</option>
+                </select>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            $.getJSON("listaDepartamentos",{},function (data) {
+                $.each(data, function (i, obj){
+                    $("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
+                });
+            });
+
+            $('#id_departamento').change(function (){
+
+                $("#id_provincia").empty();
+                $("#id_distrito").empty();
+
+                $("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
+                $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
+
+                var var_dep = $('#id_departamento').val();
+                var var_pro = $('#id_provincia').val();
+
+                $.getJSON("listaProvincias",{"dpto":var_dep},function (data) {
+                    $.each(data, function (i, obj){
+                        $("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");
+                    });
+                });
+            });
+
+            $('#id_provincia').change(function (){
+
+                $("#id_distrito").empty();
+
+                $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
+
+                var var_dep = $('#id_departamento').val();
+                var var_pro = $('#id_provincia').val();
+                var var_dis = $('#id_distrito').val();
+
+                console.log("Provincia: " + var_pro);
+
+                $.getJSON("listaDistritos",{"prov":var_pro},function (data) {
+                    $.each(data, function (i, obj){
+                        $("#id_distrito").append("<option value='" + obj + "'>" + obj + "</option>");
+                    });
+                });
+            });
+
+
+        </script>
+    </div>
+
+    <div id="banner" class="banner full-screen-mode parallax">
+
+        <div class="container pr">
+            <div style="display: flex; flex-direction: row; width: 100%; padding-top: 10%" >
+                <div style="width: 30%; height: 900px; margin: 0 auto">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="banner-static">
+                            <div class="banner-text">
+
+                                <div class="login">
+                                    <h2 class="block-title text-center">Login</h2>
+                                    <div class="form-group">
+                                        <form action="/usuarios/validar" method="post"
+                                              th:object="${usuario}">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="email"th:field="*{correo}" class="form-control" id="inputEmail4"placeholder="Correo">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="password" th:field="*{clave}" class="form-control" id="inputPassword4" placeholder="Contraseña">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="reserve-book-btn text-center">
+                                                    <button type="submit" class="hvr-underline-from-center">Ingresar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- -->
+                                        <br>
+
+                                        <div th:if="${mensaje} != null" class="alert alert-danger">
+                                            <strong th:text="${mensaje}"></strong>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <!-- end banner-cell -->
+
+                            </div>
+                            <!-- end banner-text -->
+                        </div>
+                        <!-- end banner-static -->
+                    </div>
+
+                </div>
+                <div style="width: 70%; height: 900px; margin: 0 auto">
+                    <div id="reservation" class="reservations-main pad-top-100 pad-bottom-100">
+                        <div class="">
+                            <div class="row">
+                                <div class="form-reservations-box">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                            <h2 class="block-title text-center">
+                                                Regístrate
+                                            </h2>
+                                        </div>
+
+                                        <form id="contact-form" method="post" class="reservations-box" name="contactform" action="mail.php">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="text" name="form_name" id="form_name" placeholder="Name" required="required" data-error="Firstname is required.">
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="email" name="email" id="email" placeholder="E-Mail ID" required="required" data-error="E-mail id is required.">
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="text" name="phone" id="phone" placeholder="contact no.">
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <select name="no_of_persons" id="no_of_persons" class="selectpicker">
+                                                        <option selected disabled>No. Of persons</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="text" name="date-picker" id="date-picker" placeholder="Date" required="required" data-error="Date is required." />
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <input type="text" name="time-picker" id="time-picker" placeholder="Time" required="required" data-error="Time is required." />
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <select name="preferred_food" id="preferred_food" class="selectpicker">
+                                                        <option selected disabled>preferred food</option>
+                                                        <option>Indian</option>
+                                                        <option>Continental</option>
+                                                        <option>Mexican</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-box">
+                                                    <select name="occasion" id="occasion" class="selectpicker">
+                                                        <option selected disabled>Occasion</option>
+                                                        <option>Wedding</option>
+                                                        <option>Birthday</option>
+                                                        <option>Anniversary</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="reserve-book-btn text-center">
+                                                    <button class="hvr-underline-from-center" type="submit" value="SEND" id="submit">REGISTRARSE </button>
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                        </form>
+                                        <!-- end form -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end reservations-box -->
+                            </div>
+                            <!-- end row -->
+                        </div>
+                        <!-- end container -->
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- end reservations-main -->
+            <!-- end col -->
+
+        </div>
+
+        <!-- end container -->
+    </div>
+    <!-- ALL JS FILES -->
+    <script src="js/all.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="js/custom.js"></script>
+</body>
+</html>
