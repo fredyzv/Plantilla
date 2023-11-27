@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name="posicion")
+@Table(name="temporada")
 @Data
-public class Posicion {
+public class Temporada {
 	
 	@Id
-	private int codposicion;
-	private String posicion;
+	private int codtemporada;
+	private String temporada;
 
 }

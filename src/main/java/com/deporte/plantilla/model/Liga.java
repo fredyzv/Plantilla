@@ -10,11 +10,16 @@ public class Liga {
 	
 	@Id
 	private int codliga;
-	private String nombre;
-	
+	private String nomliga;
+	private String dep;
+	private String pro;
+	private String dis;
+
 	@ManyToOne
-	@JoinColumn(name="ubigeo1", insertable = false, updatable = false)
-	private Ubigeo ubi;
-	private String ubigeo1;
+	@JoinColumn(name="codestado", insertable = false, updatable = false)
+	private Estado est;
+	private int codestado;
+
+	private int num;
 
 }

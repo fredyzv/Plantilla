@@ -10,8 +10,8 @@ public class Usuario {
 	
 	@Id
 	private String usuario;
-	private String nombre;
-	private String apellido;
+	private String nombres;
+	private String apellidos;
 	
 	@ManyToOne
 	@JoinColumn(name="coddocumento", insertable = false, updatable = false)

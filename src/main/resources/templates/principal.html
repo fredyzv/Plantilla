@@ -80,8 +80,7 @@
                 <span class="nav-item">Ayuda</span>
             </a></li>
 
-            <li><a href="/users" class="logout">
-                <form action="/logout" method="post"></form>
+            <li><a href="/logout" class="logout">
                 <i class="fas fa-sign-out-alt"></i>
                 <span class="nav-item">Cerrar sesión</span>
             </a></li>
@@ -89,63 +88,5 @@
     </nav>
 </div>
 
-<div class="" style="width: 1000px; height: 800px; margin: 5% auto;">
-    <h1 style="text-align: center">Listado de usuarios</h1>
-
-<div style="width: 220px; ">
-    <div class="reserve-book-btn text-center">
-        <a href=""><button type="submit" class="hvr-underline-from-center">Agregar</button></a>
-    </div>
-</div>
-
-
-
-    <table class="table table" id="tablax" style="margin-top: 20px">
-        <thead>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Dni</th>
-        <th>Telefono</th>
-        <th>Usuario</th>
-        <th>Contraseña</th>
-        <th>Rol</th>
-        <th>Sucursal</th>
-        <th>Acciones</th>
-
-        </thead>
-        <tbody>
-        <tr th:each="u : ${lstUsuarios}">
-            <td th:text="${u.codusuario}"></td>
-            <td th:text="${u.nombre}"></td>
-            <td th:text="${u.apellido}"></td>
-            <td th:text="${u.dni}"></td>
-            <td th:text="${u.telefono}"></td>
-            <td th:text="${u.username}"></td>
-            <td th:text="${u.contra}"></td>
-            <td th:text="${u.rol.descripcion}"></td>
-            <td th:text="${u.sucursal.descripcion}"></td>
-            <td > <form action="/usuario/editar" method="post" style="margin-right:  9px;">
-                <input type="hidden" name="codusuario" th:value="${u.codusuario}">
-                <button type="submit" class="btn btn-primary">Editar</button>
-            </form></td>
-
-        </tr>
-        </tbody>
-    </table>
-</div>
-<script>
-    var menuList = document.getElementById("menuList");
-    menuList.style.maxHeight="0px";
-    function togglemenu(){
-        if(menuList.style.maxHeight=="0px"){
-            menuList.style.maxHeight="150px";
-        }
-        else{
-            menuList.style.maxHeight="0px";
-        }
-    }
-
-</script>
 </body>
 </html>
