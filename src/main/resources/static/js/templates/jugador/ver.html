@@ -15,7 +15,7 @@
 
 <!-- Styles -->
 <link rel="stylesheet" type="text/css"
-	th:href="@{/css/style.css}">
+	th:href="@{/assets/css/style.css}">
 
 <!-- Google fonts -->
 <link
@@ -26,7 +26,7 @@
 <script src="https://kit.fontawesome.com/3778e44b4a.js"
 	crossorigin="anonymous"></script>
 
-<title>Equipo</title>
+<title>Ver Jugador</title>
 </head>
 
 <body>
@@ -38,7 +38,7 @@
 				<h4 class="text-light font-weight-bold mb-0">Sistema de
 					Basketball</h4>
 			</div>
-			<div class="nav-left" th:replace="principal::navbar-left"></div>
+			<div class="menu" th:replace="principal::barra"></div>
 		</div>
 		<!-- Fin sidebar -->
 
@@ -106,78 +106,107 @@
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h6 class="font-weight-bold mb-0">Equipo</h6>
+										<h6 class="font-weight-bold mb-0">Ver Jugador</h6>
 									</div>
 									<div class="card-body">
-										<section>
+										<form action="/jugador/actualizado" method="post"
+											th:object="${jugador}">
+
 											<div class="form-row">
-												<a th:if="${usuarioAct.codrol != 3 and mostrar != si}"
-													href="/equipo/nuevo" class="btn btn-primary">Nuevo
-													Equipo</a> &nbsp;
-												<form action="/reporte/equipo" target="_blank" method="post"
-													th:object="${usuarioAct}">
-													<input type="hidden" class="form-control" name="usuario"
-														th:field="*{usuario}">
-													<button th:if="${usuario.codrol == 2}" type="submit"
-														class="btn btn-info">Reporte de Equipo</button>
-												</form>
-												&nbsp; <a th:if="${usuario.codrol != 2}"
-													href="/reportes/equipoAdmin" target="_blank"
-													class="btn btn-info">Reporte de Equipos</a>
-
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Departamento</th>
-															<th>Provincia</th>
-															<th>Distrito</th>
-															<th>Entrenador</th>
-															<th>Liga</th>
-															<th th:if="${usuarioAct.codrol == 1}">Estado</th>
-															<th>Acciones</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:each="e : ${lstEquipo}">
-															<th th:text="${e.nomequipo}"></th>
-															<td th:text="${e.dep}"></td>
-															<td th:text="${e.pro}"></td>
-															<td th:text="${e.dis}"></td>
-															<td th:text="${e.usu.apellidos}"></td>
-															<td th:text="${e.liga.nomliga}"></td>
-															<td th:if="${usuarioAct.codrol == 1}"
-																th:text="${e.estado.estado}"></td>
-															<td th:if="${usuarioAct.codrol != 2}">
-																<form action="/equipo/ver" method="post">
-																	<input type="hidden" name="codequipo"
-																		th:value="${e.codequipo}">
-																	<button type="submit" class="btn btn-info">Ver</button>
-																</form>
-															</td>
-															<td>
-																<form action="/equipo/actualizar" method="post">
-																	<input type="hidden" name="codequipo"
-																		th:value="${e.codequipo}">
-																	<button th:if="${usuarioAct.codrol != 3}" type="submit"
-																		class="btn btn-primary">Editar</button>
-																</form>
-															</td>
-															<td>
-																<form action="/equipo/eliminar" method="post">
-																	<input type="hidden" name="codequipo"
-																		th:value="${e.codequipo}">
-																	<button onclick="return alerta()"
-																		th:if="${usuarioAct.codrol != 3}" type="submit"
-																		class="btn btn-danger">Eliminar</button>
-																</form>
-															</td>
-														</tr>
-													</tbody>
-												</table>
+												<div class="form-group col-md-4">
+													<label>Nombres</label> <input type="text"
+														th:field="*{nomjug}" class="form-control" readonly>
+												</div>
+												<div class="form-group col-md-4">
+													<label>Apellidos</label> <input readonly type="text"
+														th:field="*{apejug}" class="form-control"
+														id="inputPassword4">
+												</div>
+												<div class="form-group col-md-2">
+													<label>Documento</label> <input readonly type="number"
+														th:field="*{documento}" class="form-control">
+												</div>
 											</div>
-										</section>
 
+											<div class="form-row">
+
+												<div class="form-group col-md-2">
+													<label>Sexo</label> <input readonly type="text"
+														th:field="*{sexo.descripcion}" class="form-control">
+												</div>
+												<div class="form-group col-md-2">
+													<label>Posición</label> <input readonly type="text"
+														th:field="*{posicion.posicion}" class="form-control">
+												</div>
+												<div class="form-group col-md-2">
+													<label>Categoría</label> <input readonly type="text"
+														th:field="*{categoria.categoria}" class="form-control">
+												</div>
+												<div class="form-group col-md-1">
+													<label>Talla</label> <input readonly type="number"
+														th:field="*{talla}" step="0.01" class="form-control"
+														id="inputAddress">
+												</div>
+												<div class="form-group col-md-1">
+													<label>Peso</label> <input readonly type="number"
+														th:field="*{peso}" step="0.01" class="form-control">
+												</div>
+												<div class="form-group col-md-2">
+													<label>Fecha de Nacimiento</label> <input readonly
+														type="date" format="yyyy" th:field="*{fecnac}"
+														class="form-control">
+												</div>
+											</div>
+
+											<div th:if="${usuarioAct.codrol == 1}" class="form-row">
+												<div class="form-group col-md-1">
+													<label>Teléfono</label> <input readonly type="tel"
+														th:field="*{telefono}" class="form-control">
+												</div>
+												<div class="form-group col-md-3">
+													<label>Email</label> <input readonly type="email"
+														th:field="*{email}" class="form-control">
+												</div>
+												<div class="form-group col-md-4">
+													<label>Dirección</label> <input readonly type="text"
+														th:field="*{direccion}" class="form-control">
+												</div>
+												<div class="form-group col-md-1">
+													<label>Cód. de equipo</label> <input readonly type="number"
+														th:field="*{codequipo}" class="form-control">
+												</div>
+												<div class="form-group col-md-1">
+													<label>Cód. de Jugador</label> <input readonly
+														type="number" th:field="*{codjugador}"
+														class="form-control">
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-1">
+													<label>Número</label> <input readonly type="number"
+														th:field="*{numero}" class="form-control">
+												</div>
+												<div th:if="${usuarioAct.codrol == 1}"
+													class="form-group col-md-2">
+													<label>Estado</label> <input readonly type="text"
+														th:field="*{estado.estado}" class="form-control">
+												</div>
+												<div class="form-group col-md-4">
+													<label>Equipo</label> <input readonly type="text"
+														th:field="*{equipo.nomequipo}" class="form-control">
+												</div>
+												<div class="form-group col-md-2">
+													<label>Fecha de Registro</label> <input readonly
+														type="text" th:field="*{fecreg}" class="form-control">
+												</div>
+											</div>
+
+											<a href="/jugador/jugador" class="btn btn-primary">Volver</a>
+										</form>
+										<br>
+										<div>
+											<strong th:text="${mensaje}"></strong>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -190,17 +219,6 @@
 
 		</div>
 	</div>
-
-	<script>
-		function alerta() {
-			var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
-			if (opcion == true) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	</script>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
