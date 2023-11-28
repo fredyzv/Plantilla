@@ -1,19 +1,21 @@
 package com.deporte.plantilla.controller;
 
 
-import com.tgf.Service.UbigeoService;
-import com.tgf.model.Equipo;
-import com.tgf.model.Liga;
-import com.tgf.model.Ubigeo;
-import com.tgf.model.Usuario;
-import com.tgf.repository.*;
-import com.tgf.util.Fecha;
+
+import com.deporte.plantilla.model.Equipo;
+import com.deporte.plantilla.model.Liga;
+import com.deporte.plantilla.model.Ubigeo;
+import com.deporte.plantilla.model.Usuario;
+import com.deporte.plantilla.repository.*;
+import com.deporte.plantilla.service.UbigeoService;
+import com.deporte.plantilla.util.Fecha;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 @Controller

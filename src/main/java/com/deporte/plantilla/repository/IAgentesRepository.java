@@ -11,6 +11,6 @@ public interface IAgentesRepository extends JpaRepository < Agentes, Integer> {
 
     List<Agentes> findByCodjugadorAndCodestado(int codjugador, int codestado);
 
-    Agentes findByCodjugadorAndCodequipo(int codjugador, int codequipo);
+    Agentes findByCodjugadorAndCodequipoAndCodestado(int codjugador, int codequipo, int codestado);
 
 }

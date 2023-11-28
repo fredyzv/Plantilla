@@ -1,9 +1,11 @@
 package com.deporte.plantilla.controller;
 
-import com.tgf.model.*;
-import com.tgf.repository.IAgentesRepository;
-import com.tgf.repository.IJugadorRepository;
-import com.tgf.repository.IJugadoresRepository;
+import com.deporte.plantilla.model.*;
+import com.deporte.plantilla.repository.IAgentesRepository;
+import com.deporte.plantilla.repository.IJugadorRepository;
+import com.deporte.plantilla.repository.IJugadoresRepository;
+
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/jugadores")
@@ -53,7 +55,7 @@ public class JugadoresController {
     }
     /*ACEPTAR SOLICITUD*/
     @PostMapping("/aceptar")
-    public String aceptarSolicitudes(@ModelAttribute Jugador jugador,Agentes agentes, Equipo equipo, HttpSession session, Model model) {
+    public String aceptarSolicitudes(@ModelAttribute Jugador jugador, Agentes agentes, Equipo equipo, HttpSession session, Model model) {
 
         String doc = (String) session.getAttribute("doc");
         jugador = repoJ.findByDocumento(doc);
