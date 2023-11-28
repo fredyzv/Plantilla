@@ -42,30 +42,37 @@ public class UsuariosController {
 	/*LOGUEAR*/
 	@PostMapping("/validar")
 	public String validarLogin(@ModelAttribute Usuario usuarioAct, HttpSession session, Model model) {
-		
+
 		usuarioAct = repoU.findByCorreoAndClave(usuarioAct.getCorreo(), usuarioAct.getClave());
+		try {
+			if (usuarioAct == null) {
+				model.addAttribute("mensaje", "Usuario o Clave Incorrecta");
+				return "usuario";
 
+			}
 
-		if (usuarioAct == null) {
-			model.addAttribute("mensaje", "Usuario o Clave Incorrecta");
-			return "usuario";
-			
-		}
+			if (usuarioAct.getCodestado() == 2) {
+				model.addAttribute("mensaje", "Usuario Inactivo");
+				return "usuario";
+				//return "redirect:/socios";
+			}
 
-		if (usuarioAct.getCodestado() == 2) {
+			model.addAttribute("usuarioAct", usuarioAct);
+
+			session.setAttribute("correo", usuarioAct.getCorreo());
+			session.setAttribute("rol", usuarioAct.getCodrol());
+
+			model.addAttribute("rol", session.getAttribute("rol"));
+			System.out.println("Entrando al try");
+			return "principal";
+		}catch (Exception e){
+			e.printStackTrace();
 			model.addAttribute("mensaje", "Usuario Inactivo");
+			System.out.println("Entrando al catch");
 			return "usuario";
-			//return "redirect:/socios";
 		}
-		
-		model.addAttribute("usuarioAct", usuarioAct);
-		
-		session.setAttribute("correo", usuarioAct.getCorreo());
-		session.setAttribute("rol", usuarioAct.getCodrol());
-		
-		model.addAttribute("rol", session.getAttribute("rol"));
 
-		return "principal";
+
 	}
 	
 	/* CARGAR VISTA DE PERFIL*/
