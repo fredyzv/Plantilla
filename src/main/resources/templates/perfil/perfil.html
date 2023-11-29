@@ -109,7 +109,7 @@
 											<div class="perfil-usuario-header">
 												<div class="perfil-usuario-portada">
 													<div class="perfil-usuario-avatar">
-														<img th:src="@{/images/user.jpg}">
+														<img th:src="@{/templates/images/user.jpg}">
 													</div>
 												</div>
 											</div>
@@ -119,23 +119,23 @@
 												</div>
 												<div class="perfil-usuario-footer">
 													<ul class="lista-datos">
-														<li><img th:src="@{/images/email.jpg}">
+														<li><img th:src="@{/templates/images/email.jpg}">
 															<p th:text="${usuario.correo}"></p></li>
-														<li><img th:src="@{/images/telefono.jpg}">
+														<li><img th:src="@{/templates/images/telefono.jpg}">
 															<p th:text="${usuario.telefono}"></p></li>
-														<li th:if="${equipo != null}"><img th:src="@{/images/trabajo.png}">
+														<li th:if="${equipo != null}"><img th:src="@{/templates/images/trabajo.png}">
 															<p th:text="${equipo.nomequipo}"></p></li>
-														<li th:if="${equipo != null}"><img th:src="@{/images/posicion.png}">
+														<li th:if="${equipo != null}"><img th:src="@{/templates/images/posicion.png}">
 															<p th:text="${equipo.liga.nomliga}"></p></li>
 													</ul>
 													<ul class="lista-datos">
-														<li><img th:src="@{/images/direccion.png}">
+														<li><img th:src="@{/templates/images/direccion.png}">
 															<p th:text="${usuario.direccion}"></p></li>
-														<li><img th:src="@{/images/fecha.png}">
+														<li><img th:src="@{/templates/images/fecha.png}">
 															<p th:text="${usuario.fecreg}"></p></li>
-														<li><img th:src="@{/images/usuario.png}">
+														<li><img th:src="@{/templates/images/usuario.png}">
 															<p th:text="${usuario.usuario}"></p></li>
-														<li><img th:src="@{/images/dni.jpg}">
+														<li><img th:src="@{/templates/images/dni.jpg}">
 															<p th:text="${usuario.documento}"></p></li>
 													</ul>
 													<div></div>

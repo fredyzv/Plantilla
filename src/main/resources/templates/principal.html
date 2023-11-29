@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/images/favicon.ico}" type="static/image/x-icon" />
-    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/images/apple-touch-icon.png}">
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
@@ -45,29 +45,39 @@
                 <span class="nav-item">Administrador</span>
             </a></li>
 
-            <li><a href="http://localhost:8080/">
+            <li><a href="/usuarios/inicio">
                 <i class="fas fa-home"></i>
                 <span class="nav-item">Home</span>
             </a></li>
 
-            <li><a href="/user/usuario">
-                <i class="fas fa-user"></i>
-                <span class="nav-item">Usuarios</span>
-            </a></li>
-
-            <li><a href="#">
+            <li><a href="/equipo/equipo">
                 <i class="fas fa-wallet"></i>
-                <span class="nav-item">Menus</span>
+                <span class="nav-item">Equipo</span>
+            </a></li>
+
+            <li><a href="/jugador/jugador">
+                <i class="fas fa-wallet"></i>
+                <span class="nav-item">Jugadores</span>
             </a></li>
 
             <li><a href="#">
-                <i class="fas fa-chart-bar"></i>
-                <span class="nav-item">Analisis</span>
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Agentes Libres</span>
             </a></li>
 
             <li><a href="#">
                 <i class="fas fa-tasks"></i>
-                <span class="nav-item">Tareas</span>
+                <span class="nav-item">Entrenamientos</span>
+            </a></li>
+
+            <li><a href="#">
+                <i class="fas fa-play"></i>
+                <span class="nav-item">Partidos</span>
+            </a></li>
+
+            <li><a href="#">
+                <i class="fas fa-chart-bar"></i>
+                <span class="nav-item">Estadisticas</span>
             </a></li>
 
             <li><a href="#">
@@ -75,9 +85,14 @@
                 <span class="nav-item">Configuracion</span>
             </a></li>
 
-            <li><a href="#">
-                <i class="fas fa-question"></i>
-                <span class="nav-item">Ayuda</span>
+            <li><a href="/user/usuario">
+                <i class="fas fa-soccer-ball-o"></i>
+                <span class="nav-item">Ligas</span>
+            </a></li>
+
+            <li><a href="/user/usuario">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Usuarios</span>
             </a></li>
 
             <li><a href="/logout" class="logout">
@@ -87,6 +102,100 @@
         </ul>
     </nav>
 </div>
+<div th:fragment="navbar-top">
+    <section class="bg-light py-3" style="padding: 2% 0; background-color: gray;padding-left: 5%;">
+        <div class="container-inside" style="margin: auto;width: 98%;">
+            <div class="row">
+                <div class="col-lg-9 col-md-8">
+                    <h1 class="font-weight-bold mb-0"
+                        th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}" >
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                    </h1>
+                    <p class="lead text-muted" th:text="${usuarioAct.correo}" style="color: white;"></p>
+                </div>
+                <div class="col-lg-2 col-md-4 d-flex">
+                    <a class="btn btn-primary w-100 align-self-center"
+                       href="/usuarios/perfilact">Editar mi Perfil</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
+<section style="width: auto; padding: 5% 10%">
+    <div class="container-inside">
+        <div class="row">
+            <div class="col-lg-12 my-3">
+                <div class="card rounded-0">
+                    <div class="card-header bg-light">
+                        <h6 class="font-weight-bold mb-0">Guía de uso</h6>
+                    </div>
+                    <h4
+                            style="text-align: center; font-weight: bold; color: crimson">AVISO
+                        IMPORTANTE</h4>
+                    <p style="text-align: center; font-weight: bold">Todos los
+                        datos de la presente plataforma serán de uso exclusivo de la
+                        empresa</p>
+                    <div class="card-body">
+                        <div>
+                            <h5>Como Jugador</h5>
+                            <ul>
+                                <li>Podrás revisar las estadísticas que tu entrenador
+                                    está subiendo a la plataforma en tiempo real</li>
+                                <li>Podrás actualizar tu perfil y cambiar tu clave de
+                                    acceso a la plataforma</li>
+                                <li>De ser un jugador libre, podrás ver las solicitudes
+                                    de los equipos que requieran tus servicios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section style="width: auto; padding: 5% 10%">
+    <div class="container-inside">
+        <div class="redes-admin">
+            <div class="card rounded-0">
+                <h6 class="font-weight-bold mb-0">&nbsp; Contacto del Admin</h6>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 d-flex stat my-4">
+                        <div class="mx-auto">
+                            <h6 class="text-muted">Email</h6>
+                            <a href="mailto:jdelcarpio23@gmail.com" target="_blank"><img
+                                    width="50px" th:src="@{./images/email.jpg}"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex stat my-4">
+                        <div class="mx-auto">
+                            <h6 class="text-muted">WhatsApp</h6>
+                            <a href="https://wa.me/51952926529" target="_blank"><img
+                                    width="45px" src="images/cargo.png" ></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex stat my-4">
+                        <div class="mx-auto">
+                            <h6 class="text-muted">Instagram</h6>
+                            <a href="https://www.instagram.com/jdelcarpio23/"
+                               target="_blank"><img width="55px"
+                                                    th:src="@{/templates/images/instagram.jpg}"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 d-flex my-4">
+                        <div class="mx-auto">
+                            <h6 class="text-muted">Facebook</h6>
+                            <a href="https://www.facebook.com/JDelcarpio23/"
+                               target="_blank"><img width="50px"
+                                                    th:src="@{/templates/images/facebook.jpg}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
