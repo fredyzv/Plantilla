@@ -40,7 +40,7 @@
 				<h4 class="text-light font-weight-bold mb-0">Sistema de
 					Basketball</h4>
 			</div>
-			<div class="menu" th:replace="principal::barra"></div>
+			<div class="menu" th:replace="principal::navbar-left"></div>
 		</div>
 		<!-- Fin sidebar -->
 
@@ -57,23 +57,6 @@
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<h1 th:if="${usuario.codrol == 1}">Administrador:</h1>
-						<h1 th:if="${usuario.codrol == 2}">Entrenador:</h1>
-						<h1 th:if="${usuario.codrol == 3}">Federación:</h1>
-						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-							<li class="nav-item dropdown"><a
-								class="nav-link text-dark dropdown-toggle" href="#"
-								id="navbarDropdown" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"
-								th:text="${usuario.nombres +' ' + usuario.apellidos}"> </a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/logout">Cerrar sesión</a>
-								</div></li>
-						</ul>
-					</div>
 				</div>
 			</nav>
 			<!-- Fin Navbar -->
@@ -86,7 +69,7 @@
 						<div class="row">
 							<div class="col-lg-9 col-md-8">
 								<h1 class="font-weight-bold mb-0"
-									th:text="${usuario.nombres +' ' + usuario.apellidos}">
+									th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
 									<i class="fa fa-user-o" aria-hidden="true"></i>
 								</h1>
 							</div>
@@ -109,7 +92,7 @@
 											<div class="perfil-usuario-header">
 												<div class="perfil-usuario-portada">
 													<div class="perfil-usuario-avatar">
-														<img th:src="@{/templates/images/user.jpg}">
+														<img th:src="@{/images/user.jpg}">
 													</div>
 												</div>
 											</div>
@@ -119,24 +102,24 @@
 												</div>
 												<div class="perfil-usuario-footer">
 													<ul class="lista-datos">
-														<li><img th:src="@{/templates/images/email.jpg}">
-															<p th:text="${usuario.correo}"></p></li>
-														<li><img th:src="@{/templates/images/telefono.jpg}">
-															<p th:text="${usuario.telefono}"></p></li>
-														<li th:if="${equipo != null}"><img th:src="@{/templates/images/trabajo.png}">
+														<li><img th:src="@{/images/email.jpg}">
+															<p th:text="${usuarioAct.correo}"></p></li>
+														<li><img th:src="@{/images/telefono.jpg}">
+															<p th:text="${usuarioAct.telefono}"></p></li>
+														<li th:if="${equipo != null}"><img th:src="@{/images/trabajo.png}">
 															<p th:text="${equipo.nomequipo}"></p></li>
-														<li th:if="${equipo != null}"><img th:src="@{/templates/images/posicion.png}">
+														<li th:if="${equipo != null}"><img th:src="@{/images/posicion.png}">
 															<p th:text="${equipo.liga.nomliga}"></p></li>
 													</ul>
 													<ul class="lista-datos">
-														<li><img th:src="@{/templates/images/direccion.png}">
-															<p th:text="${usuario.direccion}"></p></li>
-														<li><img th:src="@{/templates/images/fecha.png}">
-															<p th:text="${usuario.fecreg}"></p></li>
-														<li><img th:src="@{/templates/images/usuario.png}">
-															<p th:text="${usuario.usuario}"></p></li>
-														<li><img th:src="@{/templates/images/dni.jpg}">
-															<p th:text="${usuario.documento}"></p></li>
+														<li><img th:src="@{/images/direccion.png}">
+															<p th:text="${usuarioAct.direccion}"></p></li>
+														<li><img th:src="@{/images/fecha.png}">
+															<p th:text="${usuarioAct.fecreg}"></p></li>
+														<li><img th:src="@{/images/usuario.png}">
+															<p th:text="${usuarioAct.usuario}"></p></li>
+														<li><img th:src="@{/images/dni.jpg}">
+															<p th:text="${usuarioAct.documento}"></p></li>
 													</ul>
 													<div></div>
 												</div>

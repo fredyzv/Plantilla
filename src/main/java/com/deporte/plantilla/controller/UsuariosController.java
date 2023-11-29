@@ -48,9 +48,7 @@ public class UsuariosController {
 			if (usuarioAct == null) {
 				model.addAttribute("mensaje", "Usuario o Clave Incorrecta");
 				return "usuario";
-
 			}
-
 			if (usuarioAct.getCodestado() == 2) {
 				model.addAttribute("mensaje", "Usuario Inactivo");
 				return "usuario";
@@ -58,12 +56,10 @@ public class UsuariosController {
 			}
 
 			model.addAttribute("usuarioAct", usuarioAct);
-
 			session.setAttribute("correo", usuarioAct.getCorreo());
 			session.setAttribute("rol", usuarioAct.getCodrol());
-
 			model.addAttribute("rol", session.getAttribute("rol"));
-			System.out.println("Entrando al try");
+
 			return "principal";
 		}catch (Exception e){
 			e.printStackTrace();
@@ -86,7 +82,7 @@ public class UsuariosController {
 		usuario = repoU.findByCorreo(correo);
 		equipo = repoE.findByUsuarioAndCodestado(usuario.getUsuario(),1);
 
-		model.addAttribute("usuario", usuario);
+		model.addAttribute("usuarioAct", usuario);
 		model.addAttribute("equipo", equipo);
 		
 		return "perfil/perfil";
@@ -97,10 +93,9 @@ public class UsuariosController {
 	public String abrirActualizacionPerfil(@ModelAttribute Usuario usuario, HttpSession session, Model model) {
 
 		String correo = (String) session.getAttribute("correo");
-		
 		model.addAttribute("rol", session.getAttribute("rol"));
 		usuario = repoU.findByCorreo(correo);
-		model.addAttribute("usuario", usuario);
+		model.addAttribute("usuarioAct", usuario);
 
 		return "perfil/actperfil";
 	}

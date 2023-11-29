@@ -42,7 +42,9 @@
         <ul>
             <li><a href="#" class="logo">
                 <img src="/images/food.png" alt="">
-                <span class="nav-item">Administrador</span>
+                <h1 th:if="${usuarioAct.codrol == 1}">Administrador:</h1>
+                <h1 th:if="${usuarioAct.codrol == 2}">Entrenador:</h1>
+                <h1 th:if="${usuarioAct.codrol == 3}">Federación:</h1>
             </a></li>
 
             <li><a href="/usuarios/inicio">
@@ -85,14 +87,19 @@
                 <span class="nav-item">Configuracion</span>
             </a></li>
 
-            <li><a href="/user/usuario">
+            <li th:if="${rol == 1}"><a href="/user/usuario">
                 <i class="fas fa-soccer-ball-o"></i>
                 <span class="nav-item">Ligas</span>
             </a></li>
 
-            <li><a href="/user/usuario">
+            <li th:if="${rol == 1}"><a href="/user/usuario">
                 <i class="fas fa-user"></i>
                 <span class="nav-item">Usuarios</span>
+            </a></li>
+
+            <li><a href="/usuarios/perfil">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Perfil</span>
             </a></li>
 
             <li><a href="/logout" class="logout">
@@ -130,25 +137,83 @@
                     <div class="card-header bg-light">
                         <h6 class="font-weight-bold mb-0">Guía de uso</h6>
                     </div>
-                    <h4
-                            style="text-align: center; font-weight: bold; color: crimson">AVISO
-                        IMPORTANTE</h4>
-                    <p style="text-align: center; font-weight: bold">Todos los
-                        datos de la presente plataforma serán de uso exclusivo de la
-                        empresa</p>
                     <div class="card-body">
-                        <div>
-                            <h5>Como Jugador</h5>
+                        <div th:if="${usuarioAct.codrol == 2}">
+                            <h5>Como Entrenador</h5>
                             <ul>
-                                <li>Podrás revisar las estadísticas que tu entrenador
-                                    está subiendo a la plataforma en tiempo real</li>
-                                <li>Podrás actualizar tu perfil y cambiar tu clave de
-                                    acceso a la plataforma</li>
-                                <li>De ser un jugador libre, podrás ver las solicitudes
-                                    de los equipos que requieran tus servicios</li>
+                                <li>El primer paso es Registrar a tu <a
+                                        href="/usuarios/equipo">equipo</a></li>
+                                <li>El Segundo paso es empezar a registrar a tus
+                                    jugadores</li>
+                                <li>El Tercer paso es empezar a registrar tus
+                                    entrenamientos y sus datos</li>
+                                <li>El Cuarto paso es empezar a registrar tus partidos
+                                    y sus datos</li>
+                                <li>Revisar los reportes con el consolidado de tus
+                                    datos ingresados</li>
+                                <li>Puedes revisar y modificar tus datos en perfil</li>
+                                <li>COMPARTE LAS ESTADÍSTICAS CON TUS JUGADORES</li>
+                            </ul>
+                            <h5>Buscar Jugador</h5>
+                            <p>Si estás buscando un jugador para tu equipo y tienes
+                                una propuesta clara para el jugador:</p>
+                            <p>A través del Admin, puedes solicitar la búsqueda de un
+                                jugador con los parámetros (edad, talla, peso, posición,
+                                etc). El Admin se encarga de hacer la búsqueda y enviarte un
+                                reporte de los jugadores que necesitas.</p>
+                            <p>Si estás interesado en alguno, El Admin se contactará
+                                con el entrenador que esté a cargo de dicho jugador y con el
+                                jugador para exponerle tu propuesta. De ser aceptada, se te
+                                enviará el contacto, tanto de jugador como entrenador para
+                                que procedan con su convenio.</p>
+                            <p>En dicho convenio, no toma parte la Administración.
+                                Más que solo como mediador entre la red de entrenadores.</p>
+
+                        </div>
+                        <div th:if="${usuarioAct.codrol == 3}">
+                            <h5>Como Federación</h5>
+                            <ul>
+                                <li>Tienes Acceso a todos los equipos y jugadores que
+                                    pertenecen a esta red de equipos</li>
+                                <li>Puedes buscar jugadores según Edad, talla, peso,
+                                    posición que requieras para las pre-selecciones nacionales</li>
+                                <li>Puedes solicitar un reporte de todos los
+                                    entrenadores inscritos en la plataforma</li>
+                                <li>Revisar las estadísticas de los jugadores a nivel
+                                    nacional, proporcionada por sus entrenadores</li>
+                                <li>Revisar los datos de los partido y entrenamientos
+                                    realizados por los equipos inscritos</li>
+                                <li>Tendrás acceso a los datos de los jugadores y
+                                    podrás contactarte directamente con ellos</li>
+                                <li>Puedes revisar y modificar tus datos en perfil</li>
+                            </ul>
+                            <h5>Fin de la aplicación</h5>
+                            <p>El fin de ésta plataforma es la de facilitarle a la
+                                federación el scouting de jugadores a nivel nacional,
+                                basandose en estadísticas, proporcionada por los mismos
+                                entrenadores.</p>
+                            <p>Que los jugadores a nivel nacional, tengan la
+                                oportunidad de demostrar su habilidad y trabajo, en pruebas
+                                de las diferentes pre-selecciones nacionales</p>
+                        </div>
+                        <div th:if="${usuarioAct.codrol == 1}">
+                            <h5>Como Administrador</h5>
+                            <ul>
+                                <li>Tienes la responsabilidad de hacer un buen uso de
+                                    los datos proporcionados por los entrenadores</li>
+                                <li>Podrás editar eliminar y crear usuarios, que
+                                    tendrán acceso a la plataforma</li>
+                                <li>Tendrás acceso a toda la información, tanto de los
+                                    entrenadores como de los jugadores</li>
+                                <li>Ayudar a los entrenadores a hacer los cambios de
+                                    jugadores de un equipo a otro</li>
+                                <li>Dar soporte a la plataforma y a los entrenadores,
+                                    tanto como a la federación en lo que requieran</li>
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
                 </div>
             </div>
 
@@ -160,36 +225,36 @@
     <div class="container-inside">
         <div class="redes-admin">
             <div class="card rounded-0">
-                <h6 class="font-weight-bold mb-0">&nbsp; Contacto del Admin</h6>
+                <h6 class="font-weight-bold mb-0">&nbspContacto del Admin</h6>
                 <div class="row">
                     <div class="col-lg-3 col-md-6 d-flex stat my-4">
                         <div class="mx-auto">
                             <h6 class="text-muted">Email</h6>
-                            <a href="mailto:jdelcarpio23@gmail.com" target="_blank"><img
-                                    width="50px" th:src="@{./images/email.jpg}"></a>
+                            <a href="#" target="_blank"><img
+                                    width="50px" th:src="@{/images/email.jpg}"></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 d-flex stat my-4">
                         <div class="mx-auto">
                             <h6 class="text-muted">WhatsApp</h6>
-                            <a href="https://wa.me/51952926529" target="_blank"><img
-                                    width="45px" src="images/cargo.png" ></a>
+                            <a href="#" target="_blank"><img
+                                    width="45px" th:src="@{/images/wsp.jpg}" ></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 d-flex stat my-4">
                         <div class="mx-auto">
                             <h6 class="text-muted">Instagram</h6>
-                            <a href="https://www.instagram.com/jdelcarpio23/"
+                            <a href="#"
                                target="_blank"><img width="55px"
-                                                    th:src="@{/templates/images/instagram.jpg}"></a>
+                                                    th:src="@{/images/instagram.jpg}"></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 d-flex my-4">
                         <div class="mx-auto">
                             <h6 class="text-muted">Facebook</h6>
-                            <a href="https://www.facebook.com/JDelcarpio23/"
+                            <a href="#"
                                target="_blank"><img width="50px"
-                                                    th:src="@{/templates/images/facebook.jpg}"></a>
+                                                    th:src="@{/images/facebook.jpg}"></a>
                         </div>
                     </div>
                 </div>
