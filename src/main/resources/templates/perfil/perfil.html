@@ -4,125 +4,122 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	<!-- Site Icons -->
+	<link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
+	<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
 
-<!-- Styles -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/style.css}">
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/perfil.css}">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+	<!-- Login CSS -->
+	<link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+	<!-- color -->
+	<link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
 
-<!-- Google fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap"
-	rel="stylesheet">
+	<!-- Modernizer -->
+	<script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-<!-- Ionic icons -->
-<script src="https://kit.fontawesome.com/3778e44b4a.js"
-	crossorigin="anonymous"></script>
+	<script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
 <title>Perfil de Usuario</title>
 </head>
 
 <body>
+	<!-- Navbar left-->
+	<div class="menu" th:replace="principal::navbar-left"></div>
+	<!-- Fin Navbar left -->
+
 	<div class="d-flex" id="content-wrapper">
-
-		<!-- Sidebar -->
-		<div id="sidebar-container" class="bg-primary">
-			<div class="logo">
-				<h4 class="text-light font-weight-bold mb-0">Sistema de
-					Basketball</h4>
-			</div>
-			<div class="menu" th:replace="principal::navbar-left"></div>
-		</div>
-		<!-- Fin sidebar -->
-
-		<div class="w-100">
-
-			<!-- Navbar -->
-			<nav
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-				<div class="container">
-
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
-			</nav>
-			<!-- Fin Navbar -->
 
 			<!-- Page Content -->
 			<div id="content" class="bg-grey w-100">
 
-				<section class="bg-light py-3">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-9 col-md-8">
-								<h1 class="font-weight-bold mb-0"
-									th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-								</h1>
-							</div>
-						</div>
-					</div>
-				</section>
-
-
-
-				<section>
-					<div class="container">
+				<section style="padding: 3%;">
+					<div class="container-inside" style="width: 90%;margin: auto;">
 						<div class="row">
 							<div class="col-lg-12 my-3">
-								<div class="card rounded-0">
+								<div class="card rounded-0" style="width: 600px;margin: 0 auto;">
 									<div class="card-header bg-light">
-										<h6 class="font-weight-bold mb-0">Perfil de Usuario</h6>
+										<h1 class="font-weight-bold mb-0" style="text-align: center">Perfil de Usuario</h1>
 									</div>
-									<div class="card-body">
+									<div class="card-body" style="margin: 0 auto; width: 410px;">
 										<section class="seccion-perfil-usuario">
-											<div class="perfil-usuario-header">
+											<div class="form-row">
 												<div class="perfil-usuario-portada">
 													<div class="perfil-usuario-avatar">
-														<img th:src="@{/images/user.jpg}">
+														<center>
+														<img th:src="@{/images/user.jpg}" style="width: 200px">
+														</center>
 													</div>
 												</div>
 											</div>
 											<div class="perfil-usuario-body">
-												<div class="perfil-usuario-bio">
-													<a href="/usuarios/perfilact">Actualizar Datos</a>
+												<div class="perfil-usuario-bio" style="margin: 20px 0;width: 150px;text-align: center;padding: 5px 0;background-color: gray;border-radius: 20px;">
+													<a href="/usuarios/perfilact" style="color: white;">Actualizar Datos</a>
 												</div>
-												<div class="perfil-usuario-footer">
+
+												<div class="perfil-usuario-footer" style="display: table">
 													<ul class="lista-datos">
-														<li><img th:src="@{/images/email.jpg}">
-															<p th:text="${usuarioAct.correo}"></p></li>
-														<li><img th:src="@{/images/telefono.jpg}">
-															<p th:text="${usuarioAct.telefono}"></p></li>
-														<li th:if="${equipo != null}"><img th:src="@{/images/trabajo.png}">
-															<p th:text="${equipo.nomequipo}"></p></li>
-														<li th:if="${equipo != null}"><img th:src="@{/images/posicion.png}">
-															<p th:text="${equipo.liga.nomliga}"></p></li>
+
+														<li style="height: 40px;">
+															<img th:src="@{/images/email.jpg}" style="width: 30px; height: 30px; margin-right: 5px;">
+															<span  class="nav-item" th:text="${usuarioAct.correo}"></span>
+														</li>
+														<li style="height: 40px;">
+
+															<img th:src="@{/images/telefono.jpg}" style="width: 30px;height: 30px; margin-right: 5px;">
+															<span th:text="${usuarioAct.telefono}"></span>
+
+														</li>
+														<li th:if="${equipo != null}" style="height: 40px;" >
+
+															<img th:src="@{/images/trabajo.png}"style="width: 30px;height: 30px; margin-right: 5px;">
+															<span th:text="${equipo.nomequipo}"></span>
+
+														</li>
+														<li th:if="${equipo != null}" style="height: 40px;" >
+
+															<img th:src="@{/images/posicion.png}" style="width: 30px;height: 30px; margin-right: 5px;">
+															<span th:text="${equipo.liga.nomliga}"></span>
+
+														</li>
+
 													</ul>
 													<ul class="lista-datos">
-														<li><img th:src="@{/images/direccion.png}">
-															<p th:text="${usuarioAct.direccion}"></p></li>
-														<li><img th:src="@{/images/fecha.png}">
-															<p th:text="${usuarioAct.fecreg}"></p></li>
-														<li><img th:src="@{/images/usuario.png}">
-															<p th:text="${usuarioAct.usuario}"></p></li>
-														<li><img th:src="@{/images/dni.jpg}">
-															<p th:text="${usuarioAct.documento}"></p></li>
+
+														<li style="height: 40px">
+															<img th:src="@{/images/direccion.png}" style="width: 30px;height: 30px; margin-right: 5px;">
+															<span th:text="${usuarioAct.direccion}"></span>
+														</li>
+														<li style="height: 40px">
+															<img th:src="@{/images/fecha.png}" style="width: 30px;height: 30px; margin-right: 5px;">
+															<span th:text="${usuarioAct.fecreg}"></span>
+														</li>
+														<li style="height: 40px">
+															<img th:src="@{/images/usuario.png}" style="width: 30px;height: 30px; margin-right: 5px;">
+															<span th:text="${usuarioAct.usuario}"></span>
+														</li>
+														<li style="height: 40px">
+															<img th:src="@{/images/dni.jpg}" style="width: 30px;height: 30px; margin-right: 5px;">
+															<span th:text="${usuarioAct.documento}"></span>
+														</li>
+
 													</ul>
 													<div></div>
 												</div>
+
 											</div>
 										</section>
 									</div>

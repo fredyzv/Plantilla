@@ -42,9 +42,9 @@
         <ul>
             <li><a href="#" class="logo">
                 <img src="/images/food.png" alt="">
-                <h1 th:if="${usuarioAct.codrol == 1}">Administrador:</h1>
-                <h1 th:if="${usuarioAct.codrol == 2}">Entrenador:</h1>
-                <h1 th:if="${usuarioAct.codrol == 3}">Federación:</h1>
+                <span class="nav-item" th:if="${usuarioAct.codrol == 1}">Administrador</span>
+                <span class="nav-item"  th:if="${usuarioAct.codrol == 2}">Entrenador</span>
+                <span class="nav-item"  th:if="${usuarioAct.codrol == 3}">Federación</span>
             </a></li>
 
             <li><a href="/usuarios/inicio">
@@ -62,7 +62,7 @@
                 <span class="nav-item">Jugadores</span>
             </a></li>
 
-            <li><a href="#">
+            <li><a href="/agentes/libres">
                 <i class="fas fa-user"></i>
                 <span class="nav-item">Agentes Libres</span>
             </a></li>

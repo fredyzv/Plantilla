@@ -102,7 +102,7 @@ public class UsuariosController {
 	
 	/*GRABAR ACTUALIZACION DE PERFIL*/
 	@PostMapping("/perfilgra")
-	public String actualizarPerfil(@ModelAttribute Usuario usuario, Model model) {
+	public String actualizarPerfil(@ModelAttribute Usuario usuario, HttpSession session, Model model) {
 		
 		  try {
 		  
@@ -117,7 +117,7 @@ public class UsuariosController {
 		  System.out.println("cambiar2 " + usuario);
 		  }
 
-		return "perfil/actperfil";
+		return "redirect:/usuarios/perfil";
 		  
 	}
 	
