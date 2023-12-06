@@ -15,4 +15,6 @@ public interface IJugadorRepository extends JpaRepository<Jugador, Integer>{
 
 	List<Jugador> findByCodestado(int codestado);
 
+	List<Jugador> findByCodcategoriaAndCodequipo(int codcategoria, int codequipo);
+
 }

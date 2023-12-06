@@ -1,0 +1,253 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!-- Styles -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/assets/css/style.css}">
+
+<!-- Google fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap"
+	rel="stylesheet">
+
+<!-- Ionic icons -->
+<script src="https://kit.fontawesome.com/3778e44b4a.js"
+	crossorigin="anonymous"></script>
+
+<title>Partidos</title>
+</head>
+
+<body>
+	<div class="d-flex" id="content-wrapper">
+
+		<!-- Sidebar -->
+		<div id="sidebar-container" class="bg-primary">
+			<div class="logo">
+				<h4 class="text-light font-weight-bold mb-0">Sistema de
+					Basketball</h4>
+			</div>
+			<div class="menu" th:replace="principal::barra"></div>
+		</div>
+		<!-- Fin sidebar -->
+
+		<div class="w-100">
+
+			<!-- Navbar -->
+			<nav
+				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+				<div class="container-inside">
+
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<h1 th:if="${usuarioAct.codrol == 1}">Administrador:</h1>
+						<h1 th:if="${usuarioAct.codrol == 2}">Entrenador:</h1>
+						<h1 th:if="${usuarioAct.codrol == 3}">Federación:</h1>
+						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+							<li class="nav-item dropdown"><a
+								class="nav-link text-dark dropdown-toggle" href="#"
+								id="navbarDropdown" role="button" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"
+								th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
+							</a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="/logout">Cerrar sesión</a>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<!-- Fin Navbar -->
+
+			<!-- Page Content -->
+			<div id="content" class="bg-grey w-100">
+
+				<section class="bg-light py-3">
+					<div class="container-inside">
+						<div class="row">
+							<div class="col-lg-9 col-md-8">
+								<h1 class="font-weight-bold mb-0"
+									th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
+									<i class="fa fa-user-o" aria-hidden="true"></i>
+								</h1>
+								<p class="lead text-muted" th:text="${usuarioAct.correo}"></p>
+							</div>
+							<div class="col-lg-2 col-md-4 d-flex">
+								<a class="btn btn-primary w-100 align-self-center"
+									href="/usuarios/perfilact">Editar mi Perfil</a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+
+				<section>
+					<div class="container-inside">
+						<div class="row">
+							<div class="col-lg-12 my-3">
+								<div class="card rounded-0">
+									<div class="card-header bg-light">
+										<h5 th:if="${usuarioAct.codrol == 2}" class="font-weight-bold mb-0" th:text="'Lista de Partidos de ' + ${equipo.nomequipo}"></h5>
+										<h5 th:if="${usuarioAct.codrol != 2}" class="font-weight-bold mb-0" th:text="'Lista de Partidos'"></h5>
+									</div>
+									<div class="card-body">
+										<section>
+											<div class="form-row">
+												<a th:if="${usuarioAct.codrol != 3}" href="/partido/nuevo"
+													class="btn btn-primary">Registrar Partido</a>
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Fecha</th>
+															<th th:if="${usuarioAct.codrol != 2}">Equipo Local</th>
+															<th>Equipo Rival</th>
+															<th>Categoría</th>
+															<th>Temporada</th>
+															<th>Liga</th>
+															<th>Score Local</th>
+															<th>Score Visita</th>
+															<th>Estado</th>
+															<th>Acciones</th>
+															<th></th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="u : ${lstPartido}">
+															<th th:text="${u.fecpartido}"></th>
+															<th th:if="${usuarioAct.codrol != 2}" th:text="${u.equipo.nomequipo}"></th>
+															<th th:text="${u.equiporival}"></th>
+															<td th:text="${u.cate.nomcategoria}"></td>
+															<td th:text="${u.temp.nomtemporada}"></td>
+															<td th:text="${u.liga.nomliga}"></td>
+															<td th:text="${u.scoreequipo}"></td>
+															<td th:text="${u.scorerival}"></td>
+															<td th:if="${u.scoreequipo > u.scorerival}">Ganador</td>
+															<td th:if="${u.scoreequipo < u.scorerival}">Perdedor</td>
+															<td th:if="${usuarioAct.codrol != 2}">
+																<form action="/partido/ver" method="post">
+																	<input type="hidden" name="codpartido"
+																		th:value="${u.codpartido}">
+																	<button type="submit" class="btn btn-info">Ver</button>
+																</form>
+															</td>
+															<td th:if="${usuarioAct.codrol == 2}">
+																<form action="/partido/actualizar" method="post">
+																	<input type="hidden" name="codpartido"
+																		   th:value="${u.codpartido}">
+																	<button type="submit"
+																			class="btn btn-primary">Editar</button>
+																</form>
+															</td>
+															<td th:if="${usuarioAct.codrol == 2}">
+																<form action="/partido/datos" method="post">
+																	<input type="hidden" name="codpartido"
+																		   th:value="${u.codpartido}">
+																	<button type="submit"
+																			class="btn btn-success">Datos</button>
+																</form>
+															</td>
+															<td>
+																<form action="/partido/verdatos" method="post">
+																	<input type="hidden" name="codpartido"
+																		th:value="${u.codpartido}">
+																	<button type="submit" class="btn btn-info">Ver Datos</button>
+																</form>
+															</td>
+														</tr>
+													</tbody>
+
+												</table>
+												<div>
+													<strong th:text="${mensaje}"></strong>
+												</div>
+											</div>
+										</section>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+		function alerta() {
+			var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
+			if (opcion == true) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+		integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
+		crossorigin="anonymous"></script>
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : [ 'Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020' ],
+				datasets : [ {
+					label : 'Nuevos usuarios',
+					data : [ 50, 100, 150, 200 ],
+					backgroundColor : [ '#12C9E5', '#12C9E5', '#12C9E5',
+							'#111B54' ],
+					maxBarThickness : 30,
+					maxBarLength : 2
+				} ]
+			},
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
