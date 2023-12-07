@@ -1,8 +1,6 @@
 package com.deporte.plantilla.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 
@@ -15,4 +13,8 @@ public class Categoria {
 	private int codcategoria;
 	private String categoria;
 
+	@ManyToOne
+	@JoinColumn(name = "codestado", insertable = false, updatable = false)
+	private Estado estado;
+	private int codestado;
 }

@@ -36,190 +36,118 @@
 </head>
 
 <body>
+	<!-- Navbar -->
+	<div class="menu" th:replace="principal::navbar-left"></div>
+	<!-- Fin Navbar -->
 	<div class="d-flex" id="content-wrapper">
-
-		<!-- Sidebar -->
-		<div id="sidebar-container" class="bg-primary">
-			<div class="logo">
-				<h4 class="text-light font-weight-bold mb-0">Sistema de
-					Basketball</h4>
-			</div>
-			<div class="menu" th:replace="principal::navbar-left"></div>
-		</div>
-		<!-- Fin sidebar -->
-
-		<div class="w-100">
-
-			<!-- Navbar -->
-			<nav
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-				<div class="container-inside">
-
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<h1 th:if="${usuarioAct.codrol == 1}">Administrador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 2}">Entrenador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 3}">Federación:</h1>
-						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-							<li class="nav-item dropdown"><a
-								class="nav-link text-dark dropdown-toggle" href="#"
-								id="navbarDropdown" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"
-								th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-							</a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/logout">Cerrar sesión</a>
-								</div></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- Fin Navbar -->
-
+		<!-- Navbar top-->
+		<div class="menu" th:replace="principal::navbar-top"></div>
+		<!-- Fin Navbar top-->
 			<!-- Page Content -->
 			<div id="content" class="bg-grey w-100">
 
-				<section class="bg-light py-3">
-					<div class="container-inside">
-						<div class="row">
-							<div class="col-lg-9 col-md-8">
-								<h1 class="font-weight-bold mb-0"
-									th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-								</h1>
-								<p class="lead text-muted" th:text="${usuarioAct.correo}"></p>
-							</div>
-							<div class="col-lg-2 col-md-4 d-flex">
-								<a class="btn btn-primary w-100 align-self-center"
-									href="/usuarios/perfilact">Editar mi Perfil</a>
-							</div>
-						</div>
-					</div>
-				</section>
-
-
-
-				<section>
-					<div class="container-inside">
+				<section style="padding: 1% 3%;">
+					<div class="container-reg">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h6 class="font-weight-bold mb-0">Actualizar Usuario</h6>
+										<h1>Actualizar Usuario</h1>
 									</div>
 									<div class="card-body">
-										<form action="/user/actualizado" method="post"
-											th:object="${usuario}">
+										<form action="/user/actualizado" method="post" th:object="${usuario}">
 
-											<div class="form-row">
-												<div class="form-group col-md-4">
-													<label>Nombres</label> <input type="text"
-														th:field="*{nombres}" class="form-control">
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-box col-md-4">
+													<label>Nombres</label>
+													<input type="text" th:field="*{nombres}" class="form-control">
 												</div>
-												<div class="form-group col-md-4">
-													<label>Apellidos</label> <input type="text"
-														th:field="*{apellidos}" class="form-control"
-														id="inputPassword4">
+												<div class="form-box col-md-4">
+													<label>Apellidos</label>
+													<input type="text" th:field="*{apellidos}" class="form-control">
+												</div>
+												<div class="form-box col-md-2">
+													<label>Tipo de Documento</label>
+													<select th:field="*{coddocumento}">
+														<option value="-1">Seleccione...</option>
+														<option th:each="d : ${lstDocumento}" th:value="${d.coddocumento}" th:text="${d.documento}"></option>
+													</select>
+												</div>
+												<div class="form-box col-md-2">
+													<label>Documento</label>
+													<input type="number" th:field="*{documento}" class="form-control">
 												</div>
 											</div>
 
-											<div class="form-row">
-												<div class="form-group col-md-2">
-													<label>Tipo de Documento</label> <select
-														th:field="*{coddocumento}" class="form-control">
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-box col-md-3">
+													<label>Sexo</label>
+													<select th:field="*{codsexo}">
 														<option value="-1">Seleccione...</option>
-														<option th:each="d : ${lstDocumento}"
-															th:value="${d.coddocumento}" th:text="${d.documento}"></option>
-													</select>
-												</div>
-												<div class="form-group col-md-3">
-													<label>Documento</label> <input type="number"
-														th:field="*{documento}" class="form-control">
-												</div>
-											</div>
-
-											<div class="form-row">
-												<div class="form-group col-md-2">
-													<label for="inputCat">Sexo</label> <select
-														th:field="*{codsexo}" class="form-control">
-														<option value="-1">Seleccione...</option>
-														<option th:each="s : ${lstSexo}" th:value="${s.codsexo}"
-															th:text="${s.descripcion}"></option>
-													</select>
-												</div>
-												<div class="form-group col-md-2">
-													<label>Teléfono</label> <input type="text"
-														th:field="*{telefono}" class="form-control">
-												</div>
-												<div class="form-group col-md-2">
-													<label>Fecha de Nacimiento</label> <input type="date"
-														format="yyyy" th:field="*{fecnac}" class="form-control">
-												</div>
-												<div class="form-group col-md-2">
-													<label for="inputCat">Nivel</label> <select
-														th:field="*{codnivel}" class="form-control">
-														<option value="-1">Seleccione...</option>
-														<option th:each="n : ${lstNivel}" th:value="${n.codnivel}"
-															th:text="${n.nivel}"></option>
+														<option th:each="s : ${lstSexo}" th:value="${s.codsexo}" th:text="${s.descripcion}"></option>
 													</select>
 												</div>
 
-											</div>
-
-											<div class="form-row">
-												<div class="form-group col-md-4">
-													<label>Correo</label> <input type="email"
-														th:field="*{correo}" class="form-control"
-														id="inputAddress">
+												<div class="form-box col-md-3">
+													<label>Teléfono</label>
+													<input type="text" th:field="*{telefono}" class="form-control">
 												</div>
-												<div class="form-group col-md-4">
-													<label>Contraseña</label> <input type="text"
-														th:field="*{clave}" class="form-control">
+												<div class="form-box col-md-3">
+													<label>Fecha de Nacimiento</label>
+													<input type="date" format="yyyy" th:field="*{fecnac}" class="form-control">
 												</div>
-											</div>
-											<div class="form-row">
-
-												<div class="form-group col-md-8">
-													<label>Dirección</label> <input type="text"
-														th:field="*{direccion}" class="form-control">
-												</div>
-											</div>
-
-											<div class="form-row">
-
-												<input type="hidden" class="form-control"
-													th:field="*{usuario}"> <input type="hidden"
-													class="form-control" readonly th:field="*{fecreg}">
-
-											</div>
-											<div class="form-row">
-												<div class="form-group col-md-2">
-													<label>Estado</label> <select th:field="*{codestado}"
-														class="form-control">
+												<div class="form-box col-md-3">
+													<label>Nivel</label>
+													<select th:field="*{codnivel}">
 														<option value="-1">Seleccione...</option>
-														<option th:each="n : ${lstEstado}"
-															th:value="${n.codestado}" th:text="${n.estado}"></option>
-													</select>
-												</div>
-												<div class="form-group col-md-2">
-													<label>Rol</label> <select id="inputCat"
-														th:field="*{codrol}" class="form-control">
-														<option value="-1">Seleccione...</option>
-														<option th:each="n : ${lstRol}" th:value="${n.codrol}"
-															th:text="${n.descripcion}"></option>
+														<option th:each="n : ${lstNivel}" th:value="${n.codnivel}" th:text="${n.nivel}"></option>
 													</select>
 												</div>
 											</div>
 
-											<button type="submit" class="btn btn-success">Actualizar</button>
-											<a href="/user/usuario" class="btn btn-primary">Volver</a>
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-box col-md-3">
+													<label for="inputEmail4">Correo</label>
+													<input type="email" th:field="*{correo}" class="form-control" id="inputAddress">
+												</div>
+												<div class="form-box col-md-3">
+													<label for="inputEmail4">Contraseña</label>
+													<input type="text" th:field="*{clave}" class="form-control" id="inputEmail4">
+												</div>
+												<div class="form-box col-md-6">
+													<label for="inputEmail4">Dirección</label>
+													<input type="text" th:field="*{direccion}" class="form-control" id="inputAddress2">
+												</div>
+											</div>
+
+											<input type="hidden" class="form-control" th:field="*{usuario}">
+											<input type="hidden" class="form-control" readonly th:field="*{fecreg}">
+
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12" style="margin-left: 30%;">
+												<div class="form-box col-md-2">
+													<label>Estado</label>
+													<select th:field="*{codestado}">
+													<option value="-1">Seleccione...</option>
+													<option th:each="n : ${lstEstado}" th:value="${n.codestado}" th:text="${n.estado}"></option>
+												</select>
+												</div>
+												<div class="form-box col-md-3">
+													<label>Rol</label>
+													<select th:field="*{codrol}" >
+													<option value="-1">Seleccione...</option>
+													<option th:each="n : ${lstRol}" th:value="${n.codrol}" th:text="${n.descripcion}"></option>
+												</select>
+												</div>
+											</div>
+
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<center>
+													<button type="submit" class="btn btn-success">Actualizar</button>
+													<a href="/user/usuario" class="btn btn-primary">Volver</a>
+												</center>
+
+											</div>
+
 										</form>
 										<br>
 										<div>

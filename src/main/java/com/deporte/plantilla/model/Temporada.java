@@ -11,5 +11,9 @@ public class Temporada {
 	@Id
 	private int codtemporada;
 	private String temporada;
+	@ManyToOne
+	@JoinColumn(name = "codestado", insertable = false, updatable = false)
+	private Estado estado;
+	private int codestado;
 
 }

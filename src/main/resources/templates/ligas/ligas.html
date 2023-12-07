@@ -4,171 +4,109 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	<!-- Site Icons -->
+	<link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
+	<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
 
-<!-- Styles -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/style.css}">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+	<!-- Login CSS -->
+	<link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+	<!-- color -->
+	<link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
 
-<!-- Google fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap"
-	rel="stylesheet">
+	<!-- Modernizer -->
+	<script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
+
 	<script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
-<!-- Ionic icons -->
-<script src="https://kit.fontawesome.com/3778e44b4a.js"
-	crossorigin="anonymous"></script>
+
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
 
 <title>Ligas</title>
 </head>
 
 <body>
-	<div class="d-flex" id="content-wrapper">
-
-		<!-- Sidebar -->
-		<div id="sidebar-container" class="bg-primary">
-			<div class="logo">
-				<h4 class="text-light font-weight-bold mb-0">Sistema de
-					Basketball</h4>
-			</div>
-			<div class="menu" th:replace="principal::navbar-left"></div>
-		</div>
-		<!-- Fin sidebar -->
-
-		<div class="w-100">
-
-			<!-- Navbar -->
-			<nav
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-				<div class="container-inside">
-
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<h1 th:if="${usuarioAct.codrol == 1}">Administrador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 2}">Entrenador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 3}">Federación:</h1>
-						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-							<li class="nav-item dropdown"><a
-								class="nav-link text-dark dropdown-toggle" href="#"
-								id="navbarDropdown" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"
-								th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-							</a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/logout">Cerrar sesión</a>
-								</div></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- Fin Navbar -->
+	<!-- Navbar -->
+	<div class="menu" th:replace="principal::navbar-left"></div>
+	<!-- Fin Navbar -->
+	<div class="d-flex" id="content-wrapper" style="width: auto; height: 100%;">
+		<!-- Navbar top-->
+		<div class="menu" th:replace="principal::navbar-top"></div>
+		<!-- Fin Navbar top-->
 
 			<!-- Page Content -->
 			<div id="content" class="bg-grey w-100">
 
-				<section class="bg-light py-3">
-					<div class="container-inside">
-						<div class="row">
-							<div class="col-lg-9 col-md-8">
-								<h1 class="font-weight-bold mb-0"
-									th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-								</h1>
-								<p class="lead text-muted" th:text="${usuarioAct.correo}"></p>
-							</div>
-							<div class="col-lg-2 col-md-4 d-flex">
-								<a class="btn btn-primary w-100 align-self-center"
-									href="/usuarios/perfilact">Editar mi Perfil</a>
-							</div>
-						</div>
-					</div>
-				</section>
 
-
-
-				<section>
-					<div class="container-inside">
+				<section style="padding: 1% 3%;">
+					<div class="container-tabla">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h6 class="font-weight-bold mb-0">Ligas</h6>
+										<h1>Ligas</h1>
 									</div>
 									<div class="card-body">
 										<section>
-											<div class="form-row">
-												<a
-													href="/ligas/nuevo" class="btn btn-primary">Registrar
-													Liga</a> &nbsp;
-												<form action="/reporte/ligas" target="_blank" method="post"
-													th:object="${usuarioAct}">
-													<input type="hidden" class="form-control" name="usuario"
-														th:field="*{usuario}">
-													<button th:if="${usuario.codrol == 2}" type="submit"
-														class="btn btn-info">Reporte de Ligas</button>
+											<div class="form-row" style="display: flex;">
+												<a href="/ligas/nuevo" class="btn btn-primary">Registrar Liga</a> &nbsp;
+												<form action="/reporte/ligas" target="_blank" method="post" th:object="${usuarioAct}">
+													<input type="hidden" class="form-control" name="usuario" th:field="*{usuario}">
+													<button th:if="${usuario.codrol != 2}" type="submit" class="btn btn-info">Reporte de Ligas</button>
 												</form>
-												&nbsp; <a th:if="${usuario.codrol != 2}"
-													href="/reportes/equipoAdmin" target="_blank"
-													class="btn btn-info">Reporte de Equipos</a>
-
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Código</th>
-															<th>Nombre</th>
-															<th>Departamento</th>
-															<th>Provincia</th>
-															<th>Distrito</th>
-															<th>Equipos</th>
-															<th>Estado</th>
-															<th>Acciones</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:each="e : ${lstLigas}">
-															<td	th:text="${e.codliga}"></td>
-															<td th:text="${e.nomliga}"></td>
-															<td th:text="${e.dep}"></td>
-															<td th:text="${e.pro}"></td>
-															<td th:text="${e.dis}"></td>
-															<td th:text="${e.num}"></td>
-															<td th:text="${e.est.estado}"></td>
-															<td>
-																<form action="/ligas/actualizar" method="post">
-																	<input type="hidden" name="codliga"
-																		th:value="${e.codliga}">
-																	<button type="submit"
-																		class="btn btn-primary">Editar</button>
-																</form>
-															</td>
-															<td>
-																<form action="/ligas/eliminar" method="post">
-																	<input type="hidden" name="codliga"
-																		th:value="${e.codliga}">
-																	<button onclick="return alerta()"
-																		type="submit"
-																		class="btn btn-danger">Eliminar</button>
-																</form>
-															</td>
-														</tr>
-													</tbody>
-												</table>
+												&nbsp; <a th:if="${usuario.codrol != 2}" href="/reportes/equipoAdmin" target="_blank" class="btn btn-info">Reporte de Equipos</a>
 											</div>
+											<table class="table">
+												<thead>
+												<tr>
+													<th>Código</th>
+													<th>Nombre</th>
+													<th>Departamento</th>
+													<th>Provincia</th>
+													<th>Distrito</th>
+													<th>Equipos</th>
+													<th>Estado</th>
+													<th>Acciones</th>
+												</tr>
+												</thead>
+												<tbody>
+												<tr th:each="e : ${lstLigas}">
+													<td	th:text="${e.codliga}"></td>
+													<td th:text="${e.nomliga}"></td>
+													<td th:text="${e.dep}"></td>
+													<td th:text="${e.pro}"></td>
+													<td th:text="${e.dis}"></td>
+													<td th:text="${e.num}"></td>
+													<td th:text="${e.est.estado}"></td>
+													<td style="display: flex;">
+														<form action="/ligas/actualizar" method="post" style="margin-right: 5px;">
+															<input type="hidden" name="codliga"
+																   th:value="${e.codliga}">
+															<button type="submit"
+																	class="btn btn-primary"><i class="fas fa-edit"></i></button>
+														</form>
+														<form action="/ligas/eliminar" method="post">
+															<input type="hidden" name="codliga"
+																   th:value="${e.codliga}">
+															<button onclick="return alerta()" type="submit"
+																	class="btn btn-danger"><i class="fas fa-trash"></i></button>
+														</form>
+													</td>
+												</tr>
+												</tbody>
+											</table>
 										</section>
 
 									</div>

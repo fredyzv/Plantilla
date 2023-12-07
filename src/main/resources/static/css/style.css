@@ -69,6 +69,7 @@ body{
 	font-size:14px;
 	font-family: 'Roboto', sans-serif;
 	line-height:1.80857;
+    background-color: lavender;
 }
 
 a {
@@ -257,12 +258,15 @@ html, body{ height: 100%; }
     HEADER AREA
 -------------------------------------------------------------------*/
 
+
 #site-header{
 	
 }
 #header{}
 .logo{
 	float:left;
+    display: flex;
+    align-items: center;
 }
 .header-block-top{
 	position: absolute;
@@ -1901,4 +1905,119 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 
 .vivid-yellow-bg{
 	background: #fdcb03;
+}
+/*------------------------------------------------------------------
+    ENCABEZADO
+-------------------------------------------------------------------*/
+
+.etiqueta-usuario{
+    background-color: white;
+    width: 35%;
+    height: auto;
+    padding: 20px 40px;
+    border-radius: 26px;
+    margin-left: 2%;
+}
+.etiqueta-usuario p{
+    color: gray;
+}
+
+/*------------------------------------------------------------------
+    ENCABEZADO
+-------------------------------------------------------------------*/
+
+.section-guia{
+    width: auto;
+    padding: 2% 7.5%;
+    height: 61%;
+}
+.container-guia{
+    background-color: white;
+    padding: 40px 30px;
+    width: 70%;
+    height: auto;
+    border-radius: 35px;
+}
+
+/*------------------------------------------------------------------
+    ENCABEZADO
+-------------------------------------------------------------------*/
+
+.section-contactAdm{
+    width: 100%;
+    padding-left: 40%;
+}
+.contactAdm{
+    background-color: white;
+    padding: 30px 40px;
+    width: 40%;
+    border-radius: 35px;
+}
+/*------------------------------------------------------------------
+    TABLAS - REGISTROS
+-------------------------------------------------------------------*/
+
+.container-tabla{
+    width: 90%;
+    margin: auto;
+    border-radius: 40px;
+    padding: 40px 60px;
+    background-color: white;
+}
+.container-tabla h1{
+    text-align: center;
+}
+.container-reg{
+    width: 75%;
+    margin: auto;
+    border-radius: 40px;
+    padding: 40px 60px;
+    background-color: white;
+}
+.container-reg h1{
+    text-align: center;
+}
+
+/*------------------------------------------------------------------
+    PERFIL
+-------------------------------------------------------------------*/
+
+.container-perfil{
+    width: 50%;
+    margin: 5% auto;
+    border-radius: 40px;
+    padding: 40px 60px;
+    background-color: white;
+}
+.container-perfil h1{
+    text-align: center;
+}
+.perfil-box{
+    margin: 20px 0;
+    width: 150px;
+    text-align: center;
+    padding: 5px 0;
+    background-color: gray;
+    border-radius: 20px;
+}
+.perfil-info{
+    display: flex;
+    padding-left: 10%;
+}
+.lista-datos{
+    width: 45%;
+}
+
+
+/*QUITAR SCROLL DE LOS INPUT NUMBER*/
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

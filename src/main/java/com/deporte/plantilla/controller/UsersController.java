@@ -112,7 +112,7 @@ public class UsersController {
 		model.addAttribute("rol", session.getAttribute("rol"));
 		Usuario usuarioAct = repoU.findByCorreo(correo);
 		model.addAttribute("usuarioAct", usuarioAct);
-
+		model.addAttribute("usuario", usuario);
 		model.addAttribute("lstUsuario", repoU.findAll());
 		model.addAttribute("lstEstado", repoE.findAll());
 		model.addAttribute("lstNivel", repoN.findAll());

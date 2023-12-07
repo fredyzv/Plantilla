@@ -1,9 +1,6 @@
 package com.deporte.plantilla.controller;
 
-import com.deporte.plantilla.model.Equipo;
-import com.deporte.plantilla.model.Jugador;
-import com.deporte.plantilla.model.Partido;
-import com.deporte.plantilla.model.Usuario;
+import com.deporte.plantilla.model.*;
 import com.deporte.plantilla.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +56,7 @@ public class PartidoController {
 
     /* NUEVO PARTIDO */
     @GetMapping("/nuevo")
-    public String abrirNuevoPartido(@ModelAttribute Usuario usuarioAct, Equipo equipo, Partido partido, HttpSession session, Model model) {
+    public String abrirNuevoPartido(@ModelAttribute Usuario usuarioAct, Equipo equipo, Partido partido, HttpSession session, Model model, Temporada temporada) {
 
         String correo = (String) session.getAttribute("correo");
         model.addAttribute("rol", session.getAttribute("rol"));
@@ -76,6 +73,7 @@ public class PartidoController {
 
         model.addAttribute("equipo", equipo);
         model.addAttribute("partido", partido);
+        model.addAttribute("temporada", temporada);
         model.addAttribute("lstTemporada", repoT.findAll());
         model.addAttribute("lstCategoria", repoC.findAll());
         model.addAttribute("lstLiga", repoL.findByCodestado(1));
