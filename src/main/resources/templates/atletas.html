@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+
+    <!-- Site Metas -->
+    <title>Food Funday Restaurant - One page HTML Responsive</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}"
+          type="static/image/x-icon"/>
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png"
+          th:href="@{/templates/images/apple-touch-icon.png}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css"
+          th:href="@{/css/colors/orange.css}"/>
+
+    <!-- Modernizer -->
+    <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
+
+    <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div id="site-header">
+    <header id="header" class="header-block-top">
+        <div class="container">
+            <div class="row">
+                <div class="main-menu">
+                    <!-- navbar -->
+                    <nav class="navbar navbar-default" id="mainNav">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="logo">
+                                <a class="navbar-brand js-scroll-trigger logo-header" href="/">
+                                    <img src="images/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/socios">Regresar</a></li>
+
+                            </ul>
+                        </div>
+                        <!-- end nav-collapse -->
+                    </nav>
+                    <!-- end navbar -->
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+    </header>
+
+    <!-- end header -->
+</div>
+<!-- end site-header -->
+
+
+<div id="banner" class="banner full-screen-mode parallax">
+
+    <div class="container pr">
+        <div class="loginatleta">
+            <div class="loginatleta-left">
+                <div id="reservation" class="reservations-main pad-top-100 pad-bottom-100">
+                    <div class="">
+                        <div class="row">
+                            <div class="form-reservations-box">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                                        <h2 class="block-title text-center">
+                                            Regístrate
+                                        </h2>
+                                    </div>
+
+                                    <form action="/jugadores/registrar" method="post" class="reservations-box" th:object="${jugadores}">
+                                        <div class="col-lg-12">
+                                            <div class="form-box">
+                                                <input type="text" placeholder="Nombres" th:field="*{nombre}"
+                                                       required="required" data-error="Los nombres son requerido.">
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+                                        <div class="col-lg-12">
+                                            <div class="form-box">
+                                                <input type="text"  placeholder="Apellidos" th:field="*{apellido}"
+                                                       required="required" data-error="Los apellidos son requeridos.">
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+                                        <div class="col-lg-6">
+                                            <div class="form-box">
+                                                <input type="number" placeholder="Dni" th:field="*{documento}"
+                                                       required="required" data-error="El dni es requerido.">
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-box">
+                                                <input type="text" placeholder="Contraseña" th:field="*{clave}"
+                                                       required="required" data-error="La contraseña es requerida."/>
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="reserve-book-btn text-center">
+                                                <button class="hvr-underline-from-center" type="submit">REGISTRARSE</button>
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+                                    </form>
+                                    <!-- end form -->
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end reservations-box -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+                </div>
+
+
+            </div>
+            <div class="loginatleta-right">
+                <div class="login">
+                    <h2 class="block-title text-center">Login</h2>
+                    <div class="form-group">
+                        <form action="/jugadores/validar" method="post" th:object="${jugadores}">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-box">
+                                    <input type="number" class="form-control"  placeholder="Dni" th:field="*{documento}">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-box">
+                                    <input type="password" class="form-control" placeholder="Contraseña" th:field="*{clave}">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="reserve-book-btn text-center">
+                                    <button type="submit" class="hvr-underline-from-center">Ingresar</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- -->
+                        <br>
+                        <div th:if="${valor == 0}" class="alert alert-danger" >
+                            <strong th:text="${mensaje}"></strong>
+                        </div>
+                        <div th:if="${valor == 2} " class="alert alert-danger" >
+                            <strong th:text="${mensaje}"></strong>
+                        </div>
+                        <div th:if="${valor == 1} " class="alert alert-success" >
+                            <strong th:text="${mensaje}"></strong>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end banner-cell -->
+            </div>
+
+        </div>
+        <!-- end reservations-main -->
+        <!-- end col -->
+    </div>
+    <!-- end container -->
+</div>
+
+
+<!-- end banner -->
+
+
+<a href="#" class="scrollup" style="margin-top: -50px">Scroll</a>
+
+
+<!-- ALL JS FILES -->
+<script src="js/all.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- ALL PLUGINS -->
+<script src="js/custom.js"></script>
+</body>
+
+</html>
