@@ -42,141 +42,147 @@
 	<!-- Fin Navbar -->
 
 	<div class="d-flex" id="content-wrapper">
-		<!-- Navbar top-->
-		<div class="menu" th:replace="principal::navbar-top"></div>
-		<!-- Fin Navbar top-->
 
 			<!-- Page Content -->
 			<div id="content" class="bg-grey w-100">
 
 
-				<section style="padding: 3%;">
-					<div class="container-inside" style="width: 90%;margin: auto;">
+				<section style="padding: 5% 3%;">
+					<div class="container-reg">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h1 th:text="'Registro de Partido de ' + ${equipo.nomequipo}" class="font-weight-bold mb-0"></h1>
+										<h1 th:text="'Registro de Partido de ' + ${equipo.nomequipo}"></h1>
 									</div>
 									<div class="card-body">
-										<form action="/partido/grabar" method="post"
-											th:object="${partido}">
-											<div class="form-row">
-												<div class="form-group col-md-2">
-													<label>Fecha de Partido</label> <input required
-														type="date" format="yyyy" th:field="*{fecpartido}"
-														class="form-control">
+										<form action="/partido/grabar" method="post" th:object="${partido}">
+
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-box col-md-3">
+													<label>Fecha de Partido</label>
+													<input required type="date" format="yyyy" th:field="*{fecpartido}">
 												</div>
-												<div class="form-group col-md-2">
-													<label>Temporada</label> <select required
-														th:field="*{codtemporada}" class="form-control">
-													<option value="-1">Seleccione...</option>
-													<option th:each="d : ${lstTemporada}"
-															th:value="${d.codtemporada}" th:text="${d.nomtemporada}"></option>
-												</select>
+												<div class="form-box col-md-3">
+													<label>Temporada</label>
+													<select required th:field="*{codtemporada}">
+														<option value="-1">Seleccione...</option>
+														<option th:each="d : ${lstTemporada}" th:value="${d.codtemporada}" th:text="${d.temporada}"></option>
+													</select>
 												</div>
-												<div class="form-group col-md-2">
-													<label>Categoría</label> <select required
-														th:field="*{codcategoria}" class="form-control">
-													<option value="-1">Seleccione...</option>
-													<option th:each="d : ${lstCategoria}"
-															th:value="${d.codcategoria}" th:text="${d.nomcategoria}"></option>
-												</select>
+												<div class="form-box col-md-3">
+													<label>Categoría</label>
+													<select required th:field="*{codcategoria}" >
+														<option value="-1">Seleccione...</option>
+														<option th:each="d : ${lstCategoria}" th:value="${d.codcategoria}" th:text="${d.categoria}"></option>
+													</select>
 												</div>
-												<div class="form-group col-md-2">
-													<label>Liga</label> <select required
-														th:field="*{codliga}" class="form-control">
-													<option value="-1">Seleccione...</option>
-													<option th:each="d : ${lstLiga}"
-															th:value="${d.codliga}" th:text="${d.nomliga}"></option>
-												</select>
+												<div class="form-box col-md-3">
+													<label>Liga</label>
+													<select required th:field="*{codliga}" >
+														<option value="-1">Seleccione...</option>
+														<option th:each="d : ${lstLiga}" th:value="${d.codliga}" th:text="${d.nomliga}"></option>
+													</select>
 												</div>
 											</div>
 
-											<div class="form-row">
-												<div class="form-group col-md-3">
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-box col-md-4">
 													<label>Equipo Rival</label>
-													<input required type="text" th:field="*{equiporival}" class="form-control">
+													<input required type="text" th:field="*{equiporival}">
 												</div>
-												<div class="form-group col-md-2">
+												<div class="form-box col-md-4">
 													<label>Score Local</label>
-													<input required type="text" th:field="*{scoreequipo}" class="form-control">
+													<input required type="text" th:field="*{scoreequipo}">
 												</div>
-												<div class="form-group col-md-2">
+												<div class="form-box col-md-4">
 													<label>Score Rival</label>
-													<input required type="text" th:field="*{scorerival}" class="form-control">
+													<input  type="text" th:field="*{scorerival}">
 												</div>
 											</div>
-											<div>
-												<h6>Puntos por cuarto</h6>
-											</div>
-											<h6>Equipo</h6>
-											<div class="form-row">
-												<div class="form-group col-md-1">
-													<label>1er Cuarto</label> <input placeholder="0"
-														type="number" th:field="*{pcequipo}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>2do Cuarto</label> <input placeholder="0"
-														type="number" th:field="*{scequipo}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>3er Cuarto</label> <input placeholder="0"
-														type="number" th:field="*{tcequipo}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>4to Cuarto</label> <input placeholder="0"
-														type="number" th:field="*{ccequipo}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>1er OT</label> <input placeholder="0"
-																					 type="number" th:field="*{psequipo}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>2do OT</label> <input placeholder="0"
-																					 type="number" th:field="*{ssequipo}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>3er OT</label> <input placeholder="0"
-																					 type="number" th:field="*{tsequipo}" class="form-control">
-												</div>
-											</div>
-											<h6>Rival</h6>
-											<div class="form-row">
 
-												<div class="form-group col-md-1">
-													<label>1er Cuarto</label> <input placeholder="0"
-																					 type="number" th:field="*{pcrival}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>2do Cuarto</label> <input placeholder="0"
-																					 type="number" th:field="*{scrival}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>3er Cuarto</label> <input placeholder="0"
-																					 type="number" th:field="*{tcrival}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>4to Cuarto</label> <input placeholder="0"
-																					 type="number" th:field="*{ccrival}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>1er OT</label> <input placeholder="0"
-																				 type="number" th:field="*{psrival}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>2do OT</label> <input placeholder="0"
-																				 type="number" th:field="*{ssrival}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<label>3er OT</label> <input placeholder="0"
-																				 type="number" th:field="*{tsrival}" class="form-control">
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-group col-md-2">
+													<label>Equipo Local</label>
 												</div>
 											</div>
-											<input type="hidden" class="form-control" th:field="*{codpartido}">
 
-											<button type="submit" class="btn btn-success">Registrar</button>
-											<a href="/partido/listado" class="btn btn-primary">Volver</a>
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-box col-md-2">
+													<label>1er Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{pcequipo}">
+												</div>
+												<div class="form-box col-md-2">
+													<label>2do Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{scequipo}">
+												</div>
+												<div class="form-box col-md-2">
+													<label>3er Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{tcequipo}">
+												</div>
+												<div class="form-box col-md-2">
+													<label>4to Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{ccequipo}">
+												</div>
+												<div class="form-box col-md-1">
+													<label>1er OT</label>
+													<input placeholder="0" type="number" th:field="*{psequipo}">
+												</div>
+												<div class="form-box col-md-1">
+													<label>2do OT</label>
+													<input placeholder="0" type="number" th:field="*{ssequipo}">
+												</div>
+												<div class="form-box col-md-1">
+													<label>3er OT</label>
+													<input placeholder="0" type="number" th:field="*{tsequipo}">
+												</div>
+											</div>
+
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-group col-md-2">
+													<label>Equipo Rival</label>
+												</div>
+											</div>
+
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<div class="form-box col-md-2">
+													<label>1er Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{pcrival}" class="form-control">
+												</div>
+												<div class="form-box col-md-2">
+													<label>2do Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{scrival}" class="form-control">
+												</div>
+												<div class="form-box col-md-2">
+													<label>3er Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{tcrival}" class="form-control">
+												</div>
+												<div class="form-box col-md-2">
+													<label>4to Cuarto</label>
+													<input placeholder="0" type="number" th:field="*{ccrival}" class="form-control">
+												</div>
+												<div class="form-box col-md-1">
+													<label>1er OT</label>
+													<input placeholder="0" type="number" th:field="*{psrival}" class="form-control">
+												</div>
+												<div class="form-box col-md-1">
+													<label>2do OT</label>
+													<input placeholder="0" type="number" th:field="*{ssrival}" class="form-control">
+												</div>
+												<div class="form-box col-md-1">
+													<label>3er OT</label>
+													<input placeholder="0" type="number" th:field="*{tsrival}" class="form-control">
+												</div>
+											</div>
+
+											<input type="hidden"  th:field="*{codpartido}">
+
+											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+												<center>
+												<button type="submit" class="btn btn-success">Registrar</button>
+												<a href="/partido/listado" class="btn btn-primary">Volver</a>
+												</center>
+											</div>
 										</form>
 										<br>
 										<div>

@@ -4,242 +4,53 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	<!-- Site Icons -->
+	<link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
+	<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
 
-<!-- Styles -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/style.css}">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+	<!-- Login CSS -->
+	<link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+	<!-- color -->
+	<link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
 
-<!-- Google fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap"
-	rel="stylesheet">
+	<!-- Modernizer -->
+	<script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-<!-- Ionic icons -->
-<script src="https://kit.fontawesome.com/3808e44b4a.js"
-	crossorigin="anonymous"></script>
+	<script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
 <title>Registro de Partido</title>
 </head>
 
 <body>
+<!-- Navbar left-->
+<div class="menu" th:replace="principal::navbar-left"></div>
+<!-- Fin Navbar left -->
+
 	<div class="d-flex" id="content-wrapper">
-
-		<!-- Sidebar -->
-		<div id="sidebar-container" class="bg-primary">
-			<div class="logo">
-				<h4 class="text-light font-weight-bold mb-0">Sistema de
-					Basketball</h4>
-			</div>
-			<div class="menu" th:replace="principal::barra"></div>
-		</div>
-		<!-- Fin sidebar -->
-
-		<div class="w-100">
-
-			<!-- Navbar -->
-			<nav
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-				<div class="container-inside">
-
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<h1 th:if="${usuarioAct.codrol == 1}">Administrador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 2}">Entrenador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 3}">Federación:</h1>
-						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-							<li class="nav-item dropdown"><a
-								class="nav-link text-dark dropdown-toggle" href="#"
-								id="navbarDropdown" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"
-								th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-							</a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/logout">Cerrar sesión</a>
-								</div></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- Fin Navbar -->
+		<!-- Navbar top-->
+		<div class="menu" th:replace="principal::navbar-top"></div>
+		<!-- Fin Navbar top-->
 
 			<!-- Page Content -->
 			<div id="content" class="bg-grey w-100">
 
-				<section class="bg-light py-3">
-					<div class="container-inside">
-						<div class="row">
-							<div class="col-lg-9 col-md-8">
-								<h1 class="font-weight-bold mb-0"
-									th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-								</h1>
-								<p class="lead text-muted" th:text="${usuarioAct.correo}"></p>
-							</div>
-							<div class="col-lg-2 col-md-4 d-flex">
-								<a class="btn btn-primary w-100 align-self-center"
-									href="/usuarios/perfilact">Editar mi Perfil</a>
-							</div>
-						</div>
-					</div>
-				</section>
+				<!-- AQUI VA LA TABLA DE DATOS-->
 
-
-
-				<section>
-					<div class="container-inside">
-						<div class="row">
-							<div class="col-lg-12 my-3">
-								<div class="card rounded-0">
-									<div class="card-header bg-light">
-										<h6 th:text="'Registro de datos de ' + ${equipo.nomequipo} + ' del partido contra ' + ${partido.equiporival}" class="font-weight-bold mb-0"></h6>
-									</div>
-									<div class="card-body">
-										<div>
-											<h6>Datos del Partido</h6>
-										</div>
-										<h6>Equipo</h6>
-										<div class="form-row">
-											<div style="width: 9%;">
-												<label>Nombre</label>
-											</div>
-											<div style="width: 9%;">
-												<label>Apellido</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T2I</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T2C</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T3I</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T3C</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T1I</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T1C</label>
-											</div>
-											<div style="width: 5%;">
-												<label>RO</label>
-											</div>
-											<div style="width: 5%;">
-												<label>RD</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Asist</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Recup</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Perd</label>
-											</div>
-											<div style="width: 5%;">
-												<label>TapFav</label>
-											</div>
-											<div style="width: 5%;">
-												<label>TapCon</label>
-											</div>
-											<div style="width: 5%;">
-											<label>Falt Fav</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Falt Con</label>
-											</div>
-											<div style="width: 7%;">
-												<label>Tiempo</label>
-											</div>
-										</div>
-										<form action="/partido/datosGrabar" method="post" th:each="d : ${datos}">
-											<div class="form-row">
-												<div class="form-group col-md-1">
-													<input th:value="*{d.jugador.nomjug}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<input th:value="*{d.jugador.apejug}" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.idobles}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.cdobles}" type="number" class="form-control" >
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.itriples}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.ctriples}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.ilibres}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.clibres}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.rebofe}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.rebdef}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.asist}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.recup}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.perd}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.tapfav}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.tapcont}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.faltdadas}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.faltasrec}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 110px;">
-													<input th:value="*{d.tiempo}" type="time" class="form-control">
-												</div>
-											</div>
-										</form>
-										<button type="submit" class="btn btn-success">Registrar</button>
-										<a href="/partido/listado" class="btn btn-primary">Volver</a>
-										<br>
-										<div>
-											<strong th:text="${mensaje}"></strong>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</section>
 
 			</div>
 

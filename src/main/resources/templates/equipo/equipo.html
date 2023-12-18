@@ -88,18 +88,19 @@
 														<tr th:each="e : ${lstEquipo}">
 															<th th:text="${e.nomequipo}"></th>
 															<td th:text="${e.dep}"></td>
-															<td th:text="${e.pro}"></td>
+															<td th:text="${e.pro}" hid></td>
 															<td th:text="${e.dis}"></td>
 															<td th:text="${e.usu.apellidos}"></td>
 															<td th:text="${e.liga.nomliga}"></td>
 															<td th:if="${usuarioAct.codrol == 1}"
 																th:text="${e.estado.estado}"></td>
 															<td style="display: flex;">
+
 																<form action="/equipo/ver" method="post" th:if="${usuarioAct.codrol != 2}" style="margin-right: 5px;">
-																	<input type="hidden" name="codequipo"
-																		th:value="${e.codequipo}">
+																	<input type="hidden" name="codequipo" th:value="${e.codequipo}">
 																	<button type="submit" class="btn btn-info"><i class="fas fa-eye"></i></button>
 																</form>
+
 																<form action="/equipo/actualizar" method="post" style="margin-right: 5px;">
 																	<input type="hidden" name="codequipo"
 																		   th:value="${e.codequipo}">

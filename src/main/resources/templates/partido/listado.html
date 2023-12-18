@@ -49,14 +49,14 @@
 			<!-- Page Content -->
 			<div id="content" class="bg-grey w-100">
 
-				<section style="padding: 3%;">
-					<div class="container-inside" style="width: 90%;margin: auto;">
+				<section style="padding: 1% 3%;">
+					<div class="container-tabla">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h1 th:if="${usuarioAct.codrol == 2}" class="font-weight-bold mb-0" th:text="'Lista de Partidos de ' + ${equipo.nomequipo}" style="text-align: center"></h1>
-										<h1 th:if="${usuarioAct.codrol != 2}" class="font-weight-bold mb-0" th:text="'Lista de Partidos'" style="text-align: center"></h1>
+										<h1 th:if="${usuarioAct.codrol == 2}" th:text="'Lista de Partidos de ' + ${equipo.nomequipo}"></h1>
+										<h1 th:if="${usuarioAct.codrol != 2}" th:text="'Lista de Partidos'"></h1>
 									</div>
 									<div class="card-body">
 										<section>
@@ -85,8 +85,8 @@
 															<th th:text="${u.fecpartido}"></th>
 															<th th:if="${usuarioAct.codrol != 2}" th:text="${u.equipo.nomequipo}"></th>
 															<th th:text="${u.equiporival}"></th>
-															<td th:text="${u.cate.nomcategoria}"></td>
-															<td th:text="${u.temp.nomtemporada}"></td>
+															<td th:text="${u.categoria.categoria}"></td>
+															<td th:text="${u.temporada.temporada}"></td>
 															<td th:text="${u.liga.nomliga}"></td>
 															<td th:text="${u.scoreequipo}"></td>
 															<td th:text="${u.scorerival}"></td>
@@ -99,7 +99,7 @@
 																	<button type="submit" class="btn btn-info">Ver</button>
 																</form>
 															</td>
-															<td th:if="${usuarioAct.codrol == 2}">
+															<td th:if="${usuarioAct.codrol != 3}">
 																<form action="/partido/actualizar" method="post">
 																	<input type="hidden" name="codpartido"
 																		   th:value="${u.codpartido}">

@@ -41,7 +41,7 @@
     <nav >
         <ul>
             <li><a href="#" class="logo" >
-                <img src="/images/food.png" alt="">
+                <img src="/images/logo-voley.png" alt="">
                 <span class="nav-item" th:if="${usuarioAct.codrol == 1}" style="top: 0;">Administrador</span>
                 <span class="nav-item"  th:if="${usuarioAct.codrol == 2}" style="top: -0;">Entrenador</span>
                 <span class="nav-item"  th:if="${usuarioAct.codrol == 3}" style="top: 0;">Federación</span>
@@ -221,7 +221,14 @@
     </div>
 </section>
 
-<section class="section-contactAdm">
+<section style="width: 50%">
+    <div class="graphBox">
+
+
+    </div>
+</section>
+
+<section class="section-contactAdm" th:fragment="contactosAdm">
     <div class="contactAdm">
         <div class="redes-admin">
             <div class="card rounded-0">

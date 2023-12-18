@@ -38,7 +38,9 @@ public class UsuariosController {
 
 		return "principal";
 	}
-	
+
+
+
 	/*LOGUEAR*/
 	@PostMapping("/validar")
 	public String validarLogin(@ModelAttribute Usuario usuarioAct, HttpSession session, Model model) {

@@ -65,20 +65,24 @@ public class PartidoController {
 
         equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
 
+        String url=null;
+
         if(equipo == null){
             model.addAttribute("lstEquipo", repoE.findAll());
             model.addAttribute("mostrar", "no");
-            return "equipo/equipo";
+            url= "equipo/equipo";
         }
-
-        model.addAttribute("equipo", equipo);
-        model.addAttribute("partido", partido);
-        model.addAttribute("temporada", temporada);
-        model.addAttribute("lstTemporada", repoT.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
-        model.addAttribute("lstLiga", repoL.findByCodestado(1));
-
-        return "partido/nuevo";
+        if(equipo!=null) {
+            model.addAttribute("equipo", equipo);
+            model.addAttribute("partido", partido);
+            model.addAttribute("temporada", temporada);
+            model.addAttribute("lstTemporada", repoT.findAll());
+            model.addAttribute("lstCategoria", repoC.findAll());
+            model.addAttribute("lstLiga", repoL.findByCodestado(1));
+            url= "partido/nuevo";
+        }
+        double sv,av,ad,ac =0.0;
+        return url;
     }
 
     @PostMapping("/grabar")

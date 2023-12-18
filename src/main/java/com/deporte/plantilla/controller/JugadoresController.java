@@ -5,6 +5,7 @@ import com.deporte.plantilla.repository.IAgentesRepository;
 import com.deporte.plantilla.repository.IJugadorRepository;
 import com.deporte.plantilla.repository.IJugadoresRepository;
 
+import com.deporte.plantilla.util.Fecha;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class JugadoresController {
     @GetMapping("/inicio")
     public String abrirPrincipal(@ModelAttribute Jugador jugador, HttpSession session, Model model) {
 
-        String doc = (String) session.getAttribute("doc");
+        String doc = (String) session.getAttribute("documento");
         jugador = repoJ.findByDocumento(doc);
 
         model.addAttribute("jugador", jugador);
@@ -39,18 +40,65 @@ public class JugadoresController {
         return "jugadores/principalJugadores";
     }
 
-    @GetMapping("/solicitudes")
-    public String abrirSolicitudes(@ModelAttribute Jugador jugador, HttpSession session, Model model) {
+    @PostMapping("/registrar")
+    public String grabarRegistroAtleta(@ModelAttribute Jugadores jugadores, Model model) {
+
+        if(repoJ.findByDocumento(jugadores.getDocumento()) != null) {
+
+            if(repoJug.findByDocumento(jugadores.getDocumento()) == null){
+                try {
+                    model.addAttribute("jugadores", new Jugadores());
+                    jugadores.setFecreg(Fecha.fechaActual());
+                    repoJug.save(jugadores);
+                    model.addAttribute("mensaje", "Jugador Registrado");
+                    model.addAttribute("valor", 1);
+                } catch (Exception e) {
+                    model.addAttribute("mensaje", "Error al Registrar");
+                    model.addAttribute("valor", 2);
+                }
+            }else{
+                model.addAttribute("mensaje", "El jugador ya se encuentra registrado");
+                model.addAttribute("valor", 2);
+            }
+        }else {
+            model.addAttribute("mensaje", "El jugador no está registrado en ningún equipo de éste sistema");
+            model.addAttribute("valor", 2);
+        }
+
+        return "atletas";
+    }
+
+    /*LOGUEAR*/
+    @PostMapping("/validar")
+    public String validarLogin(@ModelAttribute Jugadores jugadores, HttpSession session, Model model) {
+
+        jugadores = repoJug.findByDocumentoAndClave(jugadores.getDocumento(), jugadores.getClave());
+        System.out.println(jugadores);
+
+        if (jugadores == null) {
+            model.addAttribute("mensaje", "Documento o Clave Incorrecta");
+            model.addAttribute("valor", 0);
+            return "atletas";
+        }
+        Jugadores jugadorAct = repoJug.findByDocumento(jugadores.getDocumento());
+        model.addAttribute("jugadorAct", jugadorAct);
+        session.setAttribute("doc", jugadorAct.getDocumento().toString());
+
+        return "jugadores/principalJugadores";
+    }
+    @GetMapping("/solicitud")
+    public String abrirSolicitudes(@ModelAttribute Jugador jugador, HttpSession session, Model model, Jugadores jugadores) {
 
         String doc = (String) session.getAttribute("doc");
         jugador = repoJ.findByDocumento(doc);
         model.addAttribute("jugador", jugador);
-
         if(jugador.getCodestado() == 2){
             model.addAttribute("lstAgentes", repoA.findByCodjugadorAndCodestado(jugador.getCodjugador(),1));
         }else{
             model.addAttribute("lstAgentes", repoA.findByCodjugadorAndCodestado(jugador.getCodjugador(),2));
         }
+
+        model.addAttribute("jugadorAct", jugador);
         return "jugadores/solicitudes";
     }
     /*ACEPTAR SOLICITUD*/
