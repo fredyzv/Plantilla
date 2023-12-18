@@ -86,7 +86,7 @@
 															<th th:if="${usuarioAct.codrol != 2}" th:text="${u.equipo.nomequipo}"></th>
 															<th th:text="${u.equiporival}"></th>
 															<td th:text="${u.categoria.categoria}"></td>
-															<td th:text="${u.temporada.temporada}"></td>
+															<td th:text="${u.temporada.nomtemporada}"></td>
 															<td th:text="${u.liga.nomliga}"></td>
 															<td th:text="${u.scoreequipo}"></td>
 															<td th:text="${u.scorerival}"></td>
@@ -108,11 +108,9 @@
 																</form>
 															</td>
 															<td th:if="${usuarioAct.codrol == 2}">
-																<form action="/partido/datos" method="post">
-																	<input type="hidden" name="codpartido"
-																		   th:value="${u.codpartido}">
+																<form th:action="@{'/partido/datos/' + ${u.codpartido}}" method="get">
 																	<button type="submit"
-																			class="btn btn-success">Datos</button>
+																			class="btn btn-success">Registrar Datos</button>
 																</form>
 															</td>
 															<td>

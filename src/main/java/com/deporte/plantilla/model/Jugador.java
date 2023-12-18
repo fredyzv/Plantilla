@@ -54,4 +54,7 @@ public class Jugador {
 	private Estado estado;
 	private int codestado;
 
+	@Transient
+	private Datos datos;
+
 }

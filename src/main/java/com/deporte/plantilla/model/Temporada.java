@@ -10,7 +10,7 @@ public class Temporada {
 	
 	@Id
 	private int codtemporada;
-	private String temporada;
+	private String nomtemporada;
 	@ManyToOne
 	@JoinColumn(name = "codestado", insertable = false, updatable = false)
 	private Estado estado;

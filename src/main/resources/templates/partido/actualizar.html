@@ -65,7 +65,7 @@
 													<label>Temporada</label>
 													<select required th:field="*{codtemporada}">
 														<option value="-1">Seleccione...</option>
-														<option th:each="d : ${lstTemporada}" th:value="${d.codtemporada}" th:text="${d.temporada}"></option>
+														<option th:each="d : ${lstTemporada}" th:value="${d.codtemporada}" th:text="${d.nomtemporada}"></option>
 													</select>
 												</div>
 												<div class="form-box col-md-3">

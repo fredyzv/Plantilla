@@ -74,28 +74,18 @@
 												<div class="perfil-info" >
 													<ul class="lista-datos">
 
-														<li style="height: 40px;">
-															<img th:src="@{/images/email.jpg}" style="width: 30px; height: 30px; margin-right: 5px;">
-															<span  class="nav-item" th:text="${usuarioAct.correo}"></span>
-														</li>
-														<li style="height: 40px;">
-
-															<img th:src="@{/images/telefono.jpg}" style="width: 30px;height: 30px; margin-right: 5px;">
-															<span th:text="${usuarioAct.telefono}"></span>
-
-														</li>
-														<li th:if="${equipo != null}" style="height: 40px;" >
-
-															<img th:src="@{/images/trabajo.png}"style="width: 30px;height: 30px; margin-right: 5px;">
-															<span th:text="${equipo.nomequipo}"></span>
-
-														</li>
-														<li th:if="${equipo != null}" style="height: 40px;" >
-
-															<img th:src="@{/images/posicion.png}" style="width: 30px;height: 30px; margin-right: 5px;">
-															<span th:text="${equipo.liga.nomliga}"></span>
-
-														</li>
+														<li><img th:src="@{/images/email.jpg}">
+															<p th:text="${usuario.correo}"></p></li>
+														<li><img th:src="@{/images/telefono.jpg}">
+															<p th:text="${usuario.telefono}"></p></li>
+														<li th:if="${equipo != null and usuario.codrol == 2}"><img th:src="@{/images/trabajo.png}">
+															<p th:text="${equipo.nomequipo}"></p></li>
+														<li th:if="${usuario.codrol != 2}"><img th:src="@{/images/trabajo.png}">
+															<p th:text="${usuario.rol.descripcion}"></p></li>
+														<li th:if="${usuario.codrol != 2}"><img th:src="@{/images/birth.png}">
+															<p th:text="${usuario.fecnac}"></p></li>
+														<li th:if="${equipo != null and usuario.codrol == 2}"><img th:src="@{/images/posicion.png}">
+															<p th:text="${equipo.liga.nomliga}"></p></li>
 
 													</ul>
 													<ul class="lista-datos">

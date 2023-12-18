@@ -110,12 +110,12 @@
 									</div>
 									<div class="card-body">
 										<form action="/partido/actualizado" method="post"
-											th:object="${partido}">
+											  th:object="${partido}">
 											<div class="form-row">
 												<div class="form-group col-md-2">
 													<label>Fecha de Partido</label> <input readonly
-														type="text" format="yyyy" th:field="*{fecpartido}"
-														class="form-control">
+																						   type="text" format="yyyy" th:field="*{fecpartido}"
+																						   class="form-control">
 												</div>
 												<div class="form-group col-md-2">
 													<label>Temporada</label>
@@ -123,7 +123,7 @@
 														   class="form-control">
 												</div>
 												<div class="form-group col-md-2">
-													<label>Categoría</label><input readonly type="text" th:field="*{cate.categoria}"
+													<label>Categoría</label><input readonly type="text" th:field="*{cate.nomcategoria}"
 																				   class="form-control">
 												</div>
 												<div class="form-group col-md-2">
@@ -153,31 +153,31 @@
 											<div class="form-row">
 												<div class="form-group col-md-1">
 													<label>1er Cuarto</label> <input placeholder="0" readonly
-														type="number" th:field="*{pcequipo}" class="form-control">
+																					 type="number" th:field="*{pcequipo}" class="form-control">
 												</div>
 												<div class="form-group col-md-1">
 													<label>2do Cuarto</label> <input placeholder="0" readonly
-														type="number" th:field="*{scequipo}" class="form-control">
+																					 type="number" th:field="*{scequipo}" class="form-control">
 												</div>
 												<div class="form-group col-md-1">
 													<label>3er Cuarto</label> <input placeholder="0" readonly
-														type="number" th:field="*{tcequipo}" class="form-control">
+																					 type="number" th:field="*{tcequipo}" class="form-control">
 												</div>
 												<div class="form-group col-md-1">
 													<label>4to Cuarto</label> <input placeholder="0" readonly
-														type="number" th:field="*{ccequipo}" class="form-control">
+																					 type="number" th:field="*{ccequipo}" class="form-control">
 												</div>
 												<div class="form-group col-md-1">
 													<label>1er OT</label> <input placeholder="0" readonly
-																					 type="number" th:field="*{psequipo}" class="form-control">
+																				 type="number" th:field="*{psequipo}" class="form-control">
 												</div>
 												<div class="form-group col-md-1">
 													<label>2do OT</label> <input placeholder="0" readonly
-																					 type="number" th:field="*{ssequipo}" class="form-control">
+																				 type="number" th:field="*{ssequipo}" class="form-control">
 												</div>
 												<div class="form-group col-md-1">
 													<label>3er OT</label> <input placeholder="0" readonly
-																					 type="number" th:field="*{tsequipo}" class="form-control">
+																				 type="number" th:field="*{tsequipo}" class="form-control">
 												</div>
 											</div>
 											<h6>Rival</h6>
