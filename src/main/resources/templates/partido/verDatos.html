@@ -48,34 +48,26 @@
 
 			<!-- Page Content -->
 			<div>
-				<section>
-					<div class="container-inside">
+				<section class="section-content">
+					<div class="container-tabla">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h6 th:text="'Visualización de datos del partido entre ' + ${equipo.nomequipo} + ' vs ' + ${partido.equiporival}" class="font-weight-bold mb-0"></h6>
+										<h1 th:text="'Visualización de datos del partido entre ' + ${equipo.nomequipo} + ' vs ' + ${partido.equiporival}" class="font-weight-bold mb-0"></h1>
 									</div>
 									<div class="card-body">
-										<table class="table" id="tablax">
-											<thead>
+										<table class="table table-striped" id="tablax">
+											<thead  class="head-datos">
 											<tr>
 												<th></th>
-												<th>Libres</th>
-												<th></th>
-												<th>Dobles</th>
-												<th></th>
-												<th>Triples</th>
-												<th></th>
-												<th>Rebotes</th>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th>Tapas</th>
-												<th></th>
-												<th>Faltas</th>
-												<th></th>
+												<th colspan="2">Libres</th>
+												<th colspan="2">Dobles</th>
+												<th colspan="2">Triples</th>
+												<th colspan="2">Rebotes</th>
+												<th colspan="3"></th>
+												<th colspan="2">Tapas</th>
+												<th colspan="2">Faltas</th>
 												<th></th>
 											</tr>
 											<tr>
@@ -100,7 +92,7 @@
 											</tr>
 											</thead>
 											<tbody class="tablaRegistroDatos">
-											<tr th:each="d, stat : ${lstDatos}">
+											<tr th:each="d, stat : ${lstDatos}" class="body-datos">
 												<th th:text="${d.jugador.apejug}"></th>
 												<td th:text="${d.ilibres}"></td>
 												<td th:text="${d.clibres}"></td>
@@ -118,19 +110,17 @@
 												<td th:text="${d.faltdadas}"></td>
 												<td th:text="${d.faltasrec}"></td>
 												<td th:text="${d.tiempo}"></td>
-												<td th:if="${usuarioAct.codrol == 2}">
-													<form action="#" method="post">
+												<td th:if="${usuarioAct.codrol == 2}" style="display: flex; padding: 0 22%">
+													<form action="#" method="post"  style="margin-right: 5px;">
 														<input type="hidden" name="coddatos"
 															   th:value="${d.coddatos}">
 														<button type="submit"
-																class="btn btn-primary">Editar</button>
+																class="btn btn-primary"><i class="fas fa-edit"></i></button>
 													</form>
-												</td>
-												<td>
 													<form action="#" method="post">
 														<input type="hidden" name="coddatos"
 															   th:value="${d.coddatos}">
-														<button onclick="return alerta()" type="submit" class="btn btn-danger">Eliminar</button>
+														<button onclick="return alerta()" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
 													</form>
 												</td>
 											</tr>

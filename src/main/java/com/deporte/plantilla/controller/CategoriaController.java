@@ -1,8 +1,10 @@
 package com.deporte.plantilla.controller;
 
 import com.deporte.plantilla.model.Categoria;
+import com.deporte.plantilla.model.Estado;
 import com.deporte.plantilla.model.Usuario;
 import com.deporte.plantilla.repository.ICategoriaRepository;
+import com.deporte.plantilla.repository.IEstadoRepository;
 import com.deporte.plantilla.repository.IUsuarioRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,8 @@ public class CategoriaController {
     private ICategoriaRepository repoC;
     @Autowired
     private IUsuarioRepository repoU;
-
+    @Autowired
+    private IEstadoRepository repoE;
     /*CARGAR VISTA DE CATEGORIA*/
     @GetMapping("/listar")
     public String abrirCategoria(@ModelAttribute Usuario usuarioAct, Categoria categoria, HttpSession session, Model model) {
@@ -84,7 +87,7 @@ public class CategoriaController {
         categoria = repoC.findById(categoria.getCodcategoria()).get();
 
         model.addAttribute("categoria", categoria);
-
+        model.addAttribute("lstestado", repoE.findAll());
         return "categoria/actualizar";
     }
 
@@ -106,4 +109,26 @@ public class CategoriaController {
 
         return "redirect:/categoria/listar";
     }
+
+    @PostMapping("/eliminar")
+    public String EliminarCategoria(@ModelAttribute Usuario usuarioAct, Categoria categoria, HttpSession session, Model model) {
+
+        String correo = (String) session.getAttribute("correo");
+        model.addAttribute("rol", session.getAttribute("rol"));
+        usuarioAct = repoU.findByCorreo(correo);
+
+        try {
+            categoria=repoC.findById(categoria.getCodcategoria()).get();
+            categoria.setCodestado(2);
+            repoC.save(categoria);
+            model.addAttribute("mensaje", "Categoría eliminada");
+        } catch (Exception e) {
+            model.addAttribute("mensaje", "Error al eliminar");
+        }
+
+        model.addAttribute("lstCategoria", repoC.findAll());
+
+        return "redirect:/categoria/listar";
+    }
+
 }

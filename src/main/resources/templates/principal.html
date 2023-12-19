@@ -67,11 +67,6 @@
                 <span class="nav-item">Agentes Libres</span>
             </a></li>
 
-            <li><a href="#">
-                <i class="fas fa-tasks"></i>
-                <span class="nav-item">Entrenamientos</span>
-            </a></li>
-
             <li><a href="/partido/listado">
                 <i class="fas fa-play"></i>
                 <span class="nav-item">Partidos</span>
@@ -86,7 +81,14 @@
                 <i class="fas fa-soccer-ball-o"></i>
                 <span class="nav-item">Ligas</span>
             </a></li>
-
+            <li th:if="${usuarioAct.codrol == 1}"> <a href="/temporada/listar">
+                <i class="fas fa-tasks"></i>
+                <span class="nav-item">Temporadas</span>
+            </a></li>
+            <li th:if="${usuarioAct.codrol == 1}"><a href="/categoria/listar">
+                <i class="fas fa-tasks"></i>
+                <span class="nav-item">Categorias</span>
+            </a></li>
             <li th:if="${rol == 1}"><a href="/user/usuario">
                 <i class="fas fa-user"></i>
                 <span class="nav-item">Usuarios</span>

@@ -11,7 +11,7 @@ public class Categoria {
 	
 	@Id
 	private int codcategoria;
-	private String categoria;
+	private String nomcategoria;
 
 	@ManyToOne
 	@JoinColumn(name = "codestado", insertable = false, updatable = false)

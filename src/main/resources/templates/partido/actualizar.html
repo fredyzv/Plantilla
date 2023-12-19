@@ -72,12 +72,12 @@
 													<label>Categoría</label>
 													<select required th:field="*{codcategoria}">
 													<option value="-1">Seleccione...</option>
-													<option th:each="d : ${lstCategoria}" th:value="${d.codcategoria}" th:text="${d.categoria}"></option>
+													<option th:each="d : ${lstCategoria}" th:value="${d.codcategoria}" th:text="${d.nomcategoria}"></option>
 												</select>
 												</div>
 												<div class="form-box col-md-3">
 													<label>Liga</label>
-													<select required th:field="*{codliga}" class="form-control">
+													<select required th:field="*{codliga}">
 														<option value="-1">Seleccione...</option>
 														<option th:each="d : ${lstLiga}" th:value="${d.codliga}" th:text="${d.nomliga}"></option>
 												</select>

@@ -2045,8 +2045,7 @@ input[type=number]::-webkit-outer-spin-button {
 .body-datos td input[type=number]{
     width: 60px;
 }
-.up{
-    border-top-style: solid;
-    border-style: solid;
-    border-bottom-style:solid;
+.body-datos{
+    text-align: center;
 }
+

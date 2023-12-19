@@ -100,7 +100,7 @@
 												<div class="form-box col-md-3">
 													<label>Categoría</label> <select th:field="*{codcategoria}">
 													<option value="-1">Seleccione...</option>
-													<option th:each="s : ${lstCategoria}" th:value="${s.codcategoria}" th:text="${s.categoria}"></option>
+													<option th:each="s : ${lstCategoria}" th:value="${s.codcategoria}" th:text="${s.nomcategoria}"></option>
 												</select>
 												</div>
 												<div class="form-box col-md-1">

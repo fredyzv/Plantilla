@@ -80,7 +80,7 @@ public class JugadorController {
         model.addAttribute("lstEquipo", repoE.findAll());
         model.addAttribute("lstDocumento", repoD.findAll());
         model.addAttribute("lstSexo", repoS.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstPosicion", repoP.findAll());
 
         return "jugador/nuevo";
@@ -118,7 +118,7 @@ public class JugadorController {
         model.addAttribute("lstEquipo", repoE.findAll());
         model.addAttribute("lstDocumento", repoD.findAll());
         model.addAttribute("lstSexo", repoS.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstPosicion", repoP.findAll());
 
         System.out.println("Enviado " + jugador);
@@ -142,7 +142,7 @@ public class JugadorController {
         model.addAttribute("lstEquipo", repoE.findAll());
         model.addAttribute("lstDocumento", repoD.findAll());
         model.addAttribute("lstSexo", repoS.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstPosicion", repoP.findAll());
 
         return "jugador/actualizar";
@@ -174,7 +174,7 @@ public class JugadorController {
         model.addAttribute("lstEquipo", repoE.findAll());
         model.addAttribute("lstDocumento", repoD.findAll());
         model.addAttribute("lstSexo", repoS.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstPosicion", repoP.findAll());
 
         System.out.println("usuario 2 " + jugador);

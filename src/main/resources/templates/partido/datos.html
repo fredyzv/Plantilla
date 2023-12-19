@@ -59,16 +59,17 @@
 										<h1 th:text="'Registro de datos del partido entre ' + ${equipo.nomequipo} + ' Vs ' + ${partido.equiporival}"></h1>
 									</div>
 									<div class="card-body">
-										<table class="table table-striped " id="tablax" style="border-style: solid">
+										<table class="table table-striped " id="tablax">
 											<thead class="head-datos">
 											<tr>
 												<th></th>
-												<th colspan="2" class="up">Libres</th>
-												<th colspan="2" class="up">Dobles</th>
-												<th colspan="2" class="up">Triples</th>
-												<th colspan="5" class="up">Rebotes</th>
-												<th colspan="2" class="up">Tapas</th>
-												<th colspan="2" class="up">Faltas</th>
+												<th colspan="2">Libres</th>
+												<th colspan="2">Dobles</th>
+												<th colspan="2">Triples</th>
+												<th colspan="2">Rebotes</th>
+												<th colspan="3"></th>
+												<th colspan="2">Tapas</th>
+												<th colspan="2">Faltas</th>
 												<th></th>
 											</tr>
 											<tr>
@@ -99,21 +100,21 @@
 														<!--														<input type="hidden" th:value="${id}" th:name="codpartido">-->
 														<!--														<input type="hidden" th:value="*{listJugador[__${stat.index}__].getCodjugador()}" th:name="codjugador">-->
 													</td>
-													<td style="border-left-style: solid"><input pattern="[0-9]" type="number" th:field="*{listJugador[__${stat.index}__].datos.ilibres}"  class="form-control"></td>
-													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.clibres}" class="form-control" ></td>
+													<td><input pattern="[0-9]" type="number" th:field="*{listJugador[__${stat.index}__].datos.ilibres}"  class="form-control"></td>
+													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.clibres}" class="form-control" ></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.idobles}" class="form-control"></td>
-													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.cdobles}" class="form-control"></td>
+													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.cdobles}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.itriples}" class="form-control"></td>
-													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.ctriples}" class="form-control"></td>
+													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.ctriples}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.rebdef}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.rebofe}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.asist}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.recup}" class="form-control"></td>
-													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.perd}" class="form-control"></td>
+													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.perd}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.tapfav}" class="form-control"></td>
-													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.tapcont}" class="form-control"></td>
+													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.tapcont}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.faltdadas}" class="form-control"></td>
-													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.faltasrec}" class="form-control"></td>
+													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.faltasrec}" class="form-control"></td>
 													<td><input type="time" min="00:00" max="01:30" step="any" th:field="*{listJugador[__${stat.index}__].datos.tiempo}" class="form-control"></td>
 													<td hidden="hidden"><button id="reg" type="submit" class="btn btn-info">Reg</button></td>
 												</tr>
