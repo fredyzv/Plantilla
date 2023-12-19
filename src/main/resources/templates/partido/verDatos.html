@@ -48,140 +48,102 @@
 
 			<!-- Page Content -->
 			<div>
-
-				<section class="section-content">
-					<div class="container-tabla">
+				<section>
+					<div class="container-inside">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h1 th:text="'Visualización de datos del partido entre ' + ${equipo.nomequipo} + ' vs ' + ${partido.equiporival}"></h1>
+										<h6 th:text="'Visualización de datos del partido entre ' + ${equipo.nomequipo} + ' vs ' + ${partido.equiporival}" class="font-weight-bold mb-0"></h6>
 									</div>
 									<div class="card-body">
-										<div>
-											<h6>Datos del Partido</h6>
-										</div>
-										<h6>Equipo</h6>
-										<div class="form-row">
-											<div style="width: 9%;">
-												<label>Nombre</label>
-											</div>
-											<div style="width: 9%;">
-												<label>Apellido</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T2I</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T2C</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T3I</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T3C</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T1I</label>
-											</div>
-											<div style="width: 5%;">
-												<label>T1C</label>
-											</div>
-											<div style="width: 5%;">
-												<label>RO</label>
-											</div>
-											<div style="width: 5%;">
-												<label>RD</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Asist</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Recup</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Perd</label>
-											</div>
-											<div style="width: 5%;">
-												<label>TapFav</label>
-											</div>
-											<div style="width: 5%;">
-												<label>TapCon</label>
-											</div>
-											<div style="width: 5%;">
-											<label>Falt Fav</label>
-											</div>
-											<div style="width: 5%;">
-												<label>Falt Con</label>
-											</div>
-											<div style="width: 7%;">
-												<label>Tiempo</label>
-											</div>
-										</div>
-										<form action="/partido/datosGrabar" method="post" th:each="d : ${datos}">
-											<div class="form-row">
-												<div class="form-group col-md-1">
-													<input th:value="*{d.jugador.nomjug}" class="form-control">
-												</div>
-												<div class="form-group col-md-1">
-													<input th:value="*{d.jugador.apejug}" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.idobles}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.cdobles}" type="number" class="form-control" >
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.itriples}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.ctriples}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.ilibres}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.clibres}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.rebofe}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.rebdef}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.asist}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.recup}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.perd}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.tapfav}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.tapcont}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.faltdadas}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 79px;">
-													<input th:value="*{d.faltasrec}" type="number" class="form-control">
-												</div>
-												<div style="max-width: 110px;">
-													<input th:value="*{d.tiempo}" type="time" class="form-control">
-												</div>
-											</div>
-										</form>
-										<button type="submit" class="btn btn-success">Registrar</button>
-										<a href="/partido/listado" class="btn btn-primary">Volver</a>
-										<br>
-										<div>
+										<table class="table" id="tablax">
+											<thead>
+											<tr>
+												<th></th>
+												<th>Libres</th>
+												<th></th>
+												<th>Dobles</th>
+												<th></th>
+												<th>Triples</th>
+												<th></th>
+												<th>Rebotes</th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th>Tapas</th>
+												<th></th>
+												<th>Faltas</th>
+												<th></th>
+												<th></th>
+											</tr>
+											<tr>
+												<th>Jugador</th>
+												<th>Int</th>
+												<th>Conv</th>
+												<th>Int</th>
+												<th>Conv</th>
+												<th>Int</th>
+												<th>Conv</th>
+												<th>Ofen</th>
+												<th>Def</th>
+												<th>Asist</th>
+												<th>Recup</th>
+												<th>Perd</th>
+												<th>Fav</th>
+												<th>Cont</th>
+												<th>Fav</th>
+												<th>Cont</th>
+												<th>Tiempo</th>
+												<th>Acciones</th>
+											</tr>
+											</thead>
+											<tbody class="tablaRegistroDatos">
+											<tr th:each="d, stat : ${lstDatos}">
+												<th th:text="${d.jugador.apejug}"></th>
+												<td th:text="${d.ilibres}"></td>
+												<td th:text="${d.clibres}"></td>
+												<td th:text="${d.idobles}"></td>
+												<td th:text="${d.cdobles}"></td>
+												<td th:text="${d.itriples}"></td>
+												<td th:text="${d.ctriples}"></td>
+												<td th:text="${d.rebofe}"></td>
+												<td th:text="${d.rebdef}"></td>
+												<td th:text="${d.asist}"></td>
+												<td th:text="${d.recup}"></td>
+												<td th:text="${d.perd}"></td>
+												<td th:text="${d.tapfav}"></td>
+												<td th:text="${d.tapcont}"></td>
+												<td th:text="${d.faltdadas}"></td>
+												<td th:text="${d.faltasrec}"></td>
+												<td th:text="${d.tiempo}"></td>
+												<td th:if="${usuarioAct.codrol == 2}">
+													<form action="#" method="post">
+														<input type="hidden" name="coddatos"
+															   th:value="${d.coddatos}">
+														<button type="submit"
+																class="btn btn-primary">Editar</button>
+													</form>
+												</td>
+												<td>
+													<form action="#" method="post">
+														<input type="hidden" name="coddatos"
+															   th:value="${d.coddatos}">
+														<button onclick="return alerta()" type="submit" class="btn btn-danger">Eliminar</button>
+													</form>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+										<div th:if="${mensaje} != null">
 											<strong th:text="${mensaje}"></strong>
+											<br>
+											<br>
 										</div>
+										<a href="/partido/listado" class="btn btn-primary">Volver</a>
+
+
 									</div>
 								</div>
 							</div>
@@ -189,7 +151,6 @@
 						</div>
 					</div>
 				</section>
-
 			</div>
 
 		</div>
