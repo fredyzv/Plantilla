@@ -47,8 +47,9 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-
+        equipo=repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
         if (usuarioAct.getCodrol()==2) {
+
             equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);
             model.addAttribute("equipo", equipo);
         }
@@ -56,6 +57,8 @@ public class PartidoController {
             model.addAttribute("lstPartido", repoP.findAll());
         }else {
             model.addAttribute("lstPartido", repoP.findByCodequipo(equipo.getCodequipo()));
+
+
         }
 
         return "partido/listado";
@@ -206,18 +209,30 @@ public class PartidoController {
 
         equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
         partido = repoP.findById(id).get();
+        String url = null;
 
-        List<Jugador> listJ = repoJ.findByCodcategoriaAndCodequipo(partido.getCodcategoria(), partido.getCodequipo());
+        if (!repoD.findByCodpartido(partido.getCodpartido()).isEmpty()){
+            System.out.println("Entró al if");
+            model.addAttribute("mensaje","Este partido ya tiene datos registrados");
+            model.addAttribute("equipo", equipo);
+            model.addAttribute("lstPartido", repoP.findByCodequipo(equipo.getCodequipo()));
+             url= "partido/listado";
 
-        datosJugador.setListJugador(listJ);
+        }else {
+            System.out.println("Entró al else");
+            List<Jugador> listJ = repoJ.findByCodcategoriaAndCodequipo(partido.getCodcategoria(), partido.getCodequipo());
+            datosJugador.setListJugador(listJ);
 
-        model.addAttribute("datosJugador", datosJugador);
-        model.addAttribute("equipo", equipo);
-        model.addAttribute("partido", partido);
-        model.addAttribute("id", id);
-        session.setAttribute("id", id);
+            model.addAttribute("datosJugador", datosJugador);
+            model.addAttribute("equipo", equipo);
+            model.addAttribute("partido", partido);
+            model.addAttribute("id", id);
+            session.setAttribute("id", id);
+            url= "partido/datos";
+        }
 
-        return "partido/datos";
+
+        return url;
     }
 
     @PostMapping("/datosGrabar")

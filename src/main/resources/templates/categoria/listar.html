@@ -90,7 +90,7 @@
 																		th:value="${e.codcategoria}">
 																	<button onclick="return alerta()"
 																		type="submit"
-																		class="btn btn-danger">Eliminar</button>
+																		class="btn btn-danger" th:if="${e.estado.codestado==1}">Eliminar</button>
 																</form>
 															</td>
 														</tr>
