@@ -4,150 +4,143 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	<!-- Site Icons -->
+	<link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
+	<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
 
-<!-- Styles -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/style.css}">
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/perfil.css}">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+	<!-- Login CSS -->
+	<link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+	<!-- color -->
+	<link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
 
-<!-- Google fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap"
-	rel="stylesheet">
+	<!-- Modernizer -->
+	<script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-<!-- Ionic icons -->
-<script src="https://kit.fontawesome.com/3778e44b4a.js"
-	crossorigin="anonymous"></script>
+	<script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
 <title>Perfil de Usuario</title>
 </head>
 
 <body>
+<div class="nav-left">
+	<nav >
+		<ul>
+			<li><a href="#" class="logo" >
+				<img src="/images/logo-voley.png" alt="">
+				<span class="nav-item" style="top: 0;">Atleta</span>
+
+			</a></li>
+
+			<li><a href="/usuarios/inicio">
+				<i class="fas fa-home"></i>
+				<span class="nav-item">Home</span>
+			</a></li>
+
+			<li><a href="#">
+				<i class="fas fa-chart-bar"></i>
+				<span class="nav-item">Estadisticas</span>
+			</a></li>
+
+			<li><a href="/jugadores/solicitud">
+				<i class="fas fa-chart-bar"></i>
+				<span class="nav-item">Solicitudes</span>
+			</a></li>
+
+			<li><a href="/jugadores/perfil">
+				<i class="fas fa-user"></i>
+				<span class="nav-item">Perfil</span>
+			</a></li>
+
+			<li><a href="#">
+				<i class="fas fa-cog"></i>
+				<span class="nav-item">Configuracion</span>
+			</a></li>
+			<li><a href="/logout" class="logout">
+				<i class="fas fa-sign-out-alt"></i>
+				<span class="nav-item">Cerrar sesión</span>
+			</a></li>
+		</ul>
+	</nav>
+</div>
 	<div class="d-flex" id="content-wrapper">
-
-		<!-- Sidebar -->
-		<div id="sidebar-container" class="bg-primary">
-			<div class="logo">
-				<h4 class="text-light font-weight-bold mb-0">Sistema de
-					Basketball</h4>
-			</div>
-			<div class="menu">
-				<a href="/jugadores/inicio" class="d-block text-light p-3 border-0"><i
-					class="fa fa-home" aria-hidden="true"></i>&nbsp Inicio</a> <a href="#"
-					class="d-block text-light p-3 border-0"><i
-					class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp Estadísticas</a> <a
-					href="/jugadores/solicitudes"
-					class="d-block text-light p-3 border-0"><i
-					class="fa fa-binoculars" aria-hidden="true"></i>&nbsp Solicitudes</a> <a
-					href="/jugadores/perfil" class="d-block text-light p-3 border-0"><i
-					class="fa fa-address-card" aria-hidden="true"></i>&nbsp Perfil</a> <a
-					href="#" class="d-block text-light p-3 border-0"><i
-					class="fa fa-cog" aria-hidden="true"></i>&nbsp Configuración</a>
-			</div>
-		</div>
-		<!-- Fin sidebar -->
-
-		<div class="w-100">
-
-			<!-- Navbar -->
-			<nav
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-				<div class="container-inside">
-
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<h1>Atleta:</h1>
-
-						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-							<li class="nav-item dropdown"><a
-								class="nav-link text-dark dropdown-toggle" href="#"
-								id="navbarDropdown" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"
-								th:text="${jugador.nomjug +' ' + jugador.apejug}"> </a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/logout2">Cerrar sesión</a>
-								</div></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- Fin Navbar -->
-
 			<!-- Page Content -->
-			<div id="content" class="bg-grey w-100">
-
-				<section class="bg-light py-3">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-9 col-md-8">
-								<h1 class="font-weight-bold mb-0"
-									th:text="${jugador.nomjug +' ' + jugador.apejug}">
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-								</h1>
-							</div>
-						</div>
-					</div>
-				</section>
-
-
-
-				<section>
-					<div class="container">
+			<div>
+				<section class="section-content">
+					<div class="container-perfil">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h6 class="font-weight-bold mb-0">Perfil de Jugador</h6>
+										<h1>Perfil de Jugador</h1>
 									</div>
 									<div class="card-body">
 										<section class="seccion-perfil-usuario">
 											<div class="perfil-usuario-header">
 												<div class="perfil-usuario-portada">
 													<div class="perfil-usuario-avatar">
-														<img th:src="@{/templates/images/user.jpg}">
+														<center>
+															<img th:src="@{/images/user.jpg}" style="width: 200px">
+														</center>
 													</div>
 												</div>
 											</div>
 											<div class="perfil-usuario-body">
-												<div class="perfil-usuario-bio">
-													<a href="/jugadores/perfilact">Cambiar Contraseña</a>
+												<center>
+												<div class="perfil-box">
+													<a href="/jugadores/perfilact" style="color: white;">Cambiar Contraseña</a>
 												</div>
-												<div class="perfil-usuario-footer">
+												</center>
+												<div class="perfil-info">
 													<ul class="lista-datos">
-														<li><img th:src="@{/templates/images/email.jpg}">
-															<p th:text="${jugador.email}"></p></li>
-														<li><img th:src="@{/templates/images/telefono.jpg}">
-															<p th:text="${jugador.telefono}"></p></li>
-														<li><img th:src="@{/templates/images/equipo.png}">
-															<p th:text="${jugador.equipo.nomequipo}"></p></li>
-														<li><img th:src="@{/templates/images/posicion.png}">
-															<p th:text="${jugador.posicion.posicion}"></p></li>
+														<li>
+															<img th:src="@{/images/email.jpg}">
+															<span th:text="${jugador.email}"></span>
+														</li>
+														<li>
+															<img th:src="@{/images/telefono.jpg}">
+															<span th:text="${jugador.telefono}"></span>
+														</li>
+														<li>
+															<img th:src="@{/images/equipo.png}">
+															<span th:text="${jugador.equipo.nomequipo}"></span>
+														</li>
+														<li>
+															<img th:src="@{/images/posicion.png}">
+															<span th:text="${jugador.posicion.posicion}"></span>
+														</li>
 													</ul>
 													<ul class="lista-datos">
-														<li><img th:src="@{/templates/images/direccion.png}">
-															<p th:text="${jugador.direccion}"></p></li>
-														<li><img th:src="@{/templates/images/fecha.png}">
-															<p th:text="${jugador.fecreg}"></p></li>
-														<li><img th:src="@{/templates/images/cumple.png}">
-															<p th:text="${jugador.fecnac}"></p></li>
-														<li><img th:src="@{/templates/images/dni.jpg}">
-															<p th:text="${jugador.documento}"></p></li>
+														<li>
+															<img th:src="@{/images/fecha.png}">
+															<span th:text="${jugador.fecreg}"></span>
+														</li>
+														<li>
+															<img th:src="@{/images/cumple.png}" >
+															<span th:text="${jugador.fecnac}"></span>
+														</li>
+														<li>
+															<img th:src="@{/images/dni.jpg}">
+															<span th:text="${jugador.documento}"></span>
+														</li>
+														<li>
+															<img th:src="@{/images/direccion.png}">
+															<span th:text="${jugador.direccion}"></span>
+														</li>
 													</ul>
 													<div></div>
 												</div>

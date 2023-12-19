@@ -77,16 +77,19 @@ public class UsuariosController {
 	@GetMapping("/perfil")
 	public String perfil(@ModelAttribute Rol rol, Usuario usuario, Equipo equipo, HttpSession session,
 						 Model model) {
-				
 		String correo = (String) session.getAttribute("correo");
-		
 		model.addAttribute("rol", session.getAttribute("rol"));
 		usuario = repoU.findByCorreo(correo);
-		equipo = repoE.findByUsuarioAndCodestado(usuario.getUsuario(),1);
+		System.out.println(usuario.getCodrol());
 
+		if (usuario.getCodrol()==2){
+			equipo = repoE.findByUsuarioAndCodestado(usuario.getUsuario(),1);
+		}
+		System.out.println(equipo);
 		model.addAttribute("usuarioAct", usuario);
 		model.addAttribute("equipo", equipo);
-		
+
+
 		return "perfil/perfil";
 		}
 	

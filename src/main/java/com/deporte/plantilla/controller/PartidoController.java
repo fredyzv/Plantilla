@@ -48,9 +48,10 @@ public class PartidoController {
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
 
-        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
-        model.addAttribute("equipo", equipo);
-
+        if (usuarioAct.getCodrol()==2) {
+            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);
+            model.addAttribute("equipo", equipo);
+        }
         if(usuarioAct.getCodrol()!=2){
             model.addAttribute("lstPartido", repoP.findAll());
         }else {
@@ -68,10 +69,11 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-
-        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
-
         String url=null;
+
+        if (usuarioAct.getCodrol()==2){
+            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
+        }
 
         if(equipo == null){
             model.addAttribute("lstEquipo", repoE.findAll());
@@ -98,11 +100,10 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-
-        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
-
+        if (usuarioAct.getCodrol()==2) {
+            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);
         model.addAttribute("equipo", equipo);
-
+        }
         try {
             partido.setCodequipo(equipo.getCodequipo());
             repoP.save(partido);
@@ -130,8 +131,9 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-
-        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
+        if (usuarioAct.getCodrol()==2) {
+            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);
+        }
         partido = repoP.findById(partido.getCodpartido()).get();
 
         model.addAttribute("equipo", equipo);
@@ -182,8 +184,9 @@ public class PartidoController {
         model.addAttribute("usuarioAct", usuarioAct);
 
         partido = repoP.findById(partido.getCodpartido()).get();
-        equipo = repoE.findById(partido.getCodequipo()).get();
-
+        if (usuarioAct.getCodrol()==2) {
+            equipo = repoE.findById(partido.getCodequipo()).get();
+        }
         model.addAttribute("equipo", equipo);
         model.addAttribute("partido", partido);
 

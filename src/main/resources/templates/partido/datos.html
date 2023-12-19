@@ -41,42 +41,34 @@
 <div class="menu" th:replace="principal::navbar-left"></div>
 <!-- Fin Navbar left -->
 
-	<div class="d-flex" id="content-wrapper">
+	<div class="body-vistas">
 		<!-- Navbar top-->
 		<div class="menu" th:replace="principal::navbar-top"></div>
 		<!-- Fin Navbar top-->
 
 			<!-- Page Content -->
-			<div id="content" class="bg-grey w-100">
+			<div>
 
-				<section>
-					<div class="container-inside">
+
+				<section class="section-content">
+					<div class="container-tabla">
 						<div class="row">
 							<div class="col-lg-12 my-3">
 								<div class="card rounded-0">
 									<div class="card-header bg-light">
-										<h6 th:text="'Registro de datos del partido entre ' + ${equipo.nomequipo} + ' Vs ' + ${partido.equiporival}" class="font-weight-bold mb-0"></h6>
+										<h1 th:text="'Registro de datos del partido entre ' + ${equipo.nomequipo} + ' Vs ' + ${partido.equiporival}"></h1>
 									</div>
 									<div class="card-body">
-										<table class="table" id="tablax">
-											<thead>
+										<table class="table table-striped " id="tablax" style="border-style: solid">
+											<thead class="head-datos">
 											<tr>
 												<th></th>
-												<th>Libres</th>
-												<th></th>
-												<th>Dobles</th>
-												<th></th>
-												<th>Triples</th>
-												<th></th>
-												<th>Rebotes</th>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th>Tapas</th>
-												<th></th>
-												<th>Faltas</th>
-												<th></th>
+												<th colspan="2" class="up">Libres</th>
+												<th colspan="2" class="up">Dobles</th>
+												<th colspan="2" class="up">Triples</th>
+												<th colspan="5" class="up">Rebotes</th>
+												<th colspan="2" class="up">Tapas</th>
+												<th colspan="2" class="up">Faltas</th>
 												<th></th>
 											</tr>
 											<tr>
@@ -102,35 +94,36 @@
 											</thead>
 											<tbody class="tablaRegistroDatos">
 											<form action="/partido/datosGrabar" method="post" th:object="${datosJugador}">
-												<tr th:each="jugador, stat : *{listJugador}">
+												<tr th:each="jugador, stat : *{listJugador}" class="body-datos">
 													<td><input type="text" th:attr="value=*{listJugador[__${stat.index}__].apejug}" class="form-control" readonly>
 														<!--														<input type="hidden" th:value="${id}" th:name="codpartido">-->
 														<!--														<input type="hidden" th:value="*{listJugador[__${stat.index}__].getCodjugador()}" th:name="codjugador">-->
 													</td>
-													<td><input pattern="[0-9]" type="number" th:field="*{listJugador[__${stat.index}__].datos.ilibres}"  class="form-control"></td>
-													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.clibres}" class="form-control"></td>
+													<td style="border-left-style: solid"><input pattern="[0-9]" type="number" th:field="*{listJugador[__${stat.index}__].datos.ilibres}"  class="form-control"></td>
+													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.clibres}" class="form-control" ></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.idobles}" class="form-control"></td>
-													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.cdobles}" class="form-control"></td>
+													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.cdobles}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.itriples}" class="form-control"></td>
-													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.ctriples}" class="form-control"></td>
+													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.ctriples}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.rebdef}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.rebofe}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.asist}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.recup}" class="form-control"></td>
-													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.perd}" class="form-control"></td>
+													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.perd}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.tapfav}" class="form-control"></td>
-													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.tapcont}" class="form-control"></td>
+													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.tapcont}" class="form-control"></td>
 													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.faltdadas}" class="form-control"></td>
-													<td><input type="number" th:field="*{listJugador[__${stat.index}__].datos.faltasrec}" class="form-control"></td>
+													<td style="border-right-style: solid"><input type="number" th:field="*{listJugador[__${stat.index}__].datos.faltasrec}" class="form-control"></td>
 													<td><input type="time" min="00:00" max="01:30" step="any" th:field="*{listJugador[__${stat.index}__].datos.tiempo}" class="form-control"></td>
 													<td hidden="hidden"><button id="reg" type="submit" class="btn btn-info">Reg</button></td>
 												</tr>
 											</form>
 											</tbody>
 										</table>
-										<button onclick="registrar()" class="btn btn-success">Registrar</button>
-										<a href="/partido/listado" class="btn btn-primary">Volver</a>
-
+										<center>
+											<button onclick="registrar()" class="btn btn-success">Registrar</button>
+											<a href="/partido/listado" class="btn btn-primary">Volver</a>
+										</center>
 										<div>
 											<strong th:text="${mensaje}"></strong>
 										</div>
