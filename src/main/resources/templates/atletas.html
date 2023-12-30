@@ -67,7 +67,7 @@
                             </button>
                             <div class="logo">
                                 <a class="navbar-brand js-scroll-trigger logo-header" href="/">
-                                    <img src="images/logo.png" alt="">
+                                    <img src="images/logohome.png" alt="" width="230" height="64">
                                 </a>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
 <!-- end site-header -->
 
 
-<div id="banner" class="banner full-screen-mode parallax">
+<div id="banner" class="banner-login full-screen-mode parallax">
 
     <div class="container pr">
         <div class="loginatleta">
@@ -146,6 +146,13 @@
                                         <!-- end col -->
                                     </form>
                                     <!-- end form -->
+                                    <br>
+                                    <div th:if="${valor == 2} " class="alert alert-danger" >
+                                        <strong th:text="${mensaje}"></strong>
+                                    </div>
+                                    <div th:if="${valor == 1} " class="alert alert-success" >
+                                        <strong th:text="${mensaje}"></strong>
+                                    </div>
                                 </div>
                                 <!-- end col -->
                             </div>
@@ -184,13 +191,6 @@
                         <div th:if="${valor == 0}" class="alert alert-danger" >
                             <strong th:text="${mensaje}"></strong>
                         </div>
-                        <div th:if="${valor == 2} " class="alert alert-danger" >
-                            <strong th:text="${mensaje}"></strong>
-                        </div>
-                        <div th:if="${valor == 1} " class="alert alert-success" >
-                            <strong th:text="${mensaje}"></strong>
-                        </div>
-
                     </div>
                 </div>
                 <!-- end banner-cell -->

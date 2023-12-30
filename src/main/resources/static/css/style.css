@@ -376,6 +376,7 @@ html, body{ height: 100%; }
 
 .fixed-menu .navbar-brand>img {
     max-width: 150px;
+    max-height: 50px;
 }
 
 .fixed-menu .main-menu nav li a{
@@ -387,11 +388,19 @@ html, body{ height: 100%; }
 -------------------------------------------------------------------*/
 
 .banner{
-	background:url(../images/) no-repeat center top;
+    background: url(../images/portada1.jpg) no-repeat center top;
 	background-attachment:fixed;
 	background-size:cover;
-	height:1100px;
+	height:900px;
 	min-height:100%;
+    background-color:  #686565;
+}
+
+.banner-login{
+    background-attachment:fixed;
+    background-size:cover;
+    height:1100px;
+    min-height:100%;
     background-color:  #686565;
 }
 
@@ -1558,10 +1567,7 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 
 .footer-main{}
 .footer-news{
-	background:url(../images/balon1.jpg) no-repeat center;
-	background-attachment:fixed;
-	background-size:cover;
-	position:relative;
+    color: #5e5e5e;
 }
 
 .footer-news::before {
@@ -1576,8 +1582,9 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 }
 
 .ft-title.color-white {
-    color: #fff;
+    color: #5e5e5e;
 }
+
 .ft-title {
     letter-spacing: 0.96px;
     margin-bottom: 22px;
@@ -1589,7 +1596,7 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
     margin-bottom: 40px;
     font-size: 16px;
 	font-family: 'Roboto', sans-serif;
-	color:#ffffff;
+	color:#5e5e5e;
 	text-align:center;
 }
 
@@ -1911,9 +1918,9 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 -------------------------------------------------------------------*/
 
 .etiqueta-usuario{
-    background-color: white;
-    width: 35%;
-    height: auto;
+   /* background-color: white; */
+    /*width: 35%;*/
+    height: 120px;
     padding: 20px 40px;
     border-radius: 26px;
     margin-left: 2%;
@@ -1925,11 +1932,21 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
 /*------------------------------------------------------------------
     ENCABEZADO
 -------------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 .section-guia{
-    width: auto;
+    width: 80%;
+    height: 800px;
     padding: 2% 7.5%;
-    height: 61%;
+    margin: auto;
+
+}
+.titulo-guia{
+    text-align: center;
+}
+.body-cont-guia{
+    display: flex;
+    justify-content: space-evenly;
 }
 .container-guia{
     background-color: white;
@@ -1939,18 +1956,50 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
     border-radius: 35px;
 }
 
+.cont-guia{
+    display: flex;
+    width: 20%;
+    height: auto;
+    background-color: white;
+    padding: 10px 10px;
+    border-radius: 20px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.cont-guia2{
+    width: 92%;
+    height: auto;
+    background-color: white;
+    padding: 10px 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+}
+.cont-guia2 li{
+    list-style: circle;
+}
+.titulo-guia h1{
+    font-family: 'Anton', sans-serif;
+    font-size: 35px;
+}
+.fila h2{
+    font-family: 'Anton', sans-serif;
+}
 /*------------------------------------------------------------------
     ENCABEZADO
 -------------------------------------------------------------------*/
+.section-name{
+    width: 40%;
+}
 
 .section-contactAdm{
-    width: 100%;
-    padding-left: 40%;
+    width: 40%;
+    /*padding-left: 40%;*/
 }
 .contactAdm{
-    background-color: white;
-    padding: 30px 40px;
-    width: 40%;
+   /* background-color: white;*/
+    height: 120px;
+   /* padding: 30px 40px;*/
+   /* width: 40%;*/
     border-radius: 35px;
 }
 /*------------------------------------------------------------------
@@ -2049,3 +2098,9 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
 }
 
+/*------------------------------------------------------------------
+   ICONOS CONTACTO ADMIN
+-------------------------------------------------------------------*/
+.icon-contact img{
+    filter: brightness(1.1); mix-blend-mode: multiply
+}

@@ -56,7 +56,6 @@ public class UsuariosController {
 				return "usuario";
 				//return "redirect:/socios";
 			}
-
 			model.addAttribute("usuarioAct", usuarioAct);
 			session.setAttribute("correo", usuarioAct.getCorreo());
 			session.setAttribute("rol", usuarioAct.getCodrol());

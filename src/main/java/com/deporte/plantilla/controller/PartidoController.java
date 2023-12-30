@@ -87,8 +87,8 @@ public class PartidoController {
             model.addAttribute("equipo", equipo);
             model.addAttribute("partido", partido);
             model.addAttribute("temporada", temporada);
-            model.addAttribute("lstTemporada", repoT.findAll());
-            model.addAttribute("lstCategoria", repoC.findAll());
+            model.addAttribute("lstTemporada", repoT.findByCodestado(1));
+            model.addAttribute("lstCategoria", repoC.findByCodestado(1));
             model.addAttribute("lstLiga", repoL.findByCodestado(1));
             url= "partido/nuevo";
         }

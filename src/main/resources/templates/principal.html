@@ -111,165 +111,186 @@
     </nav>
 </div>
 
-<div th:fragment="navbar-top">
-    <section class="bg-light py-3" style="padding-top: 3%;padding-left: 5%;">
-        <div class="container-inside" style="margin: auto;width: 98%;">
-            <div class="row">
-                <div class="col-lg-9 col-md-8">
-                    <div class="etiqueta-usuario">
-                        <h1 class="font-weight-bold mb-0" th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}" >
-                            <i class="fa fa-user-o" aria-hidden="true"></i>
-                        </h1>
-                        <p class="lead text-muted" th:text="${usuarioAct.correo}"></p>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 d-flex">
+<section class="section-guia">
+    <div class="titulo-guia">
+        <h1>Guia de uso como:  <span th:text="${usuarioAct.rol.descripcion}"></span> </h1>
+        <br>
+    </div>
+    <div th:if="${usuarioAct.codrol==1}" class="fila">
+        <h2>Acciones:</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia2">
+                <ul>
+                    <li>Tienes la responsabilidad de hacer un buen uso de los datos proporcionados por los entrenadores</li>
+                    <li>Podrás editar eliminar y crear usuarios, que tendrán acceso a la plataforma</li>
+                    <li>Tendrás acceso a toda la información, tanto de los entrenadores como de los jugadores</li>
+                    <li>Ayudar a los entrenadores a hacer los cambios de jugadores de un equipo a otro</li>
+                    <li>Dar soporte a la plataforma y a los entrenadores, tanto como a la federación en lo que requieran</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <h2>Objetivos:</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia">
+                <li>Mantener el flujo de información activo.</li>
+            </div>
+            <div class="cont-guia">
+                <li>Reportar bugs y dificultades presentadas.</li>
+            </div>
+            <div class="cont-guia">
+                <li>Brindar atención educada y efectiva.</li>
+            </div>
+            <div class="cont-guia">
+                <li>Supervisar información constantemente.</li>
+            </div>
+        </div>
+    </div>
 
+    <div th:if="${usuarioAct.codrol==2}" class="fila">
+    <h2>Pasos para registrar un equipo</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia">
+                <li>El primer paso es Registrar a tu <a href="/usuarios/equipo">equipo</a></li>
+            </div>
+            <div class="cont-guia">
+                <li>El Segundo paso es empezar a registrar a tus jugadores</li>
+            </div>
+            <div class="cont-guia">
+                <li>El Tercer paso es empezar a registrar tus entrenamientos y sus datos</li>
+            </div>
+            <div class="cont-guia">
+                <li>El Cuarto paso es empezar a registrar tus partidos y sus datos</li>
+            </div>
+        </div>
+        <br>
+        <h2>Otras acciones:</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia2">
+                <ul>
+                    <li>Puedes revisar los reportes con el consolidado de tus datos ingresados en una muestra en PDF</li>
+                    <li>Puedes revisar y modificar tus datos en perfil, actualizar o corregir algún dato erróneo</li>
+                    <li>PUEDES COMPARTIR LAS ESTADISTICAS CON TUS JUGADORES A TRAVES DE LA WEB.</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <h2>Buscar Jugador</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia2">
+                <h4 style="text-align: center">Si estás buscando un jugador para tu equipo y tienes una propuesta clara para el jugador:</h4>
+                <ul >
+                    <li>A través del Admin, puedes solicitar la búsqueda de un jugador con los parámetros (edad, talla, peso, posición,
+                        etc). El Admin se encarga de hacer la búsqueda y enviarte un reporte de los jugadores que necesitas.</li>
+                    <li>Si estás interesado en alguno, El Admin se contactará con el entrenador que esté a cargo de dicho jugador y con el
+                        jugador para exponerle tu propuesta. De ser aceptada, se te enviará el contacto, tanto de jugador como entrenador para
+                        que procedan con su convenio.</li>
+                    <li>En dicho convenio, no toma parte la Administración.
+                        Más que solo como mediador entre la red de entrenadores.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${usuarioAct.codrol==3}" class="fila">
+        <h2>Principales acciones:</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia">
+                <li>Observar los equipos y jugadores registrados</li>
+            </div>
+            <div class="cont-guia">
+                <li>Ver listados de atletas libres de contrato</li>
+            </div>
+            <div class="cont-guia">
+                <li>Observar partidos registrados</li>
+            </div>
+            <div class="cont-guia">
+                <li>Ver estadisticas inmediatas</li>
+            </div>
+        </div>
+        <br>
+        <h2>Acciones detalladas:</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia2">
+                <ul>
+                    <li>Tienes Acceso a todos los equipos y jugadores que pertenecen a esta red de equipos</li>
+                    <li>Puedes buscar jugadores según Edad, talla, peso, posición que requieras para las pre-selecciones nacionales</li>
+                    <li>Puedes solicitar un reporte de todos los entrenadores inscritos en la plataforma</li>
+                    <li>Revisar las estadísticas de los jugadores a nivel nacional, proporcionada por sus entrenadores</li>
+                    <li>Revisar los datos de los partido y entrenamientos realizados por los equipos inscritos</li>
+                    <li>Tendrás acceso a los datos de los jugadores y podrás contactarte directamente con ellos</li>
+                    <li>Puedes revisar y modificar tus datos en perfil</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <h2>Finalidad:</h2>
+        <div class="body-cont-guia">
+            <div class="cont-guia2">
+                <h4 style="text-align: center">Finalidad de la aplicacion web:</h4>
+                <ul>
+                    <li>El fin de ésta plataforma es la de facilitarle a la federación el scouting de jugadores a nivel nacional,
+                        basandose en estadísticas, proporcionada por los mismos entrenadores.</li>
+                    <li>Que los jugadores a nivel nacional, tengan la oportunidad de demostrar su habilidad y trabajo, en pruebas
+                        de las diferentes pre-selecciones nacionales</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:fragment="navbar-top" style="display: flex;  margin-right: 15%; margin-left: 15%; justify-content: center; border: solid">
+    <section class="section-name">
+        <div class="etiqueta-usuario">
+            <h1 class="font-weight-bold mb-0" th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+            </h1>
+            <p class="lead text-muted" th:text="${usuarioAct.correo}"></p>
+        </div>
+    </section>
+    <section class="section-contactAdm" th:fragment="contactosAdm" th:if="${usuarioAct.codrol!=1}">
+        <div class="contactAdm">
+            <div class="redes-admin">
+                <div class="card rounded-0">
+                    <h4 style="text-align: center;">&nbspContacto del Admin</h4>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 d-flex stat my-4">
+                            <div class="icon-contact">
+                                <h6 class="text-muted">Email</h6>
+                                    <a href="#" target="_blank">
+                                    <img width="50px" th:src="@{/images/email.jpg}"></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 d-flex stat my-4">
+                            <div class="icon-contact">
+                                <h6 class="text-muted">WhatsApp</h6>
+                                    <a href="#" target="_blank">
+                                    <img width="45px" th:src="@{/images/wsp.jpg}"></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 d-flex stat my-4">
+                            <div class="icon-contact">
+                                <h6 class="text-muted">Instagram</h6>
+                                    <a href="#" target="_blank">
+                                    <img width="55px" th:src="@{/images/instagram.jpg}"></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 d-flex my-4">
+                            <div class="icon-contact">
+                                <h6 class="text-muted">Facebook</h6>
+                                <a href="#"
+                                   target="_blank"><img width="50px"
+                                                        th:src="@{/images/facebook.jpg}"></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
 
-<section class="section-guia">
-    <div class="container-guia">
-        <div class="row">
-            <div class="col-lg-12 my-3">
-                <div class="card rounded-0">
-                    <div class="card-header bg-light">
-                        <h6 class="font-weight-bold mb-0">Guía de uso</h6>
-                    </div>
-                    <div class="card-body">
-                        <div th:if="${usuarioAct.codrol == 2}">
-                            <h5>Como Entrenador</h5>
-                            <ul>
-                                <li>El primer paso es Registrar a tu <a
-                                        href="/usuarios/equipo">equipo</a></li>
-                                <li>El Segundo paso es empezar a registrar a tus
-                                    jugadores</li>
-                                <li>El Tercer paso es empezar a registrar tus
-                                    entrenamientos y sus datos</li>
-                                <li>El Cuarto paso es empezar a registrar tus partidos
-                                    y sus datos</li>
-                                <li>Revisar los reportes con el consolidado de tus
-                                    datos ingresados</li>
-                                <li>Puedes revisar y modificar tus datos en perfil</li>
-                                <li>COMPARTE LAS ESTADÍSTICAS CON TUS JUGADORES</li>
-                            </ul>
-                            <h5>Buscar Jugador</h5>
-                            <p>Si estás buscando un jugador para tu equipo y tienes
-                                una propuesta clara para el jugador:</p>
-                            <p>A través del Admin, puedes solicitar la búsqueda de un
-                                jugador con los parámetros (edad, talla, peso, posición,
-                                etc). El Admin se encarga de hacer la búsqueda y enviarte un
-                                reporte de los jugadores que necesitas.</p>
-                            <p>Si estás interesado en alguno, El Admin se contactará
-                                con el entrenador que esté a cargo de dicho jugador y con el
-                                jugador para exponerle tu propuesta. De ser aceptada, se te
-                                enviará el contacto, tanto de jugador como entrenador para
-                                que procedan con su convenio.</p>
-                            <p>En dicho convenio, no toma parte la Administración.
-                                Más que solo como mediador entre la red de entrenadores.</p>
-
-                        </div>
-                        <div th:if="${usuarioAct.codrol == 3}">
-                            <h5>Como Federación</h5>
-                            <ul>
-                                <li>Tienes Acceso a todos los equipos y jugadores que
-                                    pertenecen a esta red de equipos</li>
-                                <li>Puedes buscar jugadores según Edad, talla, peso,
-                                    posición que requieras para las pre-selecciones nacionales</li>
-                                <li>Puedes solicitar un reporte de todos los
-                                    entrenadores inscritos en la plataforma</li>
-                                <li>Revisar las estadísticas de los jugadores a nivel
-                                    nacional, proporcionada por sus entrenadores</li>
-                                <li>Revisar los datos de los partido y entrenamientos
-                                    realizados por los equipos inscritos</li>
-                                <li>Tendrás acceso a los datos de los jugadores y
-                                    podrás contactarte directamente con ellos</li>
-                                <li>Puedes revisar y modificar tus datos en perfil</li>
-                            </ul>
-                            <h5>Fin de la aplicación</h5>
-                            <p>El fin de ésta plataforma es la de facilitarle a la
-                                federación el scouting de jugadores a nivel nacional,
-                                basandose en estadísticas, proporcionada por los mismos
-                                entrenadores.</p>
-                            <p>Que los jugadores a nivel nacional, tengan la
-                                oportunidad de demostrar su habilidad y trabajo, en pruebas
-                                de las diferentes pre-selecciones nacionales</p>
-                        </div>
-                        <div th:if="${usuarioAct.codrol == 1}">
-                            <h5>Como Administrador</h5>
-                            <ul>
-                                <li>Tienes la responsabilidad de hacer un buen uso de
-                                    los datos proporcionados por los entrenadores</li>
-                                <li>Podrás editar eliminar y crear usuarios, que
-                                    tendrán acceso a la plataforma</li>
-                                <li>Tendrás acceso a toda la información, tanto de los
-                                    entrenadores como de los jugadores</li>
-                                <li>Ayudar a los entrenadores a hacer los cambios de
-                                    jugadores de un equipo a otro</li>
-                                <li>Dar soporte a la plataforma y a los entrenadores,
-                                    tanto como a la federación en lo que requieran</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section style="width: 50%">
-    <div class="graphBox">
 
 
-    </div>
-</section>
-
-<section class="section-contactAdm" th:fragment="contactosAdm">
-    <div class="contactAdm">
-        <div class="redes-admin">
-            <div class="card rounded-0">
-                <h6 style="text-align: center;">&nbspContacto del Admin</h6>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 d-flex stat my-4">
-                        <div class="mx-auto">
-                            <h6 class="text-muted">Email</h6>
-                            <a href="#" target="_blank"><img
-                                    width="50px" th:src="@{/images/email.jpg}"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 d-flex stat my-4">
-                        <div class="mx-auto">
-                            <h6 class="text-muted">WhatsApp</h6>
-                            <a href="#" target="_blank"><img
-                                    width="45px" th:src="@{/images/wsp.jpg}" ></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 d-flex stat my-4">
-                        <div class="mx-auto">
-                            <h6 class="text-muted">Instagram</h6>
-                            <a href="#"
-                               target="_blank"><img width="55px"
-                                                    th:src="@{/images/instagram.jpg}"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 d-flex my-4">
-                        <div class="mx-auto">
-                            <h6 class="text-muted">Facebook</h6>
-                            <a href="#"
-                               target="_blank"><img width="50px"
-                                                    th:src="@{/images/facebook.jpg}"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 </body>
 </html>

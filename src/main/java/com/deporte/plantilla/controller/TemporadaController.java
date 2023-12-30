@@ -2,6 +2,7 @@ package com.deporte.plantilla.controller;
 
 import com.deporte.plantilla.model.Temporada;
 import com.deporte.plantilla.model.Usuario;
+import com.deporte.plantilla.repository.IEstadoRepository;
 import com.deporte.plantilla.repository.ITemporadaRepository;
 import com.deporte.plantilla.repository.IUsuarioRepository;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +23,8 @@ public class TemporadaController {
     private ITemporadaRepository repoT;
     @Autowired
     private IUsuarioRepository repoU;
-
+    @Autowired
+    private IEstadoRepository repoE;
     /*CARGAR VISTA DE TEMPORADA*/
     @GetMapping("/listar")
     public String abrirTemporada(@ModelAttribute Usuario usuarioAct, Temporada temporada, HttpSession session, Model model) {
@@ -84,7 +86,7 @@ public class TemporadaController {
         temporada = repoT.findById(temporada.getCodtemporada()).get();
 
         model.addAttribute("temporada", temporada);
-
+        model.addAttribute("lstestado", repoE.findAll());
         return "temporada/actualizar";
     }
 

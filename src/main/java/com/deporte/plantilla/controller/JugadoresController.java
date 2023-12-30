@@ -61,7 +61,7 @@ public class JugadoresController {
                 model.addAttribute("valor", 2);
             }
         }else {
-            model.addAttribute("mensaje", "El jugador no está registrado en ningún equipo de éste sistema");
+            model.addAttribute("mensaje", "El jugador no está registrado en ningún equipo de este sistema");
             model.addAttribute("valor", 2);
         }
 
