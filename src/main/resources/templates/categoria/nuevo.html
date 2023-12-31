@@ -2,209 +2,204 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}"
+          type="static/image/x-icon"/>
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png"
+          th:href="@{/templates/images/apple-touch-icon.png}">
 
-<!-- Styles -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/style.css}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css"
+          th:href="@{/css/colors/orange.css}"/>
 
-<!-- Google fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap"
-	rel="stylesheet">
+    <!-- Modernizer -->
+    <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-<script src="static/assets/js/jquery-3.1.1.min.js"
-	th:src="@{/assets/js/jquery-3.1.1.min.js}"></script>
+    <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 
-<!-- Ionic icons -->
-<script src="https://kit.fontawesome.com/3778e44b4a.js"
-	crossorigin="anonymous"></script>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-
-
-<title>Registro de Categoría</title>
+    <title>Registro de Categoría</title>
 </head>
 
 <body>
-	<div class="d-flex" id="content-wrapper">
+<!-- Navbar -->
+<div class="menu" th:replace="principal::navbar-left"></div>
+<!-- Fin Navbar -->
+<div class="d-flex" id="content-wrapper">
+
+    <!-- Page Content -->
+
+    <section class="section-content">
+        <div style="width: 100%">
+            <h1 style="margin-left: 25%">Registro de Categoría</h1>
+
+            <div class="container-reg" style="width: 50%">
+                <form action="/categoria/grabar" method="post"
+                      th:object="${categoria}">
+                    <div class="head-reg">
+                        <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-box col-md-12">
+                                <label>Nombre De Categoría</label>
+                                <input type="text" required th:field="*{nomcategoria}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="foot-reg col-lg-12">
+                        <center>
+                            <div class="buttons">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="/categoria/listar" class="btn btn-primary">Volver</a>
+                            </div>
+                        </center>
+                    </div>
+                </form>
+                <br>
+                <div>
+                    <strong th:text="${mensaje}"></strong>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="text/javascript">
+
+    $.getJSON("listaDepartamentos", {}, function (data) {
+        console.log(data);
+        $.each(data, function (i, obj) {
+            $("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
+        });
+    });
+
+    $('#id_departamento').change(function () {
+
+        console.log("Cambio Departamento");
 
 
+        $("#id_provincia").empty();
+        $("#id_distrito").empty();
 
-		<div class="w-100">
+        $("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
+        $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
 
-			<!-- Page Content -->
-			<div id="content" class="bg-grey w-100">
+        var var_dep = $('#id_departamento').val();
+        var var_pro = $('#id_provincia').val();
 
-				<section>
-					<div class="container-inside">
-						<div class="row">
-							<div class="col-lg-12 my-3">
-								<div class="card rounded-0">
-									<div class="card-header bg-light">
-										<h6 class="font-weight-bold mb-0">Registro de Categoría</h6>
-									</div>
-									<div class="card-body">
-										<form action="/categoria/grabar" method="post"
-											th:object="${categoria}">
+        console.log(var_dep);
+        $.getJSON("listaProvincias", {"dpto": var_dep}, (data) => {
+            console.log("provincias: " + data);
+            $.each(data, function (i, obj) {
+                $("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");
+            });
+        });
 
-											<div class="form-row">
-												<div class="form-group col-md-9">
-													<label>Nombre De Categoría</label> <input type="text" required
-														th:field="*{nomcategoria}" class="form-control">
-												</div>
-											</div>
-
-											<button type="submit" class="btn btn-success">Guardar</button>
-											<a href="/categoria/listar" class="btn btn-primary">Volver</a>
-										</form>
-										<br>
-										<div>
-											<strong th:text="${mensaje}"></strong>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</section>
-
-			</div>
-
-		</div>
-	</div>
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script type="text/javascript">
-	
-	$.getJSON("listaDepartamentos",{},function (data) {
-		console.log(data);
-		$.each(data, function (i, obj){
-			$("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
-		});
-	});
-
-	$('#id_departamento').change( function () {
-
-		console.log("Cambio Departamento");
+    });
 
 
-		$("#id_provincia").empty();
-		$("#id_distrito").empty();
+    $('#id_provincia').change(function () {
 
-		$("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
-		$("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
+        $("#id_distrito").empty();
 
-		var var_dep = $('#id_departamento').val();
-		var var_pro = $('#id_provincia').val();
+        $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
 
-		console.log(var_dep);
-		$.getJSON("listaProvincias",{"dpto": var_dep}, (data) =>  {
-			console.log("provincias: " + data);
-			$.each(data, function (i, obj){
-				$("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");
-			});
-		});
+        var var_dep = $('#id_departamento').val();
+        var var_pro = $('#id_provincia').val();
+        var var_dis = $('#id_distrito').val();
 
-	});
+        console.log("Provincia: " + var_pro);
 
-
-
-	$('#id_provincia').change(function (){
-
-		$("#id_distrito").empty();
-
-		$("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
-
-		var var_dep = $('#id_departamento').val();
-		var var_pro = $('#id_provincia').val();
-		var var_dis = $('#id_distrito').val();
-
-		console.log("Provincia: " + var_pro);
-
-		$.getJSON("listaDistritos",{"prov":var_pro},function (data) {
-			$.each(data, function (i, obj){
-				$("#id_distrito").append("<option value='" + obj + "'>" + obj + "</option>");
-			});
-		});
-	});
-		
+        $.getJSON("listaDistritos", {"prov": var_pro}, function (data) {
+            $.each(data, function (i, obj) {
+                $("#id_distrito").append("<option value='" + obj + "'>" + obj + "</option>");
+            });
+        });
+    });
 
 
-		$.getJSON("listaDepartamentos",{},function (data) {
-			console.log(data);
-			$.each(data, function (i, obj){
-				$("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
-			});
-		});
+    $.getJSON("listaDepartamentos", {}, function (data) {
+        console.log(data);
+        $.each(data, function (i, obj) {
+            $("#id_departamento").append("<option value='" + obj + "'>" + obj + "</option>");
+        });
+    });
 
-		$('#id_departamento').change( function () {
+    $('#id_departamento').change(function () {
 
-			console.log("Cambio Departamento");
-
-
-			$("#id_provincia").empty();
-			$("#id_distrito").empty();
-
-			$("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
-			$("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
-
-			var var_dep = $('#id_departamento').val();
-			var var_pro = $('#id_provincia').val();
-
-			console.log(var_dep);
-			$.getJSON("listaProvincias",{"dpto": var_dep}, (data) =>  {
-				console.log("provincias: " + data);
-				$.each(data, function (i, obj){
-					$("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");
-				});
-			});
-
-		});
+        console.log("Cambio Departamento");
 
 
+        $("#id_provincia").empty();
+        $("#id_distrito").empty();
 
-		$('#id_provincia').change(function (){
+        $("#id_provincia").append("<option value=' '>[Seleccione Provincia]</option>");
+        $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
 
-			$("#id_distrito").empty();
+        var var_dep = $('#id_departamento').val();
+        var var_pro = $('#id_provincia').val();
 
-			$("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
+        console.log(var_dep);
+        $.getJSON("listaProvincias", {"dpto": var_dep}, (data) => {
+            console.log("provincias: " + data);
+            $.each(data, function (i, obj) {
+                $("#id_provincia").append("<option value='" + obj + "'>" + obj + "</option>");
+            });
+        });
 
-			var var_dep = $('#id_departamento').val();
-			var var_pro = $('#id_provincia').val();
-			var var_dis = $('#id_distrito').val();
+    });
 
-			console.log("Provincia: " + var_pro);
 
-			$.getJSON("listaDistritos",{"prov":var_pro},function (data) {
-				$.each(data, function (i, obj){
-					$("#id_distrito").append("<option value='" + obj + "'>" + obj + "</option>");
-				});
-			});
-		});
+    $('#id_provincia').change(function () {
 
-	$('#id_distrito').change(function (){
+        $("#id_distrito").empty();
 
-		var var_dep = $('#id_departamento').val();
-		var var_pro = $('#id_provincia').val();
-		var var_dis = $('#id_distrito').val();
+        $("#id_distrito").append("<option value=' '>[Seleccione Distrito]</option>");
 
-		document.getElementById("departamento").value=var_dep;
-		document.getElementById("provincia").value=var_pro;
-		document.getElementById("distrito").value=var_dis;
-	});
+        var var_dep = $('#id_departamento').val();
+        var var_pro = $('#id_provincia').val();
+        var var_dis = $('#id_distrito').val();
 
-	</script>
+        console.log("Provincia: " + var_pro);
+
+        $.getJSON("listaDistritos", {"prov": var_pro}, function (data) {
+            $.each(data, function (i, obj) {
+                $("#id_distrito").append("<option value='" + obj + "'>" + obj + "</option>");
+            });
+        });
+    });
+
+    $('#id_distrito').change(function () {
+
+        var var_dep = $('#id_departamento').val();
+        var var_pro = $('#id_provincia').val();
+        var var_dis = $('#id_distrito').val();
+
+        document.getElementById("departamento").value = var_dep;
+        document.getElementById("provincia").value = var_pro;
+        document.getElementById("distrito").value = var_dis;
+    });
+
+</script>
 
 </body>
 

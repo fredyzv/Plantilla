@@ -2,175 +2,174 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-	<!-- Site Icons -->
-	<link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
-	<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}"
+          type="static/image/x-icon"/>
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png"
+          th:href="@{/templates/images/apple-touch-icon.png}">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-	<!-- Site CSS -->
-	<link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
-	<!-- Login CSS -->
-	<link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
-	<!-- Responsive CSS -->
-	<link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
-	<!-- color -->
-	<link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css"
+          th:href="@{/css/colors/orange.css}"/>
 
-	<!-- Modernizer -->
-	<script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
+    <!-- Modernizer -->
+    <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-	<script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-<title>Datos de Equipo</title>
+    <title>Datos de Equipo</title>
 </head>
 
 <body>
-	<!-- Navbar -->
-	<div class="menu" th:replace="principal::navbar-left"></div>
-	<!-- Fin Navbar -->
-	<div class="body-vistas">
+<!-- Navbar -->
+<div class="menu" th:replace="principal::navbar-left"></div>
+<!-- Fin Navbar -->
+<div class="body-vistas">
 
-			<!-- Page Content -->
-			<div id="content" class="bg-grey w-100">
+    <!-- Page Content -->
+    <div id="content" class="bg-grey w-100">
 
-				<section style="padding: 7% 3%;">
-					<div class="container-reg">
-						<div class="row">
-							<div class="col-lg-12 my-3">
-								<div class="card rounded-0">
-									<div class="card-header bg-light">
-										<h1>Datos del equipo</h1>
-									</div>
-									<div class="card-body">
-										<form action="/user/actualizado" method="post" th:object="${equipo}">
+        <section class="section-content">
+            <div style="width: 100%">
+                <h1 style="margin-left: 5%">Datos del equipo</h1>
+                <div class="container-reg">
+                    <form action="/user/actualizado" method="post" th:object="${equipo}">
+                        <div class="head-reg">
+                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-box col-md-5">
+                                    <label>Nombre del Equipo</label> <input type="text"
+                                                                            th:field="*{nomequipo}" class="form-control"
+                                                                            id="inputEmail4" readonly="readonly">
+                                </div>
+                                <div class="form-box col-md-3">
+                                    <label>Entrenador</label> <input type="text"
+                                                                     th:field="*{usu.apellidos}" class="form-control"
+                                                                     readonly="readonly">
+                                </div>
+                                <div class="form-box col-md-4">
+                                    <label for="inputEmail4">Liga</label> <input type="text"
+                                                                                 th:field="*{liga.nomliga}"
+                                                                                 class="form-control"
+                                                                                 readonly="readonly">
+                                </div>
+                            </div>
 
-											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
-												<div class="form-box col-md-5">
-													<label>Nombre del Equipo</label> <input type="text"
-														th:field="*{nomequipo}" class="form-control"
-														id="inputEmail4" readonly="readonly">
-												</div>
-												<div class="form-box col-md-3">
-													<label>Entrenador</label> <input type="text"
-														th:field="*{usu.apellidos}" class="form-control"
-														readonly="readonly">
-												</div>
-												<div class="form-box col-md-4">
-													<label for="inputEmail4">Liga</label> <input type="text"
-														th:field="*{liga.nomliga}" class="form-control"
-														readonly="readonly">
-												</div>
-											</div>
+                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-box col-md-3">
+                                    <label for="inputEmail4">Departamento</label> <input
+                                        type="text" th:field="*{dep}" class="form-control"
+                                        readonly="readonly">
+                                </div>
+                                <div class="form-box col-md-3">
+                                    <label for="inputEmail4">Provincia</label> <input
+                                        type="text" th:field="*{pro}" class="form-control"
+                                        readonly="readonly">
+                                </div>
+                                <div class="form-box col-md-3">
+                                    <label for="inputEmail4">Distrito</label> <input
+                                        type="text" th:field="*{dis}"
+                                        class="form-control" readonly="readonly">
+                                </div>
 
-											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
-												<div class="form-box col-md-3">
-													<label for="inputEmail4">Departamento</label> <input
-														type="text" th:field="*{dep}" class="form-control"
-														readonly="readonly">
-												</div>
-												<div class="form-box col-md-3">
-													<label for="inputEmail4">Provincia</label> <input
-														type="text" th:field="*{pro}" class="form-control"
-														readonly="readonly">
-												</div>
-												<div class="form-box col-md-3">
-													<label for="inputEmail4">Distrito</label> <input
-														type="text" th:field="*{dis}"
-														class="form-control" readonly="readonly">
-												</div>
+                                <div class="form-box col-md-2">
+                                    <label for="inputEmail4">Fecha de Registro</label> <input
+                                        type="text" th:field="*{fecreg}" class="form-control"
+                                        readonly="readonly">
+                                </div>
+                                <div th:if="${usuarioAct.codrol == 1}" class="form-box col-md-1">
+                                    <label for="inputEmail4">Estado</label> <input type="text"
+                                                                                   th:field="*{estado.estado}"
+                                                                                   class="form-control"
+                                                                                   readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
 
-												<div class="form-box col-md-2">
-													<label for="inputEmail4">Fecha de Registro</label> <input
-														type="text" th:field="*{fecreg}" class="form-control"
-														readonly="readonly">
-												</div>
-												<div th:if="${usuarioAct.codrol == 1}" class="form-box col-md-1">
-													<label for="inputEmail4">Estado</label> <input type="text"
-																								   th:field="*{estado.estado}" class="form-control"
-																								   readonly="readonly">
-												</div>
-											</div>
-
-											<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
-												<center>
-												<a href="/equipo/equipo" class="btn btn-primary">Volver</a>
-												</center>
-											</div>
+                        <div class="foot-reg">
+                            <center>
+                                <div class="buttons">
+                                    <a href="/equipo/equipo"><button>Volver</button></a>
+                                </div>
+                            </center>
+                        </div>
 
 
-										</form>
-										<br>
-										<div>
-											<strong th:text="${mensaje}"></strong>
-										</div>
-									</div>
-								</div>
-							</div>
+                    </form>
+                    <br>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-						</div>
-					</div>
-				</section>
+    </div>
 
-			</div>
+</div>
+</div>
 
-		</div>
-	</div>
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
-		integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
-		crossorigin="anonymous"></script>
-	<script>
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(ctx, {
-			type : 'bar',
-			data : {
-				labels : [ 'Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020' ],
-				datasets : [ {
-					label : 'Nuevos usuarios',
-					data : [ 50, 100, 150, 200 ],
-					backgroundColor : [ '#12C9E5', '#12C9E5', '#12C9E5',
-							'#111B54' ],
-					maxBarThickness : 30,
-					maxBarLength : 2
-				} ]
-			},
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : true
-						}
-					} ]
-				}
-			}
-		});
-	</script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
+        crossorigin="anonymous"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020'],
+            datasets: [{
+                label: 'Nuevos usuarios',
+                data: [50, 100, 150, 200],
+                backgroundColor: ['#12C9E5', '#12C9E5', '#12C9E5',
+                    '#111B54'],
+                maxBarThickness: 30,
+                maxBarLength: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 </body>
 
 </html>

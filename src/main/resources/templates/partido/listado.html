@@ -2,199 +2,195 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-	<!-- Site Icons -->
-	<link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
-	<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}"
+          type="static/image/x-icon"/>
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png"
+          th:href="@{/templates/images/apple-touch-icon.png}">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-	<!-- Site CSS -->
-	<link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
-	<!-- Login CSS -->
-	<link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
-	<!-- Responsive CSS -->
-	<link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
-	<!-- color -->
-	<link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css"
+          th:href="@{/css/colors/orange.css}"/>
 
-	<!-- Modernizer -->
-	<script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
+    <!-- Modernizer -->
+    <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-	<script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-<title>Partidos</title>
+    <title>Partidos</title>
 </head>
 
 <body>
-	<!-- Navbar -->
-	<div class="menu" th:replace="principal::navbar-left"></div>
-	<!-- Fin Navbar -->
+<!-- Navbar -->
+<div class="menu" th:replace="principal::navbar-left"></div>
+<!-- Fin Navbar -->
 
-	<div class="body-vistas">
-		<!-- Navbar top-->
-		<div class="menu" th:replace="principal::navbar-top"></div>
-		<!-- Fin Navbar top-->
+<div class="body-vistas">
+    <!-- Page Content -->
+    <section class="section-content">
+        <div style="width: 100%">
+            <h1 style="margin-left: 5%" th:text="'Lista de Partidos de ' + ${equipo.nomequipo}"></h1>
 
-			<!-- Page Content -->
-			<div>
+            <div class="container-tabla">
+                <div class="table_header">
+                    <div class="buttons">
+                        <button th:if="${usuarioAct.codrol == 2}">
+                            <a href="/partido/nuevo">Registrar Partido</a>
+                        </button>
+                        <button th:if="${usuarioAct.codrol != 2}"></button>
+                    </div>
 
-				<section class="section-content">
-					<div class="container-tabla">
-						<div class="row">
-							<div class="col-lg-12 my-3">
-								<div class="card rounded-0">
-									<div class="card-header bg-light">
-										<h1 th:if="${usuarioAct.codrol == 2}" th:text="'Lista de Partidos de ' + ${equipo.nomequipo}"></h1>
-										<h1 th:if="${usuarioAct.codrol != 2}" th:text="'Lista de Partidos'"></h1>
-									</div>
-									<div class="card-body">
-										<section>
-											<div class="form-row">
-												<a th:if="${usuarioAct.codrol == 2}" href="/partido/nuevo"
-													class="btn btn-primary">Registrar Partido</a>
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Fecha</th>
-															<th th:if="${usuarioAct.codrol != 2}">Equipo Local</th>
-															<th>Equipo Rival</th>
-															<th>Categoría</th>
-															<th>Temporada</th>
-															<th>Liga</th>
-															<th>Score Local</th>
-															<th>Score Visita</th>
-															<th>Estado</th>
-															<th>Acciones</th>
-															<th></th>
-															<th></th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:each="u : ${lstPartido}">
-															<th th:text="${u.fecpartido}"></th>
-															<th th:if="${usuarioAct.codrol != 2}" th:text="${u.equipo.nomequipo}"></th>
-															<th th:text="${u.equiporival}"></th>
-															<td th:text="${u.categoria.nomcategoria}"></td>
-															<td th:text="${u.temporada.nomtemporada}"></td>
-															<td th:text="${u.liga.nomliga}"></td>
-															<td th:text="${u.scoreequipo}"></td>
-															<td th:text="${u.scorerival}"></td>
-															<td th:if="${u.scoreequipo > u.scorerival}">Ganador</td>
-															<td th:if="${u.scoreequipo < u.scorerival}">Perdedor</td>
-															<td th:if="${usuarioAct.codrol != 2}">
-																<form action="/partido/ver" method="post">
-																	<input type="hidden" name="codpartido"
-																		th:value="${u.codpartido}">
-																	<button type="submit" class="btn btn-info">Ver</button>
-																</form>
-															</td>
-															<td th:if="${usuarioAct.codrol == 2}">
-																<form action="/partido/actualizar" method="post">
-																	<input type="hidden" name="codpartido"
-																		   th:value="${u.codpartido}">
-																	<button type="submit"
-																			class="btn btn-primary">Editar</button>
-																</form>
-															</td>
-															<td th:if="${usuarioAct.codrol == 2}">
-																<form th:action="@{'/partido/datos/' + ${u.codpartido}}" method="get">
-																	<button type="submit"
-																			class="btn btn-success">Registrar Datos</button>
-																</form>
-															</td>
-															<td>
-																<form action="/partido/verdatos" method="post">
-																	<input type="hidden" name="codpartido"
-																		th:value="${u.codpartido}">
-																	<button type="submit" class="btn btn-info">Ver Datos</button>
-																</form>
-															</td>
-														</tr>
-													</tbody>
+                    <div class="input_search">
+                        <input type="search" placeholder="Buscar">
+                        <i class="fa fa-search" id="search"></i>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Fecha <i class="fa fa-chevron-down"></i></th>
+                        <th th:if="${usuarioAct.codrol != 2}">Equipo Local</th>
+                        <th>Equipo Rival</th>
+                        <th>Categoría</th>
+                        <th>Temporada</th>
+                        <th>Liga</th>
+                        <th>Score Local</th>
+                        <th>Score Visita</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="u : ${lstPartido}">
+                        <th th:text="${u.fecpartido}"></th>
+                        <th th:if="${usuarioAct.codrol != 2}" th:text="${u.equipo.nomequipo}"></th>
+                        <th th:text="${u.equiporival}"></th>
+                        <td th:text="${u.categoria.nomcategoria}"></td>
+                        <td th:text="${u.temporada.nomtemporada}"></td>
+                        <td th:text="${u.liga.nomliga}"></td>
+                        <td th:text="${u.scoreequipo}"></td>
+                        <td th:text="${u.scorerival}"></td>
+                        <td th:if="${u.scoreequipo > u.scorerival}">Ganador</td>
+                        <td th:if="${u.scoreequipo < u.scorerival}">Perdedor</td>
+                        <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
+                            <form action="/partido/ver" method="post" th:if="${usuarioAct.codrol != 2}">
+                                <input type="hidden" name="codpartido"
+                                       th:value="${u.codpartido}">
+                                <button type="submit" class="btn btn-info">Ver</button>
+                            </form>
 
-												</table>
-												<div>
-													<strong th:text="${mensaje}"></strong>
-												</div>
-											</div>
-										</section>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+                            <form action="/partido/actualizar" method="post" th:if="${usuarioAct.codrol == 2}">
+                                <input type="hidden" name="codpartido"
+                                       th:value="${u.codpartido}">
+                                <button type="submit"
+                                        class="btn btn-primary">Editar
+                                </button>
+                            </form>
 
-			</div>
+                            <form th:action="@{'/partido/datos/' + ${u.codpartido}}" method="get"
+                                  th:if="${usuarioAct.codrol == 2}">
+                                <button type="submit"
+                                        class="btn btn-success">Registrar Datos
+                                </button>
+                            </form>
 
-		</div>
-	</div>
+                            <form action="/partido/verdatos" method="post">
+                                <input type="hidden" name="codpartido"
+                                       th:value="${u.codpartido}">
+                                <button type="submit" class="btn btn-info">Ver Datos</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
 
-	<script>
-		function alerta() {
-			var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
-			if (opcion == true) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	</script>
+                </table>
+                <div class="table_fotter">
+                    <p>Aqui va la paginación</p>
+                </div>
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
-		integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
-		crossorigin="anonymous"></script>
-	<script>
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(ctx, {
-			type : 'bar',
-			data : {
-				labels : [ 'Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020' ],
-				datasets : [ {
-					label : 'Nuevos usuarios',
-					data : [ 50, 100, 150, 200 ],
-					backgroundColor : [ '#12C9E5', '#12C9E5', '#12C9E5',
-							'#111B54' ],
-					maxBarThickness : 30,
-					maxBarLength : 2
-				} ]
-			},
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : true
-						}
-					} ]
-				}
-			}
-		});
-	</script>
+                <div>
+                    <strong th:text="${mensaje}"></strong>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+
+<script>
+    function alerta() {
+        var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
+        if (opcion == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
+        crossorigin="anonymous"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020'],
+            datasets: [{
+                label: 'Nuevos usuarios',
+                data: [50, 100, 150, 200],
+                backgroundColor: ['#12C9E5', '#12C9E5', '#12C9E5',
+                    '#111B54'],
+                maxBarThickness: 30,
+                maxBarLength: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 </body>
 
 </html>
