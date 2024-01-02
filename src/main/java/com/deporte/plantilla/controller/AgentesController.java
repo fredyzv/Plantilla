@@ -49,6 +49,8 @@ public class AgentesController {
             model.addAttribute("mensaje", "No hay Agentes libres por el momento");
         }else {
             model.addAttribute("lstAgentes", repoJ.findByCodestado(2));
+            model.addAttribute("equipo", repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1));
+            model.addAttribute("advertencia","Debe registrar primero un equipo para poder solicitar jugadores");
         }
 
         return "agentes/agentes";

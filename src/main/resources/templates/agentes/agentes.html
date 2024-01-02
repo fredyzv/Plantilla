@@ -53,7 +53,10 @@
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
-                        <button><a href="#">Reporte PDF</a></button>
+                        <a th:if="${mensaje} == null"
+                           href="/reportes/agentes" target="_blank"
+                           class="btn btn-info">Reporte de Agentes Libres</a>
+
                     </div>
                     <div class="input_search">
                         <input type="search" placeholder="Buscar">
@@ -72,7 +75,7 @@
                         <th>Talla</th>
                         <th>Peso</th>
                         <th>Posición</th>
-                        <th>Acciones</th>
+                        <th th:if="${equipo != null and usuarioAct.codrol == 2}">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -88,8 +91,8 @@
                         <td th:text="${u.talla}"></td>
                         <td th:text="${u.peso}"></td>
                         <td th:text="${u.posicion.posicion}"></td>
-                        <td>
-                            <form th:if="${usuarioAct.codrol != 3}" action="/agentes/solicitar" method="post">
+                        <td th:if="${equipo != null and usuarioAct.codrol == 2}">
+                            <form th:if="${usuarioAct.codrol != 3}" action="/agentes/solicitar" method="post" >
                                 <input type="hidden" name="codjugador"
                                        th:value="${u.codjugador}">
                                 <button type="submit"
@@ -112,6 +115,7 @@
                 </div>
                 <div>
                     <strong th:text="${mensaje}"></strong>
+                    <strong th:text="${advertencia}"  th:if="${equipo == null and usuarioAct.codrol==2} "></strong>
                 </div>
             </div>
         </div>

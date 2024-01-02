@@ -56,8 +56,54 @@
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
+                        <div class="form-row" th:if="${usuarioAct.codrol != 2}">
+                            &nbsp;
+                            <a href="/reportes/statsPartidos" target="_blank" class="btn btn-info">Estadística de Partidos</a>
+                            &nbsp;
+                            <a href="/reportes/promJugadores" target="_blank" class="btn btn-info">Pormedios por Jugador</a>
+                            &nbsp;
+                            <a href="/reportes/efectJugadores" target="_blank" class="btn btn-info">Efectividad por Jugador</a>
+                            &nbsp;
+                            <a href="/reportes/acumJugadores" target="_blank" class="btn btn-info">Acumulados por Jugador</a>
+                        </div>
+
+                        <div class="form-row" th:if="${usuarioAct.codrol == 2}">
+                            <form action="/reporte/statsPartido" target="_blank" method="post"
+                                  th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo"
+                                       th:field="*{codequipo}">
+                                <button type="submit"
+                                        class="btn btn-info">Estadística de Partidos</button>
+                            </form>
+                            &nbsp;
+                            <form action="/reporte/promJugador" target="_blank" method="post"
+                                  th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo"
+                                       th:field="*{codequipo}">
+                                <button type="submit"
+                                        class="btn btn-info">Promedios por Jugador</button>
+                            </form>
+                            &nbsp;
+                            <form action="/reporte/efectJugador" target="_blank" method="post"
+                                  th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo"
+                                       th:field="*{codequipo}">
+                                <button type="submit"
+                                        class="btn btn-info">Efectividad por Jugador</button>
+                            </form>
+                            &nbsp;
+                            <form action="/reporte/acumJugador" target="_blank" method="post"
+                                  th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo"
+                                       th:field="*{codequipo}">
+                                <button type="submit"
+                                        class="btn btn-info">Acumulados por Jugador</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="input_search">
+                        <input type="search" placeholder="Buscar">
+                        <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
 
@@ -104,6 +150,23 @@
                         <td th:text="*{s1v}"></td>
                         <td th:text="*{s2v}"></td>
                         <td th:text="*{s3v}"></td>
+                        <input type="hidden" th:value="*{scoreLocal}" id="scorelocal">
+                        <input type="hidden" th:value="*{scoreVisita}" id="scorevisita">
+                        <input type="hidden" th:value="*{c1l}" id="c1l">
+                        <input type="hidden" th:value="*{c1v}" id="c1v">
+                        <input type="hidden" th:value="*{c2l}" id="c2l">
+                        <input type="hidden" th:value="*{c2v}" id="c2v">
+                        <input type="hidden" th:value="*{c3l}" id="c3l">
+                        <input type="hidden" th:value="*{c3v}" id="c3v">
+                        <input type="hidden" th:value="*{c4l}" id="c4l">
+                        <input type="hidden" th:value="*{c4v}" id="c4v">
+                        <input type="hidden" th:value="*{s1l}" id="s1l">
+                        <input type="hidden" th:value="*{s1v}" id="s1v">
+                        <input type="hidden" th:value="*{s2l}" id="s2l">
+                        <input type="hidden" th:value="*{s2v}" id="s2v">
+                        <input type="hidden" th:value="*{s3l}" id="s3l">
+                        <input type="hidden" th:value="*{s3v}" id="s3v">
+
                     </tr>
                     <tr th:if="${usuarioAct.codrol != 2}" th:each="u : ${lstStats}">
                         <th th:text="*{u.nombreEquipo}"></th>
@@ -129,13 +192,20 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
-                    <p>Aqui va la paginación</p>
-                </div>
-                <div>
-                    <strong th:text="${mensaje}"></strong>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
+                    </div>
+
+                    <div th:if="${usuarioAct.codrol == 2}" class="graphBox" style="width: 1000px; height: 500px" >
+                        <div class="box">
+                            <div><canvas id="myChart"></canvas></div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
+            <br>
+
         </div>
     </section>
 </div>
@@ -145,7 +215,51 @@
 
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var scorelocal = document.getElementById("scorelocal").value;
+    var scorevisita = document.getElementById("scorevisita").value;
+    var c1l = document.getElementById("c1l").value;
+    var c1v = document.getElementById("c1v").value;
+    var c2l = document.getElementById("c2l").value;
+    var c2v = document.getElementById("c2v").value;
+    var c3l = document.getElementById("c3l").value;
+    var c3v = document.getElementById("c3v").value;
+    var c4l = document.getElementById("c4l").value;
+    var c4v = document.getElementById("c4v").value;
+    var s1l = document.getElementById("s1l").value;
+    var s1v = document.getElementById("s1v").value;
+    var s2l = document.getElementById("s2l").value;
+    var s2v = document.getElementById("s2v").value;
+    var s3l = document.getElementById("s3l").value;
+    var s3v = document.getElementById("s3v").value;
+</script>
+<script>
+    const ctx = document.getElementById('myChart');
+    const Dos = document.getElementById('myChartSec');
 
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Score loc.', 'score vis.', '1 cuarto loc.', '1 cuarto vis.', '2 cuarto loc.', '2 cuarto vis.', '3 cuarto loc.',
+                '3 cuarto vis.', '4 cuarto loc.', '4 cuarto vis.', '1 sup loc.', '1 sup vis.', '2 sup loc.', '2 sup vis.', '3 sup loc.', '3 sup vis.'],
+            datasets: [{
+                label: 'Equipo Local',
+                data: [scorelocal ,scorevisita , c1l, c1v, c2l,c2v,c3l,c3v,c4l,c4v,s1l,s1v,s2l,s2v,s3l,s3v],
+                backgroundColor : [ 'rgba(25,18,229,0.22)', 'rgba(255,0,0,0.36)'],
+                maxBarThickness : 100,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -163,32 +277,7 @@
         src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
         integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
         crossorigin="anonymous"></script>
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020'],
-            datasets: [{
-                label: 'Nuevos usuarios',
-                data: [50, 100, 150, 200],
-                backgroundColor: ['#12C9E5', '#12C9E5', '#12C9E5',
-                    '#111B54'],
-                maxBarThickness: 30,
-                maxBarLength: 2
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-</script>
+
 </body>
 
 </html>

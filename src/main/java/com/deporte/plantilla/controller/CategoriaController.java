@@ -63,6 +63,7 @@ public class CategoriaController {
         model.addAttribute("categoria", categoria);
 
         try {
+            categoria.setCodestado(1);
             repoC.save(categoria);
             model.addAttribute("mensaje", "Categoría Registrada");
 

@@ -62,6 +62,7 @@ public class TemporadaController {
         model.addAttribute("temporada", temporada);
 
         try {
+            temporada.setCodestado(1);
             repoT.save(temporada);
             model.addAttribute("mensaje", "Temporada Registrado");
 
@@ -71,7 +72,7 @@ public class TemporadaController {
 
         model.addAttribute("lstTemporada", repoT.findAll());
 
-        return "ligas/nuevo";
+        return "temporada/nuevo";
     }
 
     /*ACTUALIZAR TEMPORADA*/
@@ -102,6 +103,27 @@ public class TemporadaController {
             model.addAttribute("mensaje", "Temporada Actualizada");
         } catch (Exception e) {
             model.addAttribute("mensaje", "Error al Actualizar");
+        }
+
+        model.addAttribute("lstTemporada", repoT.findAll());
+
+        return "redirect:/temporada/listar";
+    }
+    @PostMapping("/eliminar")
+    public String eliminarCategoria(@ModelAttribute Usuario usuarioAct, Temporada temporada, HttpSession session, Model model) {
+
+        String correo = (String) session.getAttribute("correo");
+        model.addAttribute("rol", session.getAttribute("rol"));
+        usuarioAct = repoU.findByCorreo(correo);
+
+        temporada = repoT.findById(temporada.getCodtemporada()).get();
+
+        try {
+            temporada.setCodestado(2);
+            repoT.save(temporada);
+            model.addAttribute("mensaje", "Temporada Eliminada");
+        } catch (Exception e) {
+            model.addAttribute("mensaje", "Error al Eliminar");
         }
 
         model.addAttribute("lstTemporada", repoT.findAll());

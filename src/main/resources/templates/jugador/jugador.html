@@ -53,11 +53,27 @@
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
-                        <button th:if="${usuarioAct.codrol != 3}">
-                            <a href="/jugador/nuevo">Nuevo Jugador</a>
-                        </button>
-                    </div>
+                        <div style="display: flex; justify-content: space-between">
+                            <a href="/jugador/nuevo">
+                                <button th:if="${usuarioAct.codrol != 3}">
+                                    Nuevo Jugador
+                                </button>&nbsp;
+                            </a>
 
+
+                            <form action="/reporte/jugador" target="_blank" method="post"
+                                  th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo"
+                                       th:field="*{codequipo}">
+                                <button th:if="${usuarioAct.codrol == 2}" type="submit"
+                                       >Reporte de jugadores
+                                </button> &nbsp;
+                            </form>
+                            <a th:if="${usuarioAct.codrol != 2}"
+                               href="/reportes/jugadores" target="_blank"
+                              >Reporte de Jugadores</a>
+                        </div>
+                    </div>
                     <div class="input_search">
                         <input type="search" placeholder="Buscar">
                         <i class="fa fa-search" id="search"></i>
@@ -107,11 +123,12 @@
                             </form>
                             <form action="/jugador/actualizar" method="post" th:if="${usuarioAct.codrol != 3}">
                                 <input type="hidden" name="codjugador" th:value="${u.codjugador}">
-                                <button  type="submit" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i></button>
                             </form>
                             <form action="/jugador/eliminar" method="post" th:if="${usuarioAct.codrol != 3}">
                                 <input type="hidden" name="codjugador" th:value="${u.codjugador}">
-                                <button onclick="return alerta()" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <button onclick="return alerta()" type="submit" class="btn btn-danger"><i
+                                        class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -119,7 +136,27 @@
 
                 </table>
                 <div class="table_fotter">
-                    <p>Aqui va la paginación</p>
+                    <div class="" th:if="${usuarioAct.codrol != 2}">
+                        <div class=""></div>
+                        <div class="">
+                            <nav aria-label="Pagination">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${prev == 0 ? 'disabled' : ''}">
+                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${prev}|}">Anterior</a>
+                                    </li>
+                                    <li class="page-item" th:each="page : ${pages}"
+                                        th:classappend="${current == page ? 'active' : ''}">
+                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${page}|}"
+                                           th:text="${page}"></a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${current == last ? 'disabled' : ''}">
+                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${next}|}">Siguiente</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
                 </div>
                 <div>
                     <strong th:text="${mensaje}"></strong>

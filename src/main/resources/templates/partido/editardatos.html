@@ -51,30 +51,25 @@
     <section class="section-content">
         <div style="width: 100%">
 
-            <h1 style="margin-left: 5%" th:text="'Visualización de datos del partido entre ' + ${equipo.nomequipo} + ' vs ' + ${partido.equiporival}"></h1>
-
-            <div class="container-tabla">
-                <div class="table_header">
-                    <div class="buttons">
-                    </div>
-                    <div class="input_search">
-                    </div>
-                </div>
-                <table class="table">
-                    <thead class="head-datos">
-                    <tr>
+            <div class="card-header bg-light">
+                <h6 th:text="'Datos del jugador ' + ${jugador.nomjug + ' ' + jugador.apejug}"
+                    class="font-weight-bold mb-0"></h6>
+            </div>
+            <div class="card-body">
+                <table class="table" id="tablax">
+                    <thead>
+                    <tr style="text-align: center">
                         <th></th>
-                        <th colspan="2">Libres</th>
-                        <th colspan="2">Dobles</th>
-                        <th colspan="2">Triples</th>
-                        <th colspan="2">Rebotes</th>
-                        <th colspan="3"></th>
-                        <th colspan="2">Tapas</th>
-                        <th colspan="2">Faltas</th>
+                        <th colspan="2" class="up">Libres</th>
+                        <th colspan="2" class="up">Dobles</th>
+                        <th colspan="2" class="up">Triples</th>
+                        <th colspan="2" class="up">Rebotes</th>
+                        <th colspan="3" class="up"></th>
+                        <th colspan="2" class="up">Tapas</th>
+                        <th colspan="2" class="up">Faltas</th>
                         <th></th>
-                        <th th:if="${usuarioAct.codrol == 2}"></th>
                     </tr>
-                    <tr>
+                    <tr style="text-align: center">
                         <th>Jugador</th>
                         <th>Int</th>
                         <th>Conv</th>
@@ -92,60 +87,49 @@
                         <th>Fav</th>
                         <th>Cont</th>
                         <th>Tiempo</th>
-                        <th th:if="${usuarioAct.codrol == 2}">Acciones</th>
                     </tr>
                     </thead>
                     <tbody class="tablaRegistroDatos">
-                    <tr th:each="d, stat : ${lstDatos}" class="body-datos">
-                        <td th:text="${d.jugador.apejug}"></td>
-                        <td th:text="${d.ilibres}"></td>
-                        <td th:text="${d.clibres}"></td>
-                        <td th:text="${d.idobles}"></td>
-                        <td th:text="${d.cdobles}"></td>
-                        <td th:text="${d.itriples}"></td>
-                        <td th:text="${d.ctriples}"></td>
-                        <td th:text="${d.rebofe}"></td>
-                        <td th:text="${d.rebdef}"></td>
-                        <td th:text="${d.asist}"></td>
-                        <td th:text="${d.recup}"></td>
-                        <td th:text="${d.perd}"></td>
-                        <td th:text="${d.tapfav}"></td>
-                        <td th:text="${d.tapcont}"></td>
-                        <td th:text="${d.faltdadas}"></td>
-                        <td th:text="${d.faltasrec}"></td>
-                        <td th:text="${d.tiempo}"></td>
-                        <td th:if="${usuarioAct.codrol == 2}" style="display: flex; justify-content: space-evenly; margin-top: -1px">
-                            <form action="/partido/editar" method="post" >
-                                <input type="hidden" name="coddatos" th:value="${d.coddatos}">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </form>
-                            <form action="/partido/eliminar" method="post">
-                                <input type="hidden" name="coddatos" th:value="${d.coddatos}">
-                                <button onclick="return alerta()" type="submit" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+                    <form action="/partido/editado" method="post" th:object="${datos}">
+                        <tr>
+                            <td><input type="text" th:value="${jugador.apejug}" class="form-control" readonly></td>
+                            <td><input pattern="[0-9]" type="number" th:field="*{ilibres}" class="form-control"></td>
+                            <td><input type="number" th:field="*{clibres}" class="form-control"></td>
+                            <td><input type="number" th:field="*{idobles}" class="form-control"></td>
+                            <td><input type="number" th:field="*{cdobles}" class="form-control"></td>
+                            <td><input type="number" th:field="*{itriples}" class="form-control"></td>
+                            <td><input type="number" th:field="*{ctriples}" class="form-control"></td>
+                            <td><input type="number" th:field="*{rebdef}" class="form-control"></td>
+                            <td><input type="number" th:field="*{rebofe}" class="form-control"></td>
+                            <td><input type="number" th:field="*{asist}" class="form-control"></td>
+                            <td><input type="number" th:field="*{recup}" class="form-control"></td>
+                            <td><input type="number" th:field="*{perd}" class="form-control"></td>
+                            <td><input type="number" th:field="*{tapfav}" class="form-control"></td>
+                            <td><input type="number" th:field="*{tapcont}" class="form-control"></td>
+                            <td><input type="number" th:field="*{faltdadas}" class="form-control"></td>
+                            <td><input type="number" th:field="*{faltasrec}" class="form-control"></td>
+                            <td><input type="time" min="00:00" max="01:30" step="any" th:field="*{tiempo}"
+                                       class="form-control"></td>
+                            <input type="hidden" th:field="*{codjugador}">
+                            <input type="hidden" th:field="*{coddatos}">
+                            <input type="hidden" th:field="*{codpartido}">
+                            <!--													<input type="hidden" name="coddatos" th:value="*{coddatos}">-->
+                            <td>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </td>
+                        </tr>
+                    </form>
                     </tbody>
                 </table>
-                <div class="table_fotter">
-                    <center>
-                        <a href="/partido/listado" class="btn btn-primary">Volver</a>
-                    </center>
-                </div>
-                <div th:if="${mensaje} != null">
+                <form action="/partido/verdatos" method="post" th:object="${datos}">
+                    <input type="hidden" th:field="*{codpartido}">
+                    <button type="submit" class="btn btn-primary">volver</button>
+                </form>
+
+                <div>
                     <strong th:text="${mensaje}"></strong>
-                    <br>
-                    <br>
                 </div>
-
-
-
             </div>
-
         </div>
     </section>
 </div>

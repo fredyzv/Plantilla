@@ -54,7 +54,9 @@ public class PartidoController {
         if(usuarioAct.getCodrol()!=2){
             model.addAttribute("lstPartido", repoP.findAll());
         }else {
+
             if(equipo == null){
+                System.out.println("entro al if null");
                 model.addAttribute("mensaje", "Primero debes registrar un equipo");
                 model.addAttribute("mostrar", "no");
                 return "equipo/equipo";

@@ -73,7 +73,6 @@
 												</center>
 												<div class="perfil-info" >
 													<ul class="lista-datos">
-
 														<li>
 															<img th:src="@{/images/email.jpg}">
 															<span th:text="${usuarioAct.correo}"></span>
@@ -82,11 +81,11 @@
 															<img th:src="@{/images/telefono.jpg}">
 															<span th:text="${usuarioAct.telefono}"></span>
 														</li>
-														<li th:if="${usuarioAct.codrol}== 2">
+														<li th:if="${equipo != null and usuarioAct.codrol == 2}">
 															<img th:src="@{/images/trabajo.png}">
 															<span th:text="${equipo.nomequipo}"></span>
 														</li>
-														<li th:if="${usuarioAct.codrol}== 2">
+														<li th:if="${equipo != null and usuarioAct.codrol == 2}">
 															<img th:src="@{/images/posicion.png}">
 															<span th:text="${equipo.liga.nomliga}"></span>
 														</li>
@@ -99,6 +98,7 @@
 															<span th:text="${usuarioAct.fecnac}"></span>
 														</li>
 													</ul>
+
 													<ul class="lista-datos">
 														<li>
 															<img th:src="@{/images/fecha.png}">

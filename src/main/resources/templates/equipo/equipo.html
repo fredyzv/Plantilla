@@ -55,14 +55,21 @@
                 <div class="table_header">
 
                     <div class="buttons">
-                        <a  href="/equipo/nuevo">  <button th:if="${usuarioAct.codrol != 3 and mostrar != si}">Nuevo Equipo&nbsp;</button></a>
-                        <a  href="/reportes/equipoAdmin" target="_blank"> <button th:if="${usuario.codrol != 2}">Reporte de Equipos</button></a>
-                    </div>
+                        <div style="display: flex; justify-content: space-between">
+                            <button th:if="${usuarioAct.codrol != 3 and mostrar != si}"> <a  href="/equipo/nuevo">Nuevo Equipo</a></button>&nbsp;
+                            <form action="/reporte/equipo" target="_blank" method="post" th:object="${usuarioAct}">
+                                <input type="hidden" class="form-control" name="usuario" th:field="*{usuario}">
+                                <button th:if="${usuarioAct.codrol == 2}" type="submit">Reporte de Equipo</button>&nbsp;
+                            </form>
+                            <a href="/reportes/equipoAll" target="_blank" ><button th:if="${usuarioAct.codrol != 2}">Reporte de Equipos </button></a>
 
+                    </div>
+                    </div>
                     <div class="input_search">
                         <input type="search" placeholder="Buscar">
                         <i class="fa fa-search" id="search"></i>
                     </div>
+
                 </div>
 
                 <table class="table">
@@ -111,8 +118,28 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
-                    <p>Aqui va la paginación</p>
+                    <div class="" th:if="${usuarioAct.codrol != 2}">
+                        <div class=""></div>
+                        <div class="">
+                            <nav aria-label="Pagination">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${prev == 0 ? 'disabled' : ''}">
+                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${prev}|}">Anterior</a>
+                                    </li>
+                                    <li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active' : ''}">
+                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${page}|}" th:text="${page}"></a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${current == last ? 'disabled' : ''}">
+                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${next}|}">Siguiente</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
                 </div>
+
+
             </div>
         </div>
 

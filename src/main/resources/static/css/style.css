@@ -2009,6 +2009,9 @@ textarea:focus, input:focus, select:focus, .bootstrap-select .dropdown-toggle:fo
     TABLAS - REGISTROS
 -------------------------------------------------------------------*/
 
+.buttons{
+
+}
 .container-tabla{
     display: flex;
     flex-direction: column;

@@ -36,10 +36,10 @@ public class JugadoresController {
     @GetMapping("/inicio")
     public String abrirPrincipal(@ModelAttribute Jugador jugador, HttpSession session, Model model) {
 
-        String doc = (String) session.getAttribute("documento");
-        jugador = repoJ.findByDocumento(doc);
+        String doc = (String) session.getAttribute("doc");
+        Jugador jugadorAct  = repoJ.findByDocumento(doc);
 
-        model.addAttribute("jugador", jugador);
+        model.addAttribute("jugadorAct", jugadorAct);
 
         return "jugadores/principalJugadores";
     }
@@ -84,9 +84,11 @@ public class JugadoresController {
             model.addAttribute("valor", 0);
             return "atletas";
         }
-        Jugadores jugadorAct = repoJug.findByDocumento(jugadores.getDocumento());
-        model.addAttribute("jugadorAct", jugadorAct);
-        session.setAttribute("doc", jugadorAct.getDocumento().toString());
+        session.setAttribute("doc", jugadores.getDocumento().toString());
+        Jugador jugador = repoJ.findByDocumento((String)session.getAttribute("doc"));
+
+        model.addAttribute("jugadorAct", jugador);
+
 
         return "jugadores/principalJugadores";
     }

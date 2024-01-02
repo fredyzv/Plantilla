@@ -159,7 +159,14 @@ public class EquipoController {
 		model.addAttribute("usuarioAct", usuarioAct);
 
 		equipo = repoE.findById(equipo.getCodequipo()).get();
-
+		if(usuarioAct.getCodrol()==1){
+			model.addAttribute("equipo", equipo);
+			model.addAttribute("lstLiga", repoL.findByCodestado(1));
+			model.addAttribute("lstUsuarios",repoU.findByCodrolAndCodestado(2,1));
+		}else{
+			model.addAttribute("equipo", equipo);
+			model.addAttribute("lstLiga", repoL.findByCodestado(1));
+		}
 		model.addAttribute("equipo", equipo);
 		model.addAttribute("lstLiga", repoL.findByCodestado(1));
 		model.addAttribute("lstEstado", repoEs.findAll());

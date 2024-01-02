@@ -98,7 +98,7 @@ public class JugadorController {
 
         model.addAttribute("lstUsuario", repoU.findAll());
         model.addAttribute("lstEstado", repoEs.findAll());
-        model.addAttribute("lstEquipo", repoE.findAll());
+        model.addAttribute("lstEquipos", repoE.findByCodestado(1));
         model.addAttribute("lstDocumento", repoD.findAll());
         model.addAttribute("lstSexo", repoS.findAll());
         model.addAttribute("lstCategoria", repoC.findByCodestado(1));

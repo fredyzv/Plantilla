@@ -60,9 +60,7 @@
                         <a href="/temporada/nuevo">
                             <button> Registrar Temporada</button>
                         </a>
-                        <a th:if="${usuario.codrol != 2}" href="/reportes/equipoAdmin" target="_blank">
-                            <button> Reporte de Temporadas</button>
-                        </a>
+
                     </div>
 
                     <div class="input_search">
@@ -75,6 +73,7 @@
                     <tr>
                         <th>Código</th>
                         <th>Temporada</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
@@ -82,6 +81,7 @@
                     <tr th:each="e : ${lstTemporadas}">
                         <td th:text="${e.codtemporada}"></td>
                         <td th:text="${e.nomtemporada}"></td>
+                        <td th:text="${e.estado.estado}"></td>
                         <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
                             <form action="/temporada/actualizar" method="post">
                                 <input type="hidden" name="codtemporada" th:value="${e.codtemporada}">

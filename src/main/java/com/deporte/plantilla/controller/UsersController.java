@@ -115,6 +115,7 @@ public class UsersController {
 						usuario.setFecreg(Fecha.fechaActual());
 						repoU.save(usuario);
 						model.addAttribute("mensaje", "Usuario Registrado");
+						model.addAttribute("usuario", new Usuario());
 					} catch (Exception e) {
 						model.addAttribute("mensaje", "Error al Registrar");
 						System.out.println("Error " + e);
