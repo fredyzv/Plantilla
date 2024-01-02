@@ -11,5 +11,7 @@ public interface IDatosRepository extends JpaRepository<Datos, Integer> {
 
     List<Datos> findByCodpartido(int codpartido);
 
+    List<Datos> findByCodjugador(int codjugador);
+
 
 }

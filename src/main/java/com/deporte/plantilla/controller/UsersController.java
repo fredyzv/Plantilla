@@ -2,15 +2,20 @@ package com.deporte.plantilla.controller;
 
 import com.deporte.plantilla.model.Usuario;
 import com.deporte.plantilla.repository.*;
+import com.deporte.plantilla.service.UsuariosPageService;
 import com.deporte.plantilla.util.Fecha;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @Controller
@@ -29,10 +34,12 @@ public class UsersController {
 	private ISexoRepository repoS;
 	@Autowired
 	private IRolRepository repoR;
+	@Autowired
+	private UsuariosPageService pageService;
 
 	/* ABRIR LISTA DE USUARIOS */
 	@GetMapping("/usuario")
-	public String abrirListadoUsuarios(@ModelAttribute Usuario usuarioAct, Usuario usuario, HttpSession session,
+	public String abrirListadoUsuarios(@RequestParam Map<String, Object> params, @ModelAttribute Usuario usuarioAct, Usuario usuario, HttpSession session,
 									   Model model) {
 
 		String correo = (String) session.getAttribute("correo");
@@ -41,7 +48,21 @@ public class UsersController {
 		model.addAttribute("usuarioAct", usuarioAct);
 		model.addAttribute("usuario", usuario);
 
-		model.addAttribute("lstUsuario", repoU.findAll());
+		/*Paginacion*/
+		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1):0;
+		PageRequest pageRequest = PageRequest.of(page,10);
+		Page<Usuario> pageUsuario = pageService.getAll(pageRequest);
+		int totalPage = pageUsuario.getTotalPages();
+		if(totalPage>0){
+			List<Integer> pages = IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
+			model.addAttribute("pages", pages);
+		}
+
+		model.addAttribute("lstUsuario", pageUsuario.getContent());
+		model.addAttribute("current", page + 1);
+		model.addAttribute("next", page + 2);
+		model.addAttribute("prev", page);
+		model.addAttribute("last", totalPage);
 
 		return "usuarios/usuarios";
 	}
@@ -77,21 +98,29 @@ public class UsersController {
 
 		model.addAttribute("usuario", usuario);
 
-		try {
-
-			usuario.setUsuario(usuario.getNombres().substring(0, 1) + usuario.getApellidos().substring(0, 1)
-					+ usuario.getDocumento());
-			usuario.setCodrol(2);
-			usuario.setCodestado(1);
-			usuario.setFecreg(Fecha.fechaActual());
-
-			repoU.save(usuario);
-			model.addAttribute("mensaje", "Usuario Registrado");
-
-		} catch (Exception e) {
-
-			model.addAttribute("mensaje", "Error al Registrar");
-			System.out.println("Error " + e);
+		if(repoU.findByDocumento(usuario.getDocumento()) != null){
+			model.addAttribute("mensaje", "El número de documento ya se encuentra registrado en el sistema.");
+		}else{
+			if(repoU.findByCorreo(usuario.getCorreo()) != null){
+				model.addAttribute("mensaje", "La dirección de correo ya se encuentra registrada.");
+			}else{
+				if(repoU.findByTelefono(usuario.getTelefono()) != null){
+					model.addAttribute("mensaje", "El número de teléfono ya se encuentra registrado.");
+				}else{
+					try {
+						usuario.setUsuario(usuario.getNombres().substring(0, 1) + usuario.getApellidos().substring(0, 1)
+								+ usuario.getDocumento());
+						usuario.setCodrol(2);
+						usuario.setCodestado(1);
+						usuario.setFecreg(Fecha.fechaActual());
+						repoU.save(usuario);
+						model.addAttribute("mensaje", "Usuario Registrado");
+					} catch (Exception e) {
+						model.addAttribute("mensaje", "Error al Registrar");
+						System.out.println("Error " + e);
+					}
+				}
+			}
 		}
 
 		model.addAttribute("lstUsuario", repoU.findAll());
@@ -100,7 +129,6 @@ public class UsersController {
 		model.addAttribute("lstDocumento", repoD.findAll());
 		model.addAttribute("lstSexo", repoS.findAll());
 
-		System.out.println("Enviado " + usuario);
 		return "usuarios/nuevo";
 	}
 
@@ -112,7 +140,7 @@ public class UsersController {
 		model.addAttribute("rol", session.getAttribute("rol"));
 		Usuario usuarioAct = repoU.findByCorreo(correo);
 		model.addAttribute("usuarioAct", usuarioAct);
-		model.addAttribute("usuario", usuario);
+
 		model.addAttribute("lstUsuario", repoU.findAll());
 		model.addAttribute("lstEstado", repoE.findAll());
 		model.addAttribute("lstNivel", repoN.findAll());
@@ -131,19 +159,11 @@ public class UsersController {
 		Usuario usuarioAct = repoU.findByCorreo(correo);
 		model.addAttribute("usuarioAct", usuarioAct);
 
-		System.out.println("usuario " + usuario);
-
 		try {
-
-			// usuario.setFecreg(Fecha.fechaActual());
-
 			repoU.save(usuario);
 			model.addAttribute("mensaje", "Usuario Actualizado");
-
 		} catch (Exception e) {
-
-			model.addAttribute("mensaje", "Error al Registrar");
-
+			model.addAttribute("mensaje", "Error al Registrar, Revise los datos a actualizar.");
 		}
 
 		model.addAttribute("lstUsuario", repoU.findAll());
@@ -152,8 +172,6 @@ public class UsersController {
 		model.addAttribute("lstDocumento", repoD.findAll());
 		model.addAttribute("lstSexo", repoS.findAll());
 		model.addAttribute("lstRol", repoR.findAll());
-
-		System.out.println("usuario 2 " + usuario);
 
 		return "usuarios/actualizar";
 	}
@@ -173,14 +191,10 @@ public class UsersController {
 			repoU.save(usuario);
 			model.addAttribute("mensaje", "Usuario Inactivo");
 			model.addAttribute("lstUsuario", repoU.findAll());
-
 		} catch (Exception e) {
-
 			model.addAttribute("mensaje", "Error al Eliminar");
 			model.addAttribute("lstUsuario", repoU.findAll());
-
 		}
-		
 		model.addAttribute("lstUsuario", repoU.findAll());
 
 		return "redirect:/user/usuario";

@@ -33,9 +33,9 @@ public class PartidoController {
     @Autowired
     private ILigaRepository repoL;
     @Autowired
-    private DatosService serviceDatos;
-    @Autowired
     private IDatosRepository repoD;
+    @Autowired
+    private DatosService serviceDatos;
 
 
     /* ABRIR PAGINA DE PARTIDOS */
@@ -47,18 +47,21 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-        equipo=repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
-        if (usuarioAct.getCodrol()==2) {
 
-            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);
-            model.addAttribute("equipo", equipo);
-        }
+        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
+        model.addAttribute("equipo", equipo);
+
         if(usuarioAct.getCodrol()!=2){
             model.addAttribute("lstPartido", repoP.findAll());
         }else {
-            model.addAttribute("lstPartido", repoP.findByCodequipo(equipo.getCodequipo()));
+            if(equipo == null){
+                model.addAttribute("mensaje", "Primero debes registrar un equipo");
+                model.addAttribute("mostrar", "no");
+                return "equipo/equipo";
 
-
+            }else {
+                model.addAttribute("lstPartido", repoP.findByCodequipo(equipo.getCodequipo()));
+            }
         }
 
         return "partido/listado";
@@ -72,28 +75,22 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-        String url=null;
 
-        if (usuarioAct.getCodrol()==2){
-            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
-        }
+        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
 
         if(equipo == null){
             model.addAttribute("lstEquipo", repoE.findAll());
             model.addAttribute("mostrar", "no");
-            url= "equipo/equipo";
+            return "equipo/equipo";
         }
-        if(equipo!=null) {
-            model.addAttribute("equipo", equipo);
-            model.addAttribute("partido", partido);
-            model.addAttribute("temporada", temporada);
-            model.addAttribute("lstTemporada", repoT.findByCodestado(1));
-            model.addAttribute("lstCategoria", repoC.findByCodestado(1));
-            model.addAttribute("lstLiga", repoL.findByCodestado(1));
-            url= "partido/nuevo";
-        }
-        double sv,av,ad,ac =0.0;
-        return url;
+
+        model.addAttribute("equipo", equipo);
+        model.addAttribute("partido", partido);
+        model.addAttribute("lstTemporada", repoT.findByCodestado(1));
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
+        model.addAttribute("lstLiga", repoL.findByCodestado(1));
+
+        return "partido/nuevo";
     }
 
     @PostMapping("/grabar")
@@ -103,24 +100,31 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-        if (usuarioAct.getCodrol()==2) {
-            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);
+
+        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
         model.addAttribute("equipo", equipo);
-        }
-        try {
-            partido.setCodequipo(equipo.getCodequipo());
-            repoP.save(partido);
-            model.addAttribute("mensaje", "Partido Registrado");
 
-        } catch (Exception e) {
-
-            model.addAttribute("mensaje", "Error al Registrar");
-
+        if((partido.getPcequipo()+partido.getScequipo()+partido.getTcequipo()+partido.getCcequipo()+partido.getPsequipo()+partido.getSsequipo()+partido.getTsequipo())
+                != partido.getScoreequipo()){
+            model.addAttribute("mensaje", "Algunos datos por cuarto no coinciden con el Score Total del equipo");
+        }else{
+            if((partido.getPcrival()+partido.getScrival()+partido.getTcrival()+partido.getCcrival()+partido.getPsrival()+partido.getSsrival()+partido.getTsrival())
+                    != partido.getScorerival()){
+                model.addAttribute("mensaje", "Algunos datos por cuarto no coinciden con el Score Total del rival");
+            }else{
+                try {
+                    partido.setCodequipo(equipo.getCodequipo());
+                    repoP.save(partido);
+                    model.addAttribute("mensaje", "Partido Registrado");
+                } catch (Exception e) {
+                    model.addAttribute("mensaje", "Error al Registrar");
+                }
+            }
         }
 
         model.addAttribute("partido", partido);
-        model.addAttribute("lstTemporada", repoT.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
+        model.addAttribute("lstTemporada", repoT.findByCodestado(1));
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstLiga", repoL.findByCodestado(1));
 
         return "partido/nuevo";
@@ -134,19 +138,17 @@ public class PartidoController {
         model.addAttribute("rol", session.getAttribute("rol"));
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
-        if (usuarioAct.getCodrol()==2) {
-            equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);
-        }
+
+        equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
         partido = repoP.findById(partido.getCodpartido()).get();
 
         model.addAttribute("equipo", equipo);
         model.addAttribute("partido", partido);
 
         model.addAttribute("partido", partido);
-        model.addAttribute("lstTemporada", repoT.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
+        model.addAttribute("lstTemporada", repoT.findByCodestado(1));
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstLiga", repoL.findByCodestado(1));
-
 
         return "partido/actualizar";
     }
@@ -159,19 +161,26 @@ public class PartidoController {
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
 
-        try {
-            repoP.save(partido);
-            model.addAttribute("mensaje", "Partido Actualizado");
-
-        } catch (Exception e) {
-
-            model.addAttribute("mensaje", "Error al Actualizar");
-
+        if((partido.getPcequipo()+partido.getScequipo()+partido.getTcequipo()+partido.getCcequipo()+partido.getPsequipo()+partido.getSsequipo()+partido.getTsequipo())
+                != partido.getScoreequipo()){
+            model.addAttribute("mensaje", "Algunos datos por cuarto no coinciden con el Score Total del equipo");
+        }else{
+            if((partido.getPcrival()+partido.getScrival()+partido.getTcrival()+partido.getCcrival()+partido.getPsrival()+partido.getSsrival()+partido.getTsrival())
+                    != partido.getScorerival()){
+                model.addAttribute("mensaje", "Algunos datos por cuarto no coinciden con el Score Total del rival");
+            }else{
+                try {
+                    repoP.save(partido);
+                    model.addAttribute("mensaje", "Partido Actualizado");
+                } catch (Exception e) {
+                    model.addAttribute("mensaje", "Error al Actualizar");
+                }
+            }
         }
 
         model.addAttribute("partido", partido);
-        model.addAttribute("lstTemporada", repoT.findAll());
-        model.addAttribute("lstCategoria", repoC.findAll());
+        model.addAttribute("lstTemporada", repoT.findByCodestado(1));
+        model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstLiga", repoL.findByCodestado(1));
 
         return "partido/actualizar";
@@ -212,17 +221,13 @@ public class PartidoController {
         String url = null;
 
         if (!repoD.findByCodpartido(partido.getCodpartido()).isEmpty()){
-            System.out.println("Entró al if");
             model.addAttribute("mensaje","Este partido ya tiene datos registrados");
             model.addAttribute("equipo", equipo);
             model.addAttribute("lstPartido", repoP.findByCodequipo(equipo.getCodequipo()));
-             url= "partido/listado";
-
+            url= "partido/listado";
         }else {
-            System.out.println("Entró al else");
-            List<Jugador> listJ = repoJ.findByCodcategoriaAndCodequipo(partido.getCodcategoria(), partido.getCodequipo());
+            List<Jugador> listJ = repoJ.findByCodcategoriaAndCodequipoAndCodestado(partido.getCodcategoria(), partido.getCodequipo(),1);
             datosJugador.setListJugador(listJ);
-
             model.addAttribute("datosJugador", datosJugador);
             model.addAttribute("equipo", equipo);
             model.addAttribute("partido", partido);
@@ -230,7 +235,6 @@ public class PartidoController {
             session.setAttribute("id", id);
             url= "partido/datos";
         }
-
 
         return url;
     }
@@ -247,7 +251,7 @@ public class PartidoController {
         List<Datos> listadoDatos = new ArrayList();
         int cod = (Integer) session.getAttribute("id");
         partido = repoP.findById(cod).get();
-        List<Jugador> jugadores = repoJ.findByCodcategoriaAndCodequipo(partido.getCodcategoria(), partido.getCodequipo());
+        List<Jugador> jugadores = repoJ.findByCodcategoriaAndCodequipoAndCodestado(partido.getCodcategoria(), partido.getCodequipo(),1);
 
         for(int i = 0; i < jugadores.size(); i++) {
             datos.setCodjugador(jugadores.get(i).getCodjugador());
@@ -309,6 +313,89 @@ public class PartidoController {
         }
 
         return "partido/verDatos";
+    }
+
+    /* ACTUALIZAR DATOS PARTIDO */
+    @PostMapping("/editar")
+    public String abrirActualizacionDatos(@ModelAttribute Usuario usuarioAct,Jugador jugador, HttpSession session,Datos datos, Partido partido, Equipo equipo, Model model) {
+
+        String correo = (String) session.getAttribute("correo");
+        model.addAttribute("rol", session.getAttribute("rol"));
+        usuarioAct = repoU.findByCorreo(correo);
+        model.addAttribute("usuarioAct", usuarioAct);
+
+        partido = repoP.findById((Integer) session.getAttribute("id")).get();
+        equipo = repoE.findById(partido.getCodequipo()).get();
+        datos = repoD.findById(datos.getCoddatos()).get();
+        jugador = repoJ.findById(datos.getCodjugador()).get();
+
+        model.addAttribute("datos", datos);
+        model.addAttribute("jugador", jugador);
+        model.addAttribute("lstJugador", repoJ.findByCodcategoriaAndCodequipoAndCodestado(partido.getCodcategoria(), equipo.getCodequipo(), 1));
+        model.addAttribute("partido", partido);
+        model.addAttribute("equipo", equipo);
+        model.addAttribute("id", session.getAttribute("id"));
+
+        return "partido/editardatos";
+    }
+
+    @PostMapping("/editado")
+    public String ActualizacionDatos(@ModelAttribute Usuario usuarioAct,Jugador jugador, HttpSession session,Datos datos, Partido partido, Equipo equipo, Model model) {
+
+        String correo = (String) session.getAttribute("correo");
+        model.addAttribute("rol", session.getAttribute("rol"));
+        usuarioAct = repoU.findByCorreo(correo);
+        model.addAttribute("usuarioAct", usuarioAct);
+
+        try {
+            repoD.save(datos);
+            model.addAttribute("mensaje", "Datos Actualizados");
+
+            partido = repoP.findById((Integer) session.getAttribute("id")).get();
+            equipo = repoE.findById(partido.getCodequipo()).get();
+            datos = repoD.findById(datos.getCoddatos()).get();
+            jugador = repoJ.findById(datos.getCodjugador()).get();
+
+            model.addAttribute("datos", datos);
+            model.addAttribute("jugador", jugador);
+            model.addAttribute("lstJugador", repoJ.findByCodcategoriaAndCodequipoAndCodestado(partido.getCodcategoria(), equipo.getCodequipo(), 1));
+            model.addAttribute("partido", partido);
+            model.addAttribute("equipo", equipo);
+            model.addAttribute("id", session.getAttribute("id"));
+        } catch (Exception e) {
+            model.addAttribute("mensaje", "Error al Registrar");
+
+        }
+
+        return "partido/editardatos";
+    }
+
+    /* ELIMINAR DATOS PARTIDO */
+    @PostMapping("/eliminar")
+    public String eliminarDatos(@ModelAttribute Usuario usuarioAct,Jugador jugador, HttpSession session,Datos datos, Partido partido, Equipo equipo, Model model) {
+
+        String correo = (String) session.getAttribute("correo");
+        model.addAttribute("rol", session.getAttribute("rol"));
+        usuarioAct = repoU.findByCorreo(correo);
+        model.addAttribute("usuarioAct", usuarioAct);
+
+        try {
+            datos = repoD.findById(datos.getCoddatos()).get();
+            repoD.delete(datos);
+
+            partido = repoP.findById(datos.getCodpartido()).get();
+            equipo = repoE.findById(partido.getCodequipo()).get();
+            model.addAttribute("partido", partido);
+            model.addAttribute("equipo", equipo);
+            model.addAttribute("datos", datos);
+            List<Datos> lstDatos = repoD.findByCodpartido(partido.getCodpartido());
+            model.addAttribute("lstDatos", lstDatos);
+            model.addAttribute("mensaje","Registro eliminado con éxito");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "partido/verdatos";
     }
 
 }

@@ -2,6 +2,7 @@ package com.deporte.plantilla.controller;
 
 import com.deporte.plantilla.model.*;
 import com.deporte.plantilla.repository.IAgentesRepository;
+import com.deporte.plantilla.repository.IDatosRepository;
 import com.deporte.plantilla.repository.IJugadorRepository;
 import com.deporte.plantilla.repository.IJugadoresRepository;
 
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import java.text.DecimalFormat;
+import java.util.List;
 
 @Controller
 @RequestMapping("/jugadores")
@@ -27,6 +29,8 @@ public class JugadoresController {
     private IJugadorRepository repoJ;
     @Autowired
     private IAgentesRepository repoA;
+    @Autowired
+    private IDatosRepository repoD;
 
     /*ABRIR PRINCIPAL*/
     @GetMapping("/inicio")
@@ -199,6 +203,38 @@ public class JugadoresController {
         }
 
         return "jugadores/actperfil";
+    }
 
+    /*ABRIR ESTADISTICAS*/
+    @GetMapping("/stats")
+    public String abrirEstadisticas(@ModelAttribute Jugador jugador,Eficiencia eficiencia, HttpSession session, Model model) {
+
+        String doc = (String) session.getAttribute("doc");
+        jugador = repoJ.findByDocumento(doc);
+        model.addAttribute("jugador", jugador);
+
+        List<Datos> lstDatos = repoD.findByCodjugador(jugador.getCodjugador());
+
+        double el=0,ed=0,et=0,ec=0;
+
+        for(int i=0;i<lstDatos.size();i++){
+            el = el + (double)((double)lstDatos.get(i).getClibres()/(double)lstDatos.get(i).getIlibres());
+            ed = ed +  (double)((double)lstDatos.get(i).getCdobles()/(double)lstDatos.get(i).getIdobles());
+            et = et +  (double)((double)lstDatos.get(i).getCtriples()/(double)lstDatos.get(i).getItriples());
+            ec = ec +  (double)((double)(lstDatos.get(i).getClibres()+lstDatos.get(i).getCdobles()+lstDatos.get(i).getCtriples())/(double)
+                    (lstDatos.get(i).getIlibres()+lstDatos.get(i).getIdobles()+lstDatos.get(i).getItriples()));
+        }
+
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        eficiencia.setEfilibres(Double.parseDouble(df.format(el/lstDatos.size()*100)));
+        eficiencia.setEfidobles(Double.parseDouble(df.format(ed/lstDatos.size()*100)));
+        eficiencia.setEfitriples(Double.parseDouble(df.format(et/lstDatos.size()*100)));
+        eficiencia.setEficampo(Double.parseDouble(df.format(ec/lstDatos.size()*100)));
+
+        model.addAttribute("eficiencia", eficiencia);
+        model.addAttribute("lstDatos", lstDatos);
+
+        return "jugadores/stats";
     }
 }

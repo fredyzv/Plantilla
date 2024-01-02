@@ -8,9 +8,11 @@ import java.util.List;
 
 @Repository
 public interface IEquipoRepository extends JpaRepository<Equipo, Integer>{
-	
+
 	Equipo findByUsuarioAndCodestado(String usuario,int codestado);
 
 	List<Equipo> findByCodliga(int codliga);
+
+	List<Equipo> findByCodestado(int codestado);
 
 }

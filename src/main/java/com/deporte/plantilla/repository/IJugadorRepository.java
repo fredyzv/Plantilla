@@ -8,13 +8,17 @@ import java.util.List;
 
 @Repository
 public interface IJugadorRepository extends JpaRepository<Jugador, Integer>{
-	
+
 	Jugador findByDocumento(String documento);
-	
+
 	List<Jugador> findByCodequipoAndCodestado(int codequipo,int codestado);
 
 	List<Jugador> findByCodestado(int codestado);
 
-	List<Jugador> findByCodcategoriaAndCodequipo(int codcategoria, int codequipo);
+	List<Jugador> findByCodcategoriaAndCodequipoAndCodestado(int codcategoria, int codequipo, int codestado);
+
+	Jugador findByTelefono(String telefono);
+
+	Jugador findByEmail(String email);
 
 }

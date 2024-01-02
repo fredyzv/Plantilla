@@ -5,16 +5,20 @@ import com.deporte.plantilla.model.Jugador;
 import com.deporte.plantilla.model.Usuario;
 import com.deporte.plantilla.repository.*;
 
+import com.deporte.plantilla.service.JugadorPageService;
 import com.deporte.plantilla.util.Fecha;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @Controller
@@ -37,10 +41,12 @@ public class JugadorController {
     private IPosicionRepository repoP;
     @Autowired
     private IJugadorRepository repoJ;
+    @Autowired
+    private JugadorPageService pageService;
 
     /* ABRIR LISTA DE JUGADORES */
     @GetMapping("/jugador")
-    public String abrirListadoJugador(@ModelAttribute Usuario usuarioAct, Equipo equipo, Jugador jugador, HttpSession session,
+    public String abrirListadoJugador(@RequestParam Map<String, Object> params, @ModelAttribute Usuario usuarioAct, Equipo equipo, Jugador jugador, HttpSession session,
                                       Model model) {
 
         String correo = (String) session.getAttribute("correo");
@@ -48,10 +54,25 @@ public class JugadorController {
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
 
+        /*Paginacion*/
+        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1):0;
+        PageRequest pageRequest = PageRequest.of(page,10);
+        Page<Jugador> pageJugador = pageService.getAll(pageRequest);
+        int totalPage = pageJugador.getTotalPages();
+        if(totalPage>0){
+            List<Integer> pages = IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
+            model.addAttribute("pages", pages);
+        }
+
         if(usuarioAct.getCodrol() != 2){
-            model.addAttribute("lstJugador" , repoJ.findAll());
+            model.addAttribute("lstJugador", pageJugador.getContent());
+            model.addAttribute("current", page + 1);
+            model.addAttribute("next", page + 2);
+            model.addAttribute("prev", page);
+            model.addAttribute("last", totalPage);
         }else{
             equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
+            model.addAttribute("equipo", equipo);
 
             if(equipo == null){
                 model.addAttribute("mensaje", "Primero debes registrar un equipo");
@@ -98,30 +119,43 @@ public class JugadorController {
 
         model.addAttribute("jugador", jugador);
 
-        try {
-
-            jugador.setCodestado(1);
-            jugador.setFecreg(Fecha.fechaActual());
-            jugador.setCodequipo(repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1).getCodequipo());
-
-            repoJ.save(jugador);
-            model.addAttribute("mensaje", "Jugador Registrado");
-
-        } catch (Exception e) {
-
-            model.addAttribute("mensaje", "Error al Registrar");
-            System.out.println("Error " + e);
+        if(repoJ.findByDocumento(jugador.getDocumento()) != null){
+            model.addAttribute("mensaje", "El jugador ya está Registrado en otro equipo");
+        }else{
+            if(repoJ.findByTelefono(jugador.getTelefono()) != null){
+                model.addAttribute("mensaje", "El Número de teléfono ya se encuentra Registrado");
+            }else{
+                if(repoJ.findByEmail(jugador.getEmail()) != null){
+                    model.addAttribute("mensaje", "El Email ya se encuentra Registrado");
+                }else{
+                    try {
+                        if(usuarioAct.getCodrol() == 1){
+                            jugador.setCodestado(1);
+                            jugador.setFecreg(Fecha.fechaActual());
+                            repoJ.save(jugador);
+                            model.addAttribute("mensaje", "Jugador Registrado");
+                        }else{
+                            jugador.setCodestado(1);
+                            jugador.setFecreg(Fecha.fechaActual());
+                            jugador.setCodequipo(repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1).getCodequipo());
+                            repoJ.save(jugador);
+                            model.addAttribute("mensaje", "Jugador Registrado");
+                        }
+                    } catch (Exception e) {
+                        model.addAttribute("mensaje", "Error al Registrar");
+                        System.out.println("Error " + e);
+                    }
+                }
+            }
         }
 
         model.addAttribute("lstUsuario", repoU.findAll());
         model.addAttribute("lstEstado", repoEs.findAll());
-        model.addAttribute("lstEquipo", repoE.findAll());
+        model.addAttribute("lstEquipos", repoE.findByCodestado(1));
         model.addAttribute("lstDocumento", repoD.findAll());
         model.addAttribute("lstSexo", repoS.findAll());
         model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstPosicion", repoP.findAll());
-
-        System.out.println("Enviado " + jugador);
 
         return "jugador/nuevo";
     }
@@ -156,17 +190,11 @@ public class JugadorController {
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
 
-        System.out.println("usuario " + jugador);
-
         try {
-
             repoJ.save(jugador);
             model.addAttribute("mensaje", "Jugador Actualizado");
-
         } catch (Exception e) {
-
-            model.addAttribute("mensaje", "Error al Registrar");
-
+            model.addAttribute("mensaje", "Error al Actualizar, Revise los campos a actualizar");
         }
 
         model.addAttribute("jugador", jugador);
@@ -176,8 +204,6 @@ public class JugadorController {
         model.addAttribute("lstSexo", repoS.findAll());
         model.addAttribute("lstCategoria", repoC.findByCodestado(1));
         model.addAttribute("lstPosicion", repoP.findAll());
-
-        System.out.println("usuario 2 " + jugador);
 
         return "jugador/actualizar";
     }
