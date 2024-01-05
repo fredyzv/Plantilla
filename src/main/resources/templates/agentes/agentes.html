@@ -47,15 +47,13 @@
 <div class="body-vistas">
     <!-- Page Content -->
     <section class="section-content">
-        <div style="width: 100%">
+        <div class="section-content-interno">
             <h1 style="margin-left: 5%">Lista de Jugadores Libres</h1>
 
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
-                        <a th:if="${mensaje} == null"
-                           href="/reportes/agentes" target="_blank"
-                           class="btn btn-info">Reporte de Agentes Libres</a>
+                        <a th:if="${mensaje} == null" href="/reportes/agentes" target="_blank" class="report">Reporte PDF </a>
 
                     </div>
                     <div class="input_search">

@@ -49,15 +49,18 @@
     <!-- Page Content -->
 
     <section class="section-content">
-        <div style="width: 100%">
+        <div class="section-content-interno">
+            <h1 style="margin-left: 5%" th:text="'Datos del jugador ' + ${jugador.nomjug + ' ' + jugador.apejug}" class="font-weight-bold mb-0"></h1>
 
-            <div class="card-header bg-light">
-                <h6 th:text="'Datos del jugador ' + ${jugador.nomjug + ' ' + jugador.apejug}"
-                    class="font-weight-bold mb-0"></h6>
-            </div>
-            <div class="card-body">
+            <div class="container-tabla">
+                <div class="table_header">
+                    <div class="buttons">
+                    </div>
+                    <div class="input_search">
+                    </div>
+                </div>
                 <table class="table" id="tablax">
-                    <thead>
+                    <thead class="head-datos">
                     <tr style="text-align: center">
                         <th></th>
                         <th colspan="2" class="up">Libres</th>
@@ -67,6 +70,7 @@
                         <th colspan="3" class="up"></th>
                         <th colspan="2" class="up">Tapas</th>
                         <th colspan="2" class="up">Faltas</th>
+                        <th></th>
                         <th></th>
                     </tr>
                     <tr style="text-align: center">
@@ -87,6 +91,7 @@
                         <th>Fav</th>
                         <th>Cont</th>
                         <th>Tiempo</th>
+                        <th>Acción</th>
                     </tr>
                     </thead>
                     <tbody class="tablaRegistroDatos">
@@ -121,14 +126,20 @@
                     </form>
                     </tbody>
                 </table>
-                <form action="/partido/verdatos" method="post" th:object="${datos}">
-                    <input type="hidden" th:field="*{codpartido}">
-                    <button type="submit" class="btn btn-primary">volver</button>
-                </form>
-
-                <div>
-                    <strong th:text="${mensaje}"></strong>
+                <div class="table_fotter">
+                    <center>
+                        <div class="buttons">
+                            <form action="/partido/verdatos" method="post" th:object="${datos}">
+                                <input type="hidden" th:field="*{codpartido}">
+                                <button type="submit" class="return">Volver</button>
+                            </form>
+                        </div>
+                    </center>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>

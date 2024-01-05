@@ -47,31 +47,20 @@
 <div class="body-vistas">
     <!-- Page Content -->
     <section class="section-content">
-        <div style="width: 100%">
+        <div class="section-content-interno">
             <h1 style="margin-left: 5%">Lista de Jugadores</h1>
 
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
                         <div style="display: flex; justify-content: space-between">
-                            <a href="/jugador/nuevo">
-                                <button th:if="${usuarioAct.codrol != 3}">
-                                    Nuevo Jugador
-                                </button>&nbsp;
-                            </a>
-
-
+                            <a href="/jugador/nuevo" th:if="${usuarioAct.codrol != 3}" class="new">Nuevo Jugador</a>&nbsp;
                             <form action="/reporte/jugador" target="_blank" method="post"
                                   th:object="${equipo}">
-                                <input type="hidden" class="form-control" name="codequipo"
-                                       th:field="*{codequipo}">
-                                <button th:if="${usuarioAct.codrol == 2}" type="submit"
-                                       >Reporte de jugadores
-                                </button> &nbsp;
+                                <input type="hidden" class="form-control" name="codequipo" th:field="*{codequipo}">
+                                <button th:if="${usuarioAct.codrol == 2}" type="submit" class="report">Reporte de jugadores</button> &nbsp;
                             </form>
-                            <a th:if="${usuarioAct.codrol != 2}"
-                               href="/reportes/jugadores" target="_blank"
-                              >Reporte de Jugadores</a>
+                            <a th:if="${usuarioAct.codrol != 2}" href="/reportes/jugadores" target="_blank" class="report">Reporte de Jugadores</a>
                         </div>
                     </div>
                     <div class="input_search">

@@ -49,19 +49,19 @@
 
     <!-- Page Content -->
     <section class="section-content">
-        <div style="width: 100%">
+        <div class="section-content-interno">
             <h1 style="margin-left: 5%">Listado de Equipos</h1>
             <div class="container-tabla">
                 <div class="table_header">
 
                     <div class="buttons">
                         <div style="display: flex; justify-content: space-between">
-                            <button th:if="${usuarioAct.codrol != 3 and mostrar != si}"> <a  href="/equipo/nuevo">Nuevo Equipo</a></button>&nbsp;
+                             <a href="/equipo/nuevo" th:if="${usuarioAct.codrol != 3 and mostrar != si}" class="new">Nuevo Equipo</a>&nbsp;
                             <form action="/reporte/equipo" target="_blank" method="post" th:object="${usuarioAct}">
                                 <input type="hidden" class="form-control" name="usuario" th:field="*{usuario}">
-                                <button th:if="${usuarioAct.codrol == 2}" type="submit">Reporte de Equipo</button>&nbsp;
+                                <button th:if="${usuarioAct.codrol == 2}" type="submit" class="report">Reporte de Equipo</button>&nbsp;
                             </form>
-                            <a href="/reportes/equipoAll" target="_blank" ><button th:if="${usuarioAct.codrol != 2}">Reporte de Equipos </button></a>
+                            <a href="/reportes/equipoAll" th:if="${usuarioAct.codrol != 2}" target="_blank" class="report">Reporte de Equipos</a>
 
                     </div>
                     </div>

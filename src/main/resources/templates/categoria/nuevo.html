@@ -48,7 +48,7 @@
     <!-- Page Content -->
 
     <section class="section-content">
-        <div style="width: 100%">
+        <div class="section-content-interno">
             <h1 style="margin-left: 25%">Registro de Categoría</h1>
 
             <div class="container-reg" style="width: 50%">
@@ -65,16 +65,17 @@
                     <div class="foot-reg col-lg-12">
                         <center>
                             <div class="buttons">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="/categoria/listar" class="btn btn-primary">Volver</a>
+                                <button type="submit" >Guardar</button>
+                                <a href="/categoria/listar" class="return">Volver</a>
                             </div>
                         </center>
+                        <div>
+                            <strong th:text="${mensaje}"></strong>
+                        </div>
                     </div>
                 </form>
                 <br>
-                <div>
-                    <strong th:text="${mensaje}"></strong>
-                </div>
+
             </div>
         </div>
     </section>

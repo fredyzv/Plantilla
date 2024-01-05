@@ -50,21 +50,15 @@
 
 
     <section class="section-content">
-        <div style="width: 100%">
+        <div class="section-content-interno">
 
             <h1 style="margin-left: 5%">Ligas</h1>
             <div class="container-tabla">
                 <div class="table_header">
 
                     <div class="buttons">
-                        <a href="/ligas/nuevo">
-                            <button> Registrar Liga</button>
-                        </a>
-                        <a th:if="${usuario.codrol != 2}" href="/reportes/ligas" target="_blank">
-                            <button>Reporte de Ligas</button>
-                        </a>
-
-
+                        <a href="/ligas/nuevo" class="new">Registrar Liga</a>
+                        <a th:if="${usuario.codrol != 2}" href="/reportes/ligas" target="_blank" class="report">Reporte de Ligas</a>
                     </div>
 
                     <div class="input_search">

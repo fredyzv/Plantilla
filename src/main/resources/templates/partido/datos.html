@@ -48,8 +48,9 @@
     <!-- Page Content -->
 
     <section class="section-content">
-        <div style="width: 100%">
-            <h1 style="margin-left: 5%" th:text="'Registro de datos del partido entre ' + ${equipo.nomequipo} + ' Vs ' + ${partido.equiporival}"></h1>
+        <div class="section-content-interno">
+            <h1 style="margin-left: 5%"
+                th:text="'Registro de datos del partido entre ' + ${equipo.nomequipo} + ' Vs ' + ${partido.equiporival}"></h1>
 
             <div class="container-tabla">
                 <div class="table_header">
@@ -142,8 +143,10 @@
                 </table>
                 <div class="table_fotter">
                     <center>
-                        <button onclick="registrar()" class="btn btn-success">Registrar</button>
-                        <a href="/partido/listado" class="btn btn-primary">Volver</a>
+                        <div class="buttons">
+                            <button onclick="registrar()">Registrar</button>
+                            <a href="/partido/listado" class="return">Volver</a>
+                        </div>
                     </center>
                 </div>
 

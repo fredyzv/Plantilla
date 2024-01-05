@@ -49,31 +49,27 @@
     <div id="content" class="bg-grey w-100">
 
         <section class="section-content">
-            <div style="width: 100%">
+            <div class="section-content-interno">
                 <h1 style="margin-left: 5%">Datos del equipo</h1>
                 <div class="container-reg">
                     <form action="/user/actualizado" method="post" th:object="${equipo}">
                         <div class="head-reg">
                             <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-box col-md-5">
-                                    <label>Nombre del Equipo</label> <input type="text"
-                                                                            th:field="*{nomequipo}" class="form-control"
-                                                                            id="inputEmail4" readonly="readonly">
+                                    <label>Nombre del Equipo</label>
+                                    <input type="text" th:field="*{nomequipo}" class="form-control" id="inputEmail4" readonly="readonly">
                                 </div>
                                 <div class="form-box col-md-3">
-                                    <label>Entrenador</label> <input type="text"
-                                                                     th:field="*{usu.apellidos}" class="form-control"
-                                                                     readonly="readonly">
+                                    <label>Entrenador</label>
+                                    <input type="text" th:field="*{usu.apellidos}" class="form-control" readonly="readonly">
                                 </div>
                                 <div class="form-box col-md-4">
-                                    <label for="inputEmail4">Liga</label> <input type="text"
-                                                                                 th:field="*{liga.nomliga}"
-                                                                                 class="form-control"
-                                                                                 readonly="readonly">
+                                    <label for="inputEmail4">Liga</label>
+                                    <input type="text" th:field="*{liga.nomliga}" class="form-control" readonly="readonly">
                                 </div>
                             </div>
 
-                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                            <div class="last-reg col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-box col-md-3">
                                     <label for="inputEmail4">Departamento</label> <input
                                         type="text" th:field="*{dep}" class="form-control"
@@ -107,7 +103,7 @@
                         <div class="foot-reg">
                             <center>
                                 <div class="buttons">
-                                    <a href="/equipo/equipo">Volver</a>
+                                    <a href="/equipo/equipo" class="return">Volver</a>
                                 </div>
                             </center>
                         </div>

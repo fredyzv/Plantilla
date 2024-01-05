@@ -56,48 +56,35 @@
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
-                        <div class="form-row" th:if="${usuarioAct.codrol != 2}">
+                        <div style="display: flex; justify-content: space-between" th:if="${usuarioAct.codrol != 2}">
+                            <a href="/reportes/statsPartidos" target="_blank" class="report">Estadística de Partidos</a>
                             &nbsp;
-                            <a href="/reportes/statsPartidos" target="_blank" class="btn btn-info">Estadística de Partidos</a>
+                            <a href="/reportes/promJugadores" target="_blank" class="report">Pormedios por Jugador</a>
                             &nbsp;
-                            <a href="/reportes/promJugadores" target="_blank" class="btn btn-info">Pormedios por Jugador</a>
+                            <a href="/reportes/efectJugadores" target="_blank" class="report">Efectividad por Jugador</a>
                             &nbsp;
-                            <a href="/reportes/efectJugadores" target="_blank" class="btn btn-info">Efectividad por Jugador</a>
-                            &nbsp;
-                            <a href="/reportes/acumJugadores" target="_blank" class="btn btn-info">Acumulados por Jugador</a>
+                            <a href="/reportes/acumJugadores" target="_blank" class="report">Acumulados por Jugador</a>
                         </div>
 
-                        <div class="form-row" th:if="${usuarioAct.codrol == 2}">
-                            <form action="/reporte/statsPartido" target="_blank" method="post"
-                                  th:object="${equipo}">
-                                <input type="hidden" class="form-control" name="codequipo"
-                                       th:field="*{codequipo}">
-                                <button type="submit"
-                                        class="btn btn-info">Estadística de Partidos</button>
+                        <div style="display: flex; justify-content: space-between" th:if="${usuarioAct.codrol == 2}">
+                            <form action="/reporte/statsPartido" target="_blank" method="post" th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo" th:field="*{codequipo}">
+                                <button type="submit" class="report">Estadística de Partidos</button>
                             </form>
                             &nbsp;
-                            <form action="/reporte/promJugador" target="_blank" method="post"
-                                  th:object="${equipo}">
-                                <input type="hidden" class="form-control" name="codequipo"
-                                       th:field="*{codequipo}">
-                                <button type="submit"
-                                        class="btn btn-info">Promedios por Jugador</button>
+                            <form action="/reporte/promJugador" target="_blank" method="post" th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo" th:field="*{codequipo}">
+                                <button type="submit" class="report">Promedios por Jugador</button>
                             </form>
                             &nbsp;
-                            <form action="/reporte/efectJugador" target="_blank" method="post"
-                                  th:object="${equipo}">
-                                <input type="hidden" class="form-control" name="codequipo"
-                                       th:field="*{codequipo}">
-                                <button type="submit"
-                                        class="btn btn-info">Efectividad por Jugador</button>
+                            <form action="/reporte/efectJugador" target="_blank" method="post" th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo" th:field="*{codequipo}">
+                                <button type="submit" class="report">Efectividad por Jugador</button>
                             </form>
                             &nbsp;
-                            <form action="/reporte/acumJugador" target="_blank" method="post"
-                                  th:object="${equipo}">
-                                <input type="hidden" class="form-control" name="codequipo"
-                                       th:field="*{codequipo}">
-                                <button type="submit"
-                                        class="btn btn-info">Acumulados por Jugador</button>
+                            <form action="/reporte/acumJugador" target="_blank" method="post" th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo" th:field="*{codequipo}">
+                                <button type="submit" class="report">Acumulados por Jugador</button>
                             </form>
                         </div>
                     </div>

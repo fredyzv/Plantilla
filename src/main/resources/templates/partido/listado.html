@@ -47,28 +47,25 @@
 <div class="body-vistas">
     <!-- Page Content -->
     <section class="section-content">
-        <div style="width: 100%">
-            <h1 th:if="${usuarioAct.codrol == 2}" style="margin-left: 5%" th:text="'Lista de Partidos de ' + ${equipo.nomequipo}"></h1>
+        <div class="section-content-interno">
+            <h1 th:if="${usuarioAct.codrol == 2}" style="margin-left: 5%"
+                th:text="'Lista de Partidos de ' + ${equipo.nomequipo}"></h1>
             <h1 th:if="${usuarioAct.codrol != 2}" style="margin-left: 5%">Lista de Partidos</h1>
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
-                        <button th:if="${usuarioAct.codrol == 2}">
-                            <a href="/partido/nuevo">Registrar Partido</a>
-                        </button>
-                        &nbsp;
-                        <form th:if="${usuarioAct.codrol == 2}" action="/reporte/partido" target="_blank" method="post"
-                              th:object="${equipo}">
-                            <input type="hidden" class="form-control" name="codequipo"
-                                   th:field="*{codequipo}">
-                            <button type="submit"
-                                    class="btn btn-info">Reporte de Partidos</button>
-                        </form>
-                        &nbsp; <a th:if="${usuarioAct.codrol != 2}"
-                                  href="/reportes/partidosAll" target="_blank"
-                                  class="btn btn-info">Reporte de Partidos</a>
+                        <div style="display: flex; justify-content: space-between">
+                            <a href="/partido/nuevo" th:if="${usuarioAct.codrol == 2}" class="new">Registrar Partido</a>&nbsp;
+                            <form th:if="${usuarioAct.codrol == 2}" action="/reporte/partido" target="_blank"
+                                  method="post"
+                                  th:object="${equipo}">
+                                <input type="hidden" class="form-control" name="codequipo" th:field="*{codequipo}">
+                                <button type="submit" class="report">Reporte PDF</button>&nbsp;
+                            </form>
+                            <a th:if="${usuarioAct.codrol != 2}" href="/reportes/partidosAll" target="_blank"
+                               class="report">Reporte PDF</a>
 
-
+                        </div>
 
                     </div>
 
@@ -108,28 +105,28 @@
                             <form action="/partido/ver" method="post" th:if="${usuarioAct.codrol != 2}">
                                 <input type="hidden" name="codpartido"
                                        th:value="${u.codpartido}">
-                                <button type="submit" class="btn btn-info">Ver</button>
+                                <button type="submit" class="btn btn-info">Ver partido </button>
                             </form>
 
                             <form action="/partido/actualizar" method="post" th:if="${usuarioAct.codrol == 2}">
                                 <input type="hidden" name="codpartido"
                                        th:value="${u.codpartido}">
                                 <button type="submit"
-                                        class="btn btn-primary">Editar
+                                        class="btn btn-primary"><i class="fas fa-edit"></i>
                                 </button>
                             </form>
 
                             <form th:action="@{'/partido/datos/' + ${u.codpartido}}" method="get"
                                   th:if="${usuarioAct.codrol == 2}">
                                 <button type="submit"
-                                        class="btn btn-success">Registrar Datos
+                                        class="btn btn-success"><i class="fas fa-plus"></i>
                                 </button>
                             </form>
 
                             <form action="/partido/verdatos" method="post">
                                 <input type="hidden" name="codpartido"
                                        th:value="${u.codpartido}">
-                                <button type="submit" class="btn btn-info">Ver Datos</button>
+                                <button type="submit" class="btn btn-info">Ver datos</button>
                             </form>
                         </td>
                     </tr>

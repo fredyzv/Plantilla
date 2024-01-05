@@ -48,7 +48,7 @@
 
 
     <section class="section-content">
-        <div style="width: 100%">
+        <div class="section-content-interno">
 
 
             <h1 style="margin-left: 15%">Temporadas</h1>
@@ -57,9 +57,7 @@
                 <div class="table_header">
 
                     <div class="buttons">
-                        <a href="/temporada/nuevo">
-                            <button> Registrar Temporada</button>
-                        </a>
+                        <a href="/temporada/nuevo" class="new">Registrar Temporada</a>
 
                     </div>
 
@@ -74,7 +72,8 @@
                         <th>Código</th>
                         <th>Temporada</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
+                        <th colspan="2">Acciones</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -82,15 +81,17 @@
                         <td th:text="${e.codtemporada}"></td>
                         <td th:text="${e.nomtemporada}"></td>
                         <td th:text="${e.estado.estado}"></td>
-                        <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
+                        <td style="width: 80px">
                             <form action="/temporada/actualizar" method="post">
                                 <input type="hidden" name="codtemporada" th:value="${e.codtemporada}">
-                                <button type="submit" class="btn btn-primary">Editar
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i>
                                 </button>
                             </form>
-                            <form action="/temporada/eliminar" method="post">
+                        </td>
+                        <td style="width: 80px">
+                            <form action="/temporada/eliminar" method="post" th:if="${e.codestado==1}">
                                 <input type="hidden" name="codtemporada" th:value="${e.codtemporada}">
-                                <button onclick="return alerta()" type="submit" class="btn btn-danger">Eliminar
+                                <button onclick="return alerta()" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>
                                 </button>
                             </form>
                         </td>
