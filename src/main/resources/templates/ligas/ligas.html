@@ -30,7 +30,8 @@
     <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
     <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
-
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -53,7 +54,7 @@
         <div class="section-content-interno">
 
             <h1 style="margin-left: 5%">Ligas</h1>
-            <div class="container-tabla">
+            <div class="container-tabla" id="table_wrapper">
                 <div class="table_header">
 
                     <div class="buttons">
@@ -61,13 +62,13 @@
                         <a th:if="${usuario.codrol != 2}" href="/reportes/ligas" target="_blank" class="report">Reporte de Ligas</a>
                     </div>
 
-                    <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                    <div class="input_search" id="table_filter">
+                        <input type="search" placeholder="Buscar" id="searchBox" >
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
 
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Código</th>
@@ -123,7 +124,35 @@
         } else {
             return false;
         }
-    }
+    };
+
+    new DataTable('#table');
+
+    /*
+    var searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('keyup',function (){
+        var keyword = this.value;
+        keyword = keyword.toUpperCase();
+        var table = document.getElementById('table');
+        var all_tr = table.getElementsByTagName('tr' );
+        for (var i=0; i<all_tr.length;i++){
+            var all_columns = all_tr[i].getElementsByTagName('td');
+            for (var j=0; j<all_columns.length;j++){
+                if (all_columns[j]){
+                    var column_value = all_columns[j].innerText || all_columns[j].textContent;
+                    column_value = column_value.toUpperCase();
+                    if (column_value.indexOf(keyword) > -1){
+                        all_tr[i].style.display = '';
+                        break;
+                    }else{
+                        all_tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+    })
+
+*/
 </script>
 
 <!-- Optional JavaScript -->

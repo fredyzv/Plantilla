@@ -36,7 +36,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
     <title>Equipo</title>
 </head>
 
@@ -66,13 +67,13 @@
                     </div>
                     </div>
                     <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                        <input type="text" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
 
                 </div>
 
-                <table class="table">
+                <table class="display" id="example" style="width: 100%">
                     <thead>
                     <tr>
                         <th>Nombre <i class="fa fa-chevron-down"></i></th>
@@ -86,13 +87,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="e : ${lstEquipo}">
-                        <th th:text="${e.nomequipo}"></th>
-                        <td th:text="${e.dep}"></td>
-                        <td th:text="${e.pro}" hid></td>
-                        <td th:text="${e.dis}"></td>
-                        <td th:text="${e.usu.apellidos}"></td>
-                        <td th:text="${e.liga.nomliga}"></td>
+                    <tr th:each="e : ${lstEquipo}" >
+                        <td th:text="${e.nomequipo}" ></td>
+                        <td th:text="${e.dep}" ></td>
+                        <td th:text="${e.pro}" ></td>
+                        <td th:text="${e.dis}" ></td>
+                        <td th:text="${e.usu.apellidos}" ></td>
+                        <td th:text="${e.liga.nomliga}" ></td>
                         <td th:if="${usuarioAct.codrol == 1}"
                             th:text="${e.estado.estado}"></td>
                         <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
@@ -121,19 +122,7 @@
                     <div class="" th:if="${usuarioAct.codrol != 2}">
                         <div class=""></div>
                         <div class="">
-                            <nav aria-label="Pagination">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" th:classappend="${prev == 0 ? 'disabled' : ''}">
-                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${prev}|}">Anterior</a>
-                                    </li>
-                                    <li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active' : ''}">
-                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${page}|}" th:text="${page}"></a>
-                                    </li>
-                                    <li class="page-item" th:classappend="${current == last ? 'disabled' : ''}">
-                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${next}|}">Siguiente</a>
-                                    </li>
-                                </ul>
-                            </nav>
+
                         </div>
                         <div class="col-md-2"></div>
                     </div>
@@ -158,7 +147,51 @@
         }
     }
 </script>
+<script>
+    //Primera columna
+    /*const searchInput = document.getElementById('searchBox');
+    const rows = document.querySelectorAll('tbody tr');
+    //console.log(rows);
+    searchInput.addEventListener('keyup', function (event) {
+        //console.log(event);
+        const q = event.target.value.toLowerCase();
+        rows.forEach((row) => {
+            row.querySelector('th').textContent.toLowerCase().startsWith(q)
+                ? (row.style.display = 'table-row')
+                : (row.style.display = 'none');
+        });
 
+    });
+*/
+
+    //All columns
+   /* var searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('keyup',function (){
+        var keyword = this.value;
+        keyword = keyword.toUpperCase();
+        var table = document.getElementById('table');
+        var all_tr = table.getElementsByTagName('tr' );
+        for (var i=0; i<all_tr.length;i++){
+            var all_columns = all_tr[i].getElementsByTagName('td');
+            for (var j=0; j<all_columns.length;j++){
+                if (all_columns[j]){
+                    var column_value = all_columns[j].innerText || all_columns[j].textContent;
+                    column_value = column_value.toUpperCase();
+                    if (column_value.indexOf(keyword) > -1){
+                        all_tr[i].style.display = '';
+                        break;
+                    }else{
+                        all_tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+    })*/
+
+    $(document).ready(function (){
+        $('#example').dataTable();
+    });
+</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

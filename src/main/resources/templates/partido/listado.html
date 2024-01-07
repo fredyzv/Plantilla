@@ -101,6 +101,7 @@
                         <td th:text="${u.scorerival}"></td>
                         <td th:if="${u.scoreequipo > u.scorerival}">Ganador</td>
                         <td th:if="${u.scoreequipo < u.scorerival}">Perdedor</td>
+                        <td th:if="${u.scoreequipo  == 0} ">No hay datos</td>
                         <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
                             <form action="/partido/ver" method="post" th:if="${usuarioAct.codrol != 2}">
                                 <input type="hidden" name="codpartido"
