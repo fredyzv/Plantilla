@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                        <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
@@ -116,9 +116,33 @@
         } else {
             return false;
         }
-    }
-</script>
+    };
 
+</script>
+<script>
+    var searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('keyup',function (){
+        var keyword = this.value;
+        keyword = keyword.toUpperCase();
+        var table = document.getElementById('table');
+        var all_tr = table.getElementsByTagName('tr' );
+        for (var i=0; i<all_tr.length;i++){
+            var all_columns = all_tr[i].getElementsByTagName('td');
+            for (var j=0; j<all_columns.length;j++){
+                if (all_columns[j]){
+                    var column_value = all_columns[j].innerText || all_columns[j].textContent;
+                    column_value = column_value.toUpperCase();
+                    if (column_value.indexOf(keyword) > -1){
+                        all_tr[i].style.display = '';
+                        break;
+                    }else{
+                        all_tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+    })
+</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -161,6 +185,7 @@
             }
         }
     });
+
 </script>
 </body>
 

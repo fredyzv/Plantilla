@@ -30,8 +30,7 @@
     <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
     <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -54,7 +53,7 @@
         <div class="section-content-interno">
 
             <h1 style="margin-left: 5%">Ligas</h1>
-            <div class="container-tabla" id="table_wrapper">
+            <div class="container-tabla" >
                 <div class="table_header">
 
                     <div class="buttons">
@@ -62,13 +61,28 @@
                         <a th:if="${usuario.codrol != 2}" href="/reportes/ligas" target="_blank" class="report">Reporte de Ligas</a>
                     </div>
 
-                    <div class="input_search" id="table_filter">
-                        <input type="search" placeholder="Buscar" id="searchBox" >
-                        <i class="fa fa-search" id="search"></i>
-                    </div>
+                        <div style="display: flex;">
+                        <div class="filterEntries">
+                            <div class="entries ">
+                                Mostrar
+                                <select name="" id="table_size" style="width: 50px">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                entradas
+                            </div>
+                        </div>
+                        <div class="input_search" >
+                            <input type="search" placeholder="Buscar" id="searchBox" >
+                            <i class="fa fa-search" id="search"></i>
+                        </div>
+                        </div>
+
                 </div>
 
-                <table class="table" id="table">
+                <table class="table" id="mytab">
                     <thead>
                     <tr>
                         <th>Código</th>
@@ -108,7 +122,16 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
-                    <p>Aqui va la paginación</p>
+                    <span class="showEntries">Mostrar 1 al 10 de 50 entradas</span>
+                    <div class="pagination">
+                        <button><</button>
+                        <button class="num">1</button>
+                        <button class="num">2</button>
+                        <button class="num">3</button>
+                        <button class="num">4</button>
+                        <button class="num">5</button>
+                        <button>></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,6 +140,7 @@
 </div>
 
 <script>
+
     function alerta() {
         var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
         if (opcion == true) {
@@ -124,37 +148,155 @@
         } else {
             return false;
         }
-    };
+    }
 
-    new DataTable('#table');
+</script>
+<script >
+    entries = document.querySelector(".showEntries")
+    paginationBtns = document.querySelectorAll(".pagination button")
+    tabSize = document.getElementById("table_size")
 
-    /*
-    var searchBox = document.getElementById('searchBox');
-    searchBox.addEventListener('keyup',function (){
-        var keyword = this.value;
-        keyword = keyword.toUpperCase();
-        var table = document.getElementById('table');
-        var all_tr = table.getElementsByTagName('tr' );
-        for (var i=0; i<all_tr.length;i++){
-            var all_columns = all_tr[i].getElementsByTagName('td');
-            for (var j=0; j<all_columns.length;j++){
-                if (all_columns[j]){
-                    var column_value = all_columns[j].innerText || all_columns[j].textContent;
-                    column_value = column_value.toUpperCase();
-                    if (column_value.indexOf(keyword) > -1){
-                        all_tr[i].style.display = '';
-                        break;
-                    }else{
-                        all_tr[i].style.display = 'none';
-                    }
-                }
-            }
+    var arrayLength = 0
+    var tablaSize = 10
+    var startIndex = 1
+    var endIndex = 0
+    var currentIndex = 1
+    var maxIndex = 0
+
+    showInfo()
+
+    function preLoadCalculations(){
+        array = getData
+        arrayLength = array.length
+        maxIndex = arrayLength / tablaSize
+        if ((arrayLength % tablaSize)>0){
+            maxIndex++
+        }
+    }
+function displayIndexBtn(){
+    const pagination = document.querySelector('.pagination')
+    pagination.innerHTML = ""
+    pagination.innerHTML = '<button onclick="prev()" class="prev"><</button>'
+
+    for (let i=1; i<=maxIndex; i++){
+        pagination.innerHTML += '<button onclick=paginationBtn('+i+') index="'+i+'">'+i+'</button>'
+    }
+
+    pagination.innerHTML += '<button onclick="next()" class="next">></button>'
+
+    highlightIndexBtn()
+}
+
+function highlightIndexBtn(){
+startIndex = ((currentIndex - 1)* tablaSize)+1
+    endIndex = (startIndex + tablaSize)-1
+
+    if (endIndex > arrayLength){
+        endIndex = arrayLength
+    }
+    if (maxIndex >= 2){
+        var nextBtn = document.querySelector(".next")
+        nextBtn.classList.add("act")
+    }
+    entries.textContent = `Showing ${startIndex} to ${endIndex} of ${arrayLength} entries`
+    paginationBtns.forEach(btn =>{
+        btn.classList.remove('active')
+        if (btn.getAttribute('index') === currentIndex.toString()){
+            btn.classList.add('active')
         }
     })
 
-*/
-</script>
+    showInfo()
+}
+function showInfo(){
+    var tab_start = startIndex - 1
+    var tab_end = endIndex
 
+    if (getData > 0){
+        for (i=tab_start; i<tab_end; i++){
+            var staff = getData[i]
+            if (staff){
+                let createElement = `<tr class="ligas">
+                        <td th:text="${staff.codliga}"></td>
+                        <td th:text="${staff.nomliga}"></td>
+                        <td th:text="${staff.dep}"></td>
+                        <td th:text="${staff.pro}"></td>
+                        <td th:text="${staff.dis}"></td>
+                        <td th:text="${staff.num}"></td>
+                        <td th:text="${staff.est.estado}"></td>
+                        <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
+                            <form action="/ligas/actualizar" method="post" >
+                                <input type="hidden" name="codliga"
+                                       th:value="${staff.codliga}">
+                                <button type="submit"
+                                        class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                            </form>
+                            <form action="/ligas/eliminar" method="post">
+                                <input type="hidden" name="codliga"
+                                       th:value="${staff.codliga}">
+                                <button onclick="return alerta()" type="submit"
+                                        class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>`
+            }
+        }
+    }
+}
+function next(){
+    var prevBtn = document.querySelector('.prev')
+    var nextBtn = document.querySelector('.next')
+
+    if (currentIndex <= maxIndex -1){
+        currentIndex++
+        prevBtn.classList.add("act")
+        highlightIndexBtn()
+    }
+    if (currentIndex > maxIndex -1){
+        nextBtn.classList.remove("act")
+    }
+}
+function prev(){
+    var prevBtn = document.querySelector(".prev")
+    if (currentIndex > 1){
+        currentIndex--
+        prevBtn.classList.add("act")
+        highlightIndexBtn()
+    }
+    if (currentIndex < 2){
+        prevBtn.classList.remove("act")
+    }
+}
+function paginationBtn(i){
+    currentIndex = i
+    var prevBtn = document.querySelector('.prev')
+    var nextBtn = document.querySelector('.next')
+    highlightIndexBtn()
+
+    if (currentIndex > maxIndex -1){
+        nextBtn.classList.remove('acts')
+    }
+    else {
+        nextBtn.classList.add("act")
+    }
+    if (currentIndex > 1){
+        prevBtn.classList.add("act")
+    }
+    if (currentIndex < 2){
+        prevBtn.classList.remove("act")
+    }
+}
+
+tabSize.add('change', ()=>{
+    var selectedValue = parseInt(tabSize.value)
+    tableSize = selectedValue
+    currentIndex = 1
+    startIndex = 1
+    displayIndexBtn()
+    })
+    displayIndexBtn()
+
+</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -173,30 +315,7 @@
         integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
         crossorigin="anonymous"></script>
 <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020'],
-            datasets: [{
-                label: 'Nuevos usuarios',
-                data: [50, 100, 150, 200],
-                backgroundColor: ['#12C9E5', '#12C9E5', '#12C9E5',
-                    '#111B54'],
-                maxBarThickness: 30,
-                maxBarLength: 2
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
+
 </script>
 </body>
 

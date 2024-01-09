@@ -36,7 +36,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
     <title>Equipo</title>
 </head>
@@ -57,23 +57,27 @@
 
                     <div class="buttons">
                         <div style="display: flex; justify-content: space-between">
-                             <a href="/equipo/nuevo" th:if="${usuarioAct.codrol != 3 and mostrar != si}" class="new">Nuevo Equipo</a>&nbsp;
+                            <a href="/equipo/nuevo" th:if="${usuarioAct.codrol != 3 and mostrar != si}" class="new">Nuevo
+                                Equipo</a>&nbsp;
                             <form action="/reporte/equipo" target="_blank" method="post" th:object="${usuarioAct}">
                                 <input type="hidden" class="form-control" name="usuario" th:field="*{usuario}">
-                                <button th:if="${usuarioAct.codrol == 2}" type="submit" class="report">Reporte de Equipo</button>&nbsp;
+                                <button th:if="${usuarioAct.codrol == 2}" type="submit" class="report">Reporte de
+                                    Equipo
+                                </button>&nbsp;
                             </form>
-                            <a href="/reportes/equipoAll" th:if="${usuarioAct.codrol != 2}" target="_blank" class="report">Reporte de Equipos</a>
+                            <a href="/reportes/equipoAll" th:if="${usuarioAct.codrol != 2}" target="_blank"
+                               class="report">Reporte de Equipos</a>
 
-                    </div>
+                        </div>
                     </div>
                     <div class="input_search">
-                        <input type="text" placeholder="Buscar" id="searchBox">
+                        <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
 
                 </div>
 
-                <table class="display" id="example" style="width: 100%">
+                <table class="table">
                     <thead>
                     <tr>
                         <th>Nombre <i class="fa fa-chevron-down"></i></th>
@@ -87,23 +91,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="e : ${lstEquipo}" >
-                        <td th:text="${e.nomequipo}" ></td>
-                        <td th:text="${e.dep}" ></td>
-                        <td th:text="${e.pro}" ></td>
-                        <td th:text="${e.dis}" ></td>
-                        <td th:text="${e.usu.apellidos}" ></td>
-                        <td th:text="${e.liga.nomliga}" ></td>
+                    <tr th:each="e : ${lstEquipo}">
+                        <td th:text="${e.nomequipo}"></td>
+                        <td th:text="${e.dep}"></td>
+                        <td th:text="${e.pro}"></td>
+                        <td th:text="${e.dis}"></td>
+                        <td th:text="${e.usu.apellidos}"></td>
+                        <td th:text="${e.liga.nomliga}"></td>
                         <td th:if="${usuarioAct.codrol == 1}"
                             th:text="${e.estado.estado}"></td>
                         <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
 
-                            <form action="/equipo/ver" method="post" th:if="${usuarioAct.codrol != 2}" >
+                            <form action="/equipo/ver" method="post" th:if="${usuarioAct.codrol != 2}">
                                 <input type="hidden" name="codequipo" th:value="${e.codequipo}">
                                 <button type="submit" class="btn btn-info"><i class="fas fa-eye"></i></button>
                             </form>
 
-                            <form action="/equipo/actualizar" method="post"  th:if="${usuarioAct.codrol != 3}" >
+                            <form action="/equipo/actualizar" method="post" th:if="${usuarioAct.codrol != 3}">
                                 <input type="hidden" name="codequipo"
                                        th:value="${e.codequipo}">
                                 <button type="submit"
@@ -112,7 +116,8 @@
                             <form action="/equipo/eliminar" method="post" th:if="${usuarioAct.codrol != 3}">
                                 <input type="hidden" name="codequipo"
                                        th:value="${e.codequipo}">
-                                <button onclick="return alerta()" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <button onclick="return alerta()" type="submit" class="btn btn-danger"><i
+                                        class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -165,32 +170,32 @@
 */
 
     //All columns
-   /* var searchBox = document.getElementById('searchBox');
-    searchBox.addEventListener('keyup',function (){
+    var searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('keyup', function () {
         var keyword = this.value;
         keyword = keyword.toUpperCase();
         var table = document.getElementById('table');
-        var all_tr = table.getElementsByTagName('tr' );
-        for (var i=0; i<all_tr.length;i++){
+        var all_tr = table.getElementsByTagName('tr');
+        for (var i = 0; i < all_tr.length; i++) {
             var all_columns = all_tr[i].getElementsByTagName('td');
-            for (var j=0; j<all_columns.length;j++){
-                if (all_columns[j]){
+            for (var j = 0; j < all_columns.length; j++) {
+                if (all_columns[j]) {
                     var column_value = all_columns[j].innerText || all_columns[j].textContent;
                     column_value = column_value.toUpperCase();
-                    if (column_value.indexOf(keyword) > -1){
+                    if (column_value.indexOf(keyword) > -1) {
                         all_tr[i].style.display = '';
                         break;
-                    }else{
+                    } else {
                         all_tr[i].style.display = 'none';
                     }
                 }
             }
         }
-    })*/
+    })
 
-    $(document).ready(function (){
+    /*$(document).ready(function (){
         $('#example').dataTable();
-    });
+    });*/
 </script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS
