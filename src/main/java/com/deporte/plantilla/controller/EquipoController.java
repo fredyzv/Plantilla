@@ -4,7 +4,6 @@ package com.deporte.plantilla.controller;
 
 import com.deporte.plantilla.model.*;
 import com.deporte.plantilla.repository.*;
-import com.deporte.plantilla.service.EquipoPageService;
 import com.deporte.plantilla.service.UbigeoService;
 import com.deporte.plantilla.util.Fecha;
 import jakarta.servlet.http.HttpSession;
@@ -37,8 +36,7 @@ public class EquipoController {
 	private IEstadoRepository repoEs;
 	@Autowired
 	private UbigeoService servicio;
-	@Autowired
-	private EquipoPageService pageService;
+
 	@Autowired
 	private IJugadorRepository repoJ;
 
@@ -70,22 +68,10 @@ public class EquipoController {
 		usuarioAct = repoU.findByCorreo(correo);
 		model.addAttribute("usuarioAct", usuarioAct);
 
-		/*Paginacion*/
-		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1):0;
-		PageRequest pageRequest = PageRequest.of(page,10);
-		Page<Equipo> pageEquipo = pageService.getAll(pageRequest);
-		int totalPage = pageEquipo.getTotalPages();
-		if(totalPage>0){
-			List<Integer> pages = IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
-			model.addAttribute("pages", pages);
-		}
+
 
 		if(usuarioAct.getCodrol() != 2){
-			model.addAttribute("lstEquipo", pageEquipo.getContent());
-			model.addAttribute("current", page + 1);
-			model.addAttribute("next", page + 2);
-			model.addAttribute("prev", page);
-			model.addAttribute("last", totalPage);
+			model.addAttribute("lstEquipo", repoE.findAll());
 			model.addAttribute("mostrar", "no");
 		}else{
 			equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(), 1);

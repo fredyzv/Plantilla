@@ -126,10 +126,6 @@
                     <div class="pagination">
                         <button><</button>
                         <button class="num">1</button>
-                        <button class="num">2</button>
-                        <button class="num">3</button>
-                        <button class="num">4</button>
-                        <button class="num">5</button>
                         <button>></button>
                     </div>
                 </div>
@@ -216,29 +212,7 @@ function showInfo(){
         for (i=tab_start; i<tab_end; i++){
             var staff = getData[i]
             if (staff){
-                let createElement = `<tr class="ligas">
-                        <td th:text="${staff.codliga}"></td>
-                        <td th:text="${staff.nomliga}"></td>
-                        <td th:text="${staff.dep}"></td>
-                        <td th:text="${staff.pro}"></td>
-                        <td th:text="${staff.dis}"></td>
-                        <td th:text="${staff.num}"></td>
-                        <td th:text="${staff.est.estado}"></td>
-                        <td style="display: flex; justify-content: space-evenly; margin-top: -1px">
-                            <form action="/ligas/actualizar" method="post" >
-                                <input type="hidden" name="codliga"
-                                       th:value="${staff.codliga}">
-                                <button type="submit"
-                                        class="btn btn-primary"><i class="fas fa-edit"></i></button>
-                            </form>
-                            <form action="/ligas/eliminar" method="post">
-                                <input type="hidden" name="codliga"
-                                       th:value="${staff.codliga}">
-                                <button onclick="return alerta()" type="submit"
-                                        class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                            </form>
-                        </td>
-                    </tr>`
+                let createElement = ``
             }
         }
     }

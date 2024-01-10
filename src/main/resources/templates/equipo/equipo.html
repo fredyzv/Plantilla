@@ -77,7 +77,7 @@
 
                 </div>
 
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Nombre <i class="fa fa-chevron-down"></i></th>
@@ -124,24 +124,14 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
-                    <div class="" th:if="${usuarioAct.codrol != 2}">
-                        <div class=""></div>
-                        <div class="">
-
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
+                    <div th:if="${usuarioAct.codrol != 2}"  class="pagination" id="paginador"></div>
                 </div>
-
-
             </div>
         </div>
-
     </section>
-
-
 </div>
 
+<script src="/js/page.js"></script>
 <script>
     function alerta() {
         var opcion = confirm("¿Estás seguro de Eliminar el Registro?");

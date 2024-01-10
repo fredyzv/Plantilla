@@ -94,7 +94,8 @@
                             <form action="/categoria/eliminar" method="post">
                                 <input type="hidden" name="codcategoria" th:value="${e.codcategoria}">
                                 <button onclick="return alerta()" type="submit"
-                                        class="btn btn-danger" th:if="${e.estado.codestado==1}"><i class="fas fa-trash"></i>
+                                        class="btn btn-danger" th:if="${e.estado.codestado==1}"><i
+                                        class="fas fa-trash"></i>
                                 </button>
                             </form>
                         </td>
@@ -102,14 +103,15 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
-                    <p>Aqui va la paginación</p>
+                    <div th:if="${usuarioAct.codrol != 2}" id="paginador" class=""></div>
                 </div>
             </div>
         </div>
     </section>
 </div>
-</div>
 
+
+<script src="/js/page.js"></script>
 <script>
     function alerta() {
         var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
@@ -121,33 +123,10 @@
     }
 
 
-
-
 </script>
 
 <script>
-    var searchBox = document.getElementById('searchBox');
-    searchBox.addEventListener('keyup', function () {
-    var keyword = this.value;
-    keyword = keyword.toUpperCase();
-    var table = document.getElementById('table');
-    var all_tr = table.getElementsByTagName('tr');
-    for (var i = 0; i < all_tr.length; i++) {
-    var all_columns = all_tr[i].getElementsByTagName('td');
-    for (var j = 0; j < all_columns.length; j++) {
-    if (all_columns[j]) {
-    var column_value = all_columns[j].innerText || all_columns[j].textContent;
-    column_value = column_value.toUpperCase();
-    if (column_value.indexOf(keyword) > -1) {
-    all_tr[i].style.display = '';
-    break;
-    } else {
-    all_tr[i].style.display = 'none';
-    }
-    }
-    }
-    }
-    })
+
 </script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
