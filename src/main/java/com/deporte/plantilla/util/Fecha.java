@@ -22,6 +22,14 @@ public class Fecha {
 			ss = c.get(Calendar.SECOND);
 			return ajustar(hh) + ":" + ajustar(mm) + ":" + ajustar(ss);
 		}
+	public static String fechaActualSinHora() {
+		int dd, mm, aa;
+		Calendar c = new GregorianCalendar();
+		dd = c.get(Calendar.DAY_OF_MONTH);
+		mm = c.get(Calendar.MONTH) + 1;
+		aa = c.get(Calendar.YEAR);
+		return aa + "-" + ajustar(mm) + "-" + ajustar(dd);
+	}
 
 		private static String ajustar(int numero) {
 			return String.format("%02d", numero);
