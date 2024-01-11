@@ -1,8 +1,8 @@
 package com.deporte.plantilla.controller;
 
+import com.deporte.plantilla.model.Control;
 import com.deporte.plantilla.model.Usuario;
 import com.deporte.plantilla.repository.*;
-import com.deporte.plantilla.service.UsuariosPageService;
 import com.deporte.plantilla.util.Fecha;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +34,10 @@ public class UsersController {
 	private ISexoRepository repoS;
 	@Autowired
 	private IRolRepository repoR;
+
 	@Autowired
-	private UsuariosPageService pageService;
+	private IControlRepository repoC;
+
 
 	/* ABRIR LISTA DE USUARIOS */
 	@GetMapping("/usuario")
@@ -48,21 +50,7 @@ public class UsersController {
 		model.addAttribute("usuarioAct", usuarioAct);
 		model.addAttribute("usuario", usuario);
 
-		/*Paginacion*/
-		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1):0;
-		PageRequest pageRequest = PageRequest.of(page,10);
-		Page<Usuario> pageUsuario = pageService.getAll(pageRequest);
-		int totalPage = pageUsuario.getTotalPages();
-		if(totalPage>0){
-			List<Integer> pages = IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
-			model.addAttribute("pages", pages);
-		}
-
-		model.addAttribute("lstUsuario", pageUsuario.getContent());
-		model.addAttribute("current", page + 1);
-		model.addAttribute("next", page + 2);
-		model.addAttribute("prev", page);
-		model.addAttribute("last", totalPage);
+		model.addAttribute("lstUsuario", repoU.findAll());
 
 		return "usuarios/usuarios";
 	}
@@ -88,8 +76,8 @@ public class UsersController {
 
 	/* GRABAR NUEVO USUARIO */
 	@PostMapping("/grabar")
-	public String grabarRegistro(@ModelAttribute Usuario usuarioAct, Usuario usuario, HttpSession session,
-			Model model) {
+	public String grabarRegistro(@ModelAttribute Usuario usuarioAct, Control control, Usuario usuario, HttpSession session,
+								 Model model) {
 
 		String correo = (String) session.getAttribute("correo");
 		model.addAttribute("rol", session.getAttribute("rol"));
@@ -115,6 +103,12 @@ public class UsersController {
 						usuario.setFecreg(Fecha.fechaActual());
 						repoU.save(usuario);
 						model.addAttribute("mensaje", "Usuario Registrado");
+						control.setUsuario(usuario.getUsuario());
+						control.setFecini(Fecha.fechaActualSinHora());
+						control.setFecact(Fecha.fechaActualSinHora());
+						control.setSituacion(false);
+						control.setMeses(1);
+						repoC.save(control);
 						model.addAttribute("usuario", new Usuario());
 					} catch (Exception e) {
 						model.addAttribute("mensaje", "Error al Registrar");

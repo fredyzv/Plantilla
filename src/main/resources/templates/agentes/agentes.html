@@ -53,15 +53,15 @@
             <div class="container-tabla">
                 <div class="table_header">
                     <div class="buttons">
-                        <a th:if="${mensaje} == null" href="/reportes/agentes" target="_blank" class="report">Reporte PDF </a>
+                        <a th:if="${mensaje} == null" href="" target="_blank" class="report">Reporte pagos </a>
 
                     </div>
                     <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                        <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Nombres</th>
@@ -78,8 +78,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="u : ${lstAgentes}">
-                        <th th:text="${u.nomjug}"></th>
-                        <th th:text="${u.apejug}"></th>
+                        <td th:text="${u.nomjug}"></td>
+                        <td th:text="${u.apejug}"></td>
                         <td th:text="${u.documento}"></td>
                         <td th:if="${usuarioAct.codrol == 1}"
                             th:text="${u.email}"></td>
@@ -109,21 +109,20 @@
 
                 </table>
                 <div class="table_fotter">
-                    <p>Aqui va la paginación</p>
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
+                        <strong th:text="${advertencia}"  th:if="${equipo == null and usuarioAct.codrol==2} "></strong>
+                    </div>
+                    <div class="pagination" id="paginador"></div>
                 </div>
-                <div>
-                    <strong th:text="${mensaje}"></strong>
-                    <strong th:text="${advertencia}"  th:if="${equipo == null and usuarioAct.codrol==2} "></strong>
-                </div>
+
             </div>
         </div>
     </section>
 </div>
-</div>
 
-<script>
-
-</script>
+<script src="/js/page.js"></script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

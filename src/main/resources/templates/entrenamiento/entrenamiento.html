@@ -35,115 +35,43 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <title>Temporadas</title>
+
+    <title>Jugadores</title>
 </head>
 
 <body>
 <!-- Navbar left-->
 <div class="menu" th:replace="principal::navbar-left"></div>
 <!-- Fin Navbar left -->
-<div class="d-flex" id="content-wrapper">
 
+<div class="body-vistas">
     <!-- Page Content -->
-
-
     <section class="section-content">
         <div class="section-content-interno">
+            <h1 style="margin-left: 5%">Entrenamientos</h1>
 
-
-            <h1 style="margin-left: 15%">Temporadas</h1>
-
-            <div class="container-tabla" style="width: 70%">
+            <div class="container-tabla">
                 <div class="table_header">
-
                     <div class="buttons">
-                        <a href="/temporada/nuevo" class="new">Registrar Temporada</a>
 
                     </div>
-
                     <div class="input_search">
                         <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
-                <table class="table" id="table">
-                    <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Temporada</th>
-                        <th>Estado</th>
-                        <th colspan="2">Acciones</th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="e : ${lstTemporadas}">
-                        <td th:text="${e.codtemporada}"></td>
-                        <td th:text="${e.nomtemporada}"></td>
-                        <td th:text="${e.estado.estado}"></td>
-                        <td style="width: 80px">
-                            <form action="/temporada/actualizar" method="post">
-                                <input type="hidden" name="codtemporada" th:value="${e.codtemporada}">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td style="width: 80px">
-                            <form action="/temporada/eliminar" method="post" th:if="${e.codestado==1}">
-                                <input type="hidden" name="codtemporada" th:value="${e.codtemporada}">
-                                <button onclick="return alerta()" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
                 <div class="table_fotter">
-                    <span class="">Mostrar 5 registros por paginación</span>
-                    <div class="pagination" id="paginador"></div>
+                   <h2>Actualización proximamente</h2>
                 </div>
-            </div>
 
+            </div>
         </div>
     </section>
 </div>
 
 <script src="/js/page.js"></script>
-<script>
-    function alerta() {
-        var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
-        if (opcion == true) {
-            return true;
-        } else {
-            return false;
-        }
-    };
 
-</script>
-<script>
-    var searchBox = document.getElementById('searchBox');
-    searchBox.addEventListener('keyup',function (){
-        var keyword = this.value;
-        keyword = keyword.toUpperCase();
-        var table = document.getElementById('table');
-        var all_tr = table.getElementsByTagName('tr' );
-        for (var i=0; i<all_tr.length;i++){
-            var all_columns = all_tr[i].getElementsByTagName('td');
-            for (var j=0; j<all_columns.length;j++){
-                if (all_columns[j]){
-                    var column_value = all_columns[j].innerText || all_columns[j].textContent;
-                    column_value = column_value.toUpperCase();
-                    if (column_value.indexOf(keyword) > -1){
-                        all_tr[i].style.display = '';
-                        break;
-                    }else{
-                        all_tr[i].style.display = 'none';
-                    }
-                }
-            }
-        }
-    })
-</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -186,7 +114,6 @@
             }
         }
     });
-
 </script>
 </body>
 

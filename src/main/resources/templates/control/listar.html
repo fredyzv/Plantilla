@@ -2,221 +2,180 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}"
+          type="static/image/x-icon"/>
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png"
+          th:href="@{/templates/images/apple-touch-icon.png}">
 
-<!-- Styles -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/style.css}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css"
+          th:href="@{/css/colors/orange.css}"/>
 
-<!-- Google fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap"
-	rel="stylesheet">
+    <!-- Modernizer -->
+    <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-<!-- Ionic icons -->
-<script src="https://kit.fontawesome.com/3778e44b4a.js"
-	crossorigin="anonymous"></script>
+    <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 
-<title>Control</title>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>Control</title>
 </head>
 
 <body>
-	<div class="d-flex" id="content-wrapper">
+<!-- Navbar left-->
+<div class="menu" th:replace="principal::navbar-left"></div>
+<!-- Fin Navbar left -->
 
-		<!-- Sidebar -->
-		<div id="sidebar-container" class="bg-primary">
-			<div class="logo">
-				<h4 class="text-light font-weight-bold mb-0">Sistema de
-					Basketball</h4>
-			</div>
-			<div class="menu" th:replace="principal::barra"></div>
-		</div>
-		<!-- Fin sidebar -->
+<!-- Page Content -->
+<div id="content" class="bg-grey w-100">
 
-		<div class="w-100">
+    <section class="section-content">
+        <div class="section-content-interno">
 
-			<!-- Navbar -->
-			<nav
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-				<div class="container-inside">
 
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+            <h1 style="margin-left: 5%">Control de Pagos</h1>
 
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<h1 th:if="${usuarioAct.codrol == 1}">Administrador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 2}">Entrenador:</h1>
-						<h1 th:if="${usuarioAct.codrol == 3}">Federación:</h1>
-						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-							<li class="nav-item dropdown"><a
-								class="nav-link text-dark dropdown-toggle" href="#"
-								id="navbarDropdown" role="button" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"
-								th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-							</a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/logout">Cerrar sesión</a>
-								</div></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- Fin Navbar -->
+            <div class="container-tabla">
+                <div class="table_header">
+                    <div class="buttons">
+                        <a th:if="${mensaje} == null" href="/reportes/agentes" target="_blank" class="report">Reporte
+                            PDF </a>
 
-			<!-- Page Content -->
-			<div id="content" class="bg-grey w-100">
+                    </div>
+                    <div class="input_search">
+                        <input type="search" placeholder="Buscar" id="searchBox">
+                        <i class="fa fa-search" id="search"></i>
+                    </div>
+                </div>
 
-				<section class="bg-light py-3">
-					<div class="container-inside">
-						<div class="row">
-							<div class="col-lg-9 col-md-8">
-								<h1 class="font-weight-bold mb-0"
-									th:text="${usuarioAct.nombres +' ' + usuarioAct.apellidos}">
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-								</h1>
-								<p class="lead text-muted" th:text="${usuarioAct.correo}"></p>
-							</div>
-							<div class="col-lg-2 col-md-4 d-flex">
-								<a class="btn btn-primary w-100 align-self-center"
-									href="/usuarios/perfilact">Editar mi Perfil</a>
-							</div>
-						</div>
-					</div>
-				</section>
+                <table class="table" id="table">
+                    <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Teléfono</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Estado</th>
+                        <th>Balance</th>
+                        <th>Acciones</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="u : ${lstControl}">
+                        <td th:text="${u.usuario}"></td>
+                        <td th:text="${u.usucontrol.nombres}"></td>
+                        <td th:text="${u.usucontrol.apellidos}"></td>
+                        <td th:text="${u.usucontrol.telefono}"></td>
+                        <td th:text="${u.fecini}"></td>
+                        <td th:text="${u.usucontrol.estado.estado}"></td>
+                        <td style="color: red" th:if="${u.meses > 0}"
+                            th:text="'Debe Pagar ' + ${u.meses} + ' cuotas'"></td>
+                        <td th:if="${u.meses <= 0}">No Presenta deudas</td>
+                        <td th:if="${u.meses > 0}">
+                            <form action="/control/pagar" method="post">
+                                <input type="hidden" name="usuario"
+                                       th:value="${u.usuario}">
+                                <button onclick="return alerta()" type="submit"
+                                        class="btn btn-primary">Pagar
+                                </button>
+                            </form>
+                        </td>
+                        <td th:if="${u.usucontrol.codestado == 1 }">
+                            <form action="/control/eliminar" method="post">
+                                <input type="hidden" name="usuario" th:value="${u.usuario}">
+                                <button onclick="return alerta()" type="submit" class="btn btn-danger">Suspender</button>
+                            </form>
+                        </td>
+                        <td th:if="${u.usucontrol.codestado == 2 }">
+                            <form action="/control/activar" method="post">
+                                <input type="hidden" name="usuario" th:value="${u.usuario}">
+                                <button onclick="return alerta()" type="submit" class="btn btn-primary">Activar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
 
-				<section>
-					<div class="container-inside">
-						<div class="row">
-							<div class="col-lg-12 my-3">
-								<div class="card rounded-0">
-									<div class="card-header bg-light">
-										<h5 class="font-weight-bold mb-0">Control de Pagos</h5>
-										<input style="margin-left: 80%" type="search" placeholder="Buscar" id="searchBox" >
-									</div>
-									<div class="card-body">
-										<section>
-											<div class="form-row">
-												<br>
-												<table class="table" id="table">
-													<thead>
-													<tr>
-														<th>Código</th>
-														<th>Nombres</th>
-														<th>Apellidos</th>
-														<th>Teléfono</th>
-														<th>Fecha de Inicio</th>
-														<th>Estado</th>
-														<th>Balance</th>
-														<th>Acciones</th>
-														<th></th>
-														<th></th>
-													</tr>
-													</thead>
-													<tbody>
-													<tr th:each="u : ${lstControl}">
-														<td th:text="${u.usuario}"></td>
-														<td th:text="${u.usucontrol.nombres}"></td>
-														<td th:text="${u.usucontrol.apellidos}"></td>
-														<td th:text="${u.usucontrol.telefono}"></td>
-														<td th:text="${u.fecini}"></td>
-														<td th:text="${u.usucontrol.estado.estado}"></td>
-														<td style="color: red" th:if="${u.meses > 0}"  th:text="'Debe Pagar ' + ${u.meses} + ' cuotas'"></td>
-														<td	th:if="${u.meses == 0}">No Presenta deudas</td>
-														<td>
-															<form action="/control/pagar" method="post">
-																<input type="hidden" name="usuario"
-																	   th:value="${u.usuario}">
-																<button onclick="return alerta()" type="submit"
-																		class="btn btn-primary">Pagar</button>
-															</form>
-														</td>
-														<td>
-															<form action="/control/eliminar" method="post">
-																<input type="hidden" name="usuario"
-																	   th:value="${u.usuario}">
-																<button onclick="return alerta()" type="submit"
-																		class="btn btn-danger">Suspender</button>
-															</form>
-														</td>
-													</tr>
-													</tbody>
+                </table>
+                <div class="table_fotter">
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
+                    </div>
+                    <div class="pagination" id="paginador"></div>
+                </div>
 
-												</table>
-												<div>
-													<strong th:text="${mensaje}"></strong>
-												</div>
-                                                <div id="paginador" class=""></div>
-											</div>
-										</section>
 
-									</div>
-								</div>
-							</div>
 
-						</div>
-					</div>
-				</section>
 
-			</div>
+            </div>
+        </div>
+    </section>
 
-		</div>
-	</div>
-    <script src="../assets/js/page.js"></script>
-	<script>
-		var searchBox = document.getElementById('searchBox');
-		searchBox.addEventListener('keyup',function (){
-			var keyword = this.value;
-			keyword = keyword.toUpperCase();
-			var table = document.getElementById('table');
-			var all_tr = table.getElementsByTagName('tr');
-			for (var i=0; i<all_tr.length;i++){
-				var all_columns = all_tr[i].getElementsByTagName('td');
-				for (var j=0; j<all_columns.length;j++){
-					if (all_columns[j]){
-						var column_value = all_columns[j].innerText || all_columns[j].textContent;
-						column_value = column_value.toUpperCase();
-						if (column_value.indexOf(keyword) > -1){
-							all_tr[i].style.display = '';
-							break;
-						}else{
-							all_tr[i].style.display = 'none';
-						}
-					}
-				}
-			}
-		})
-	</script>
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
-		integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
-		crossorigin="anonymous"></script>
+</div>
+
+<script src="/js/page.js"></script>
+
+<script>
+    var searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('keyup', function () {
+        var keyword = this.value;
+        keyword = keyword.toUpperCase();
+        var table = document.getElementById('table');
+        var all_tr = table.getElementsByTagName('tr');
+        for (var i = 0; i < all_tr.length; i++) {
+            var all_columns = all_tr[i].getElementsByTagName('td');
+            for (var j = 0; j < all_columns.length; j++) {
+                if (all_columns[j]) {
+                    var column_value = all_columns[j].innerText || all_columns[j].textContent;
+                    column_value = column_value.toUpperCase();
+                    if (column_value.indexOf(keyword) > -1) {
+                        all_tr[i].style.display = '';
+                        break;
+                    } else {
+                        all_tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+    })
+</script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
+        crossorigin="anonymous"></script>
 
 </body>
 

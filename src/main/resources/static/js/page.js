@@ -35,8 +35,8 @@ Paginador = function(divPaginador, tabla)
 
         //Ahora, agregar las celdas que serán los controles
         var ant = fil.insertCell(fil.cells.length);
-        ant.innerHTML = 'Anterior';
-        ant.className = 'pag_btn btn btn-outline-info'; //con eso le asigno un estilo y una clase al boton
+        ant.innerHTML = '<';
+        ant.className = 'prev'; //con eso le asigno un estilo y una clase al boton
         var self = this;
         ant.onclick = function()
         {
@@ -47,11 +47,11 @@ Paginador = function(divPaginador, tabla)
 
         var num = fil.insertCell(fil.cells.length);
         num.innerHTML = ''; //en teoria, aún no se el número de la página
-        num.className = 'numero_page btn btn-outline-secondary';
+        num.className = 'num ';
 
         var sig = fil.insertCell(fil.cells.length);
-        sig.innerHTML = 'Siguiente';
-        sig.className = 'pag_btn btn btn-outline-info';
+        sig.innerHTML = '>';
+        sig.className = 'next';
         sig.onclick = function()
         {
             if (self.pagActual == self.paginas)
@@ -75,4 +75,47 @@ var p = new Paginador(
     document.getElementById('table'),
     4
 );
+
+//Search all columns
+var searchBox = document.getElementById('searchBox');
+searchBox.addEventListener('keyup', function () {
+    var keyword = this.value;
+    keyword = keyword.toUpperCase();
+    var table = document.getElementById('table');
+    var all_tr = table.getElementsByTagName('tr');
+    for (var i = 0; i < all_tr.length; i++) {
+        var all_columns = all_tr[i].getElementsByTagName('td');
+        for (var j = 0; j < all_columns.length; j++) {
+            if (all_columns[j]) {
+                var column_value = all_columns[j].innerText || all_columns[j].textContent;
+                column_value = column_value.toUpperCase();
+                if (column_value.indexOf(keyword) > -1) {
+                    all_tr[i].style.display = '';
+                    break;
+                } else {
+                    all_tr[i].style.display = 'none';
+
+                }
+            }
+        }
+
+    }
+
+})
+/*
+//Primera columna
+const searchInput = document.getElementById('searchs');
+const rows = document.querySelectorAll('tbody tr');
+//console.log(rows);
+searchInput.addEventListener('keyup', function (event) {
+    //console.log(event);
+    const q = event.target.value.toLowerCase();
+    rows.forEach((row) => {
+        row.querySelector('th').textContent.toLowerCase().startsWith(q)
+            ? (row.style.display = 'table-row')
+            : (row.style.display = 'none');
+    });
+
+});
+*/
 p.Mostrar();

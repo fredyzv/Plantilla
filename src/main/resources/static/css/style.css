@@ -2135,7 +2135,7 @@ table{
 
 }
 .prev{
-    width: 35px;
+    width: 50px;
     padding: 5px 0;
     color: #f0f0f0;
     background-color: #ff9458;
@@ -2145,7 +2145,34 @@ table{
     overflow: unset;
     border: 1px solid #ff9458;
     border-left: none;
+
+}
+.num{
+    display: table-caption;
+    width: 35px;
+    padding: 5px 0;
+    color: #f0f0f0;
+    background-color: #ff9458;
+    font-size: 16px;
+    cursor: pointer;
+    pointer-events: auto;
+    overflow: unset;
+    border-left: none;
     border-radius: 5px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+.next{
+    width: 50px;
+    padding: 5px 0;
+    color: #f0f0f0;
+    background-color: #ff9458;
+    font-size: 16px;
+    cursor: pointer;
+    pointer-events: auto;
+    overflow: unset;
+    border: 1px solid #ff9458;
+    border-left: none;
 }
 .table_fotter{
     margin-top: 1rem;
@@ -2153,30 +2180,6 @@ table{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    & button {
-        width: 35px;
-        padding: 5px 0;
-        color: #f0f0f0;
-        background-color: #ff9458;
-        font-size: 16px;
-        cursor: pointer;
-        pointer-events: auto;
-        overflow: unset;
-        border: 1px solid #ff9458;
-        border-left: none;
-        border-radius: 5px;
-    }
-
-    .pagination button:first-child{
-        width: 50px;
-        border-radius: 0px;
-
-    }
-    .pagination button:last-child{
-        width: 50px;
-        border-radius: 0px;
-
-    }
     .table_fotter button.active, & button:hover {
         background-color: #ef8f55;
         color: #fdd8c2;
@@ -2189,6 +2192,10 @@ table{
         opacity: 1;
         pointer-events: auto;
     }
+}
+.table2_fotter {
+    margin-top: 1rem;
+    padding: 0 30px 20px;
     .save {
         outline: none;
         border: none;
@@ -2220,6 +2227,7 @@ table{
         }
     }
 }
+
 .container-tabla h1{
     text-align: center;
 }
@@ -2390,7 +2398,15 @@ input[type=number]::-webkit-outer-spin-button {
 .body-datos{
     text-align: center;
 }
-
+.grapf{
+    padding: 30px 30px;
+    background-color: white;
+    border-radius: 30px;
+    width:90%;margin: auto;
+    display: flex;
+    justify-content: center;
+    box-shadow: 8px 8px 5px 0px #bdbdbdbf;
+}
 /*------------------------------------------------------------------
    ICONOS CONTACTO ADMIN
 -------------------------------------------------------------------*/

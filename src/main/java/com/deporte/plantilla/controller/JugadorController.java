@@ -5,7 +5,6 @@ import com.deporte.plantilla.model.Jugador;
 import com.deporte.plantilla.model.Usuario;
 import com.deporte.plantilla.repository.*;
 
-import com.deporte.plantilla.service.JugadorPageService;
 import com.deporte.plantilla.util.Fecha;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +40,7 @@ public class JugadorController {
     private IPosicionRepository repoP;
     @Autowired
     private IJugadorRepository repoJ;
-    @Autowired
-    private JugadorPageService pageService;
+
 
     /* ABRIR LISTA DE JUGADORES */
     @GetMapping("/jugador")
@@ -54,22 +52,10 @@ public class JugadorController {
         usuarioAct = repoU.findByCorreo(correo);
         model.addAttribute("usuarioAct", usuarioAct);
 
-        /*Paginacion*/
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1):0;
-        PageRequest pageRequest = PageRequest.of(page,10);
-        Page<Jugador> pageJugador = pageService.getAll(pageRequest);
-        int totalPage = pageJugador.getTotalPages();
-        if(totalPage>0){
-            List<Integer> pages = IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
 
         if(usuarioAct.getCodrol() != 2){
-            model.addAttribute("lstJugador", pageJugador.getContent());
-            model.addAttribute("current", page + 1);
-            model.addAttribute("next", page + 2);
-            model.addAttribute("prev", page);
-            model.addAttribute("last", totalPage);
+            model.addAttribute("lstJugador", repoJ.findAll());
+
         }else{
             equipo = repoE.findByUsuarioAndCodestado(usuarioAct.getUsuario(),1);
             model.addAttribute("equipo", equipo);

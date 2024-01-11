@@ -64,12 +64,12 @@
                         </div>
                     </div>
                     <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                        <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
 
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Nombres <i class="fa fa-chevron-down"></i></th>
@@ -89,8 +89,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="u : ${lstJugador}">
-                        <th th:text="${u.nomjug}"></th>
-                        <th th:text="${u.apejug}"></th>
+                        <td th:text="${u.nomjug}"></td>
+                        <td th:text="${u.apejug}"></td>
                         <td th:text="${u.documento}"></td>
                         <td th:if="${usuarioAct.codrol != 2}"
                             th:text="${u.equipo.usu.apellidos}"></td>
@@ -125,39 +125,22 @@
 
                 </table>
                 <div class="table_fotter">
-                    <div class="" th:if="${usuarioAct.codrol != 2}">
-                        <div class=""></div>
-                        <div class="">
-                            <nav aria-label="Pagination">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" th:classappend="${prev == 0 ? 'disabled' : ''}">
-                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${prev}|}">Anterior</a>
-                                    </li>
-                                    <li class="page-item" th:each="page : ${pages}"
-                                        th:classappend="${current == page ? 'active' : ''}">
-                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${page}|}"
-                                           th:text="${page}"></a>
-                                    </li>
-                                    <li class="page-item" th:classappend="${current == last ? 'disabled' : ''}">
-                                        <a class="page-link" th:href="@{|/equipo/equipo?page=${next}|}">Siguiente</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="col-md-2"></div>
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
                     </div>
+                    <div class="pagination" id="paginador"></div>
+
                 </div>
-                <div>
-                    <strong th:text="${mensaje}"></strong>
-                </div>
+
 
 
             </div>
         </div>
     </section>
 </div>
-</div>
 
+<script src="/js/page.js"></script>
 <script>
     function alerta() {
         var opcion = confirm("¿Estás seguro de Eliminar el Registro?");

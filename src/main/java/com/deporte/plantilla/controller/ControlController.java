@@ -67,7 +67,7 @@ public class ControlController {
         try {
             control = repoC.findByUsuario(control.getUsuario());
             SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-            Date actual = date.parse(control.getFecini());
+            Date actual = date.parse(control.getFecact());
             actual.setMonth(actual.getMonth()+1);
             String fecha = date.format(actual);
             control.setFecact(fecha);
@@ -104,6 +104,29 @@ public class ControlController {
         return "redirect:/control/listar";
     }
 
+    /*ACTIVAR USUARIO*/
+    @PostMapping("/activar")
+    public String ActivarUsuario(@ModelAttribute Usuario usuario, Control control, HttpSession session, Model model )throws ParseException {
+
+        String correo = (String) session.getAttribute("correo");
+        model.addAttribute("rol", session.getAttribute("rol"));
+        Usuario usuarioAct = repoU.findByCorreo(correo);
+        model.addAttribute("usuarioAct", usuarioAct);
+
+        usuario = repoU.findById(control.getUsuario()).get();
+
+        try {
+            usuario.setCodestado(1);
+            repoU.save(usuario);
+            model.addAttribute("mensaje", "Usuario activado");
+        } catch (Exception e) {
+            model.addAttribute("mensaje", "Error al activar");
+        }
+
+        model.addAttribute("lstControl", repoC.findAll());
+
+        return "redirect:/control/listar";
+    }
 
 
 

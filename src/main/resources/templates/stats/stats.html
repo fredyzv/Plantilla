@@ -49,7 +49,7 @@
 
 
     <section class="section-content">
-        <div style="width: 100%">
+        <div style="width: 100%;margin-top: 3%;">
 
             <h1 style="margin-left: 5%">Estadísticas</h1>
 
@@ -89,12 +89,12 @@
                         </div>
                     </div>
                     <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                        <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
 
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Equipo <i class="fa fa-chevron-down"></i></th>
@@ -155,7 +155,7 @@
                         <input type="hidden" th:value="*{s3v}" id="s3v">
 
                     </tr>
-                    <tr th:if="${usuarioAct.codrol != 2}" th:each="u : ${lstStats}">
+                    <tr th:if="${usuarioAct.codrol != 2}" th:each="u : ${lstStats}" id="data">
                         <th th:text="*{u.nombreEquipo}"></th>
                         <td th:text="*{u.scoreLocal}"></td>
                         <td th:text="*{u.scoreVisita}"></td>
@@ -179,29 +179,30 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
+                    <div  th:if="${usuarioAct.codrol != 2}">
+                        <span class="">Mostrar 5 registros por paginación</span>
+                    </div>
                     <div>
                         <strong th:text="${mensaje}"></strong>
                     </div>
-
-                    <div th:if="${usuarioAct.codrol == 2}" class="graphBox" style="width: 1000px; height: 500px" >
-                        <div class="box">
-                            <div><canvas id="myChart"></canvas></div>
-                        </div>
+                    <div  th:if="${usuarioAct.codrol != 2}">
+                        <div class="pagination" id="paginador"></div>
                     </div>
                 </div>
-
             </div>
             <br>
 
+            <div class="grapf" th:if="${usuarioAct.codrol == 2}" >
+                <div class="graphBox" style="width: 1000px; height: 500px" >
+                    <div class="box">
+                        <div><canvas id="myChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
-</div>
-
-</div>
-
-</div>
-</div>
+<script src="/js/page.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var scorelocal = document.getElementById("scorelocal").value;

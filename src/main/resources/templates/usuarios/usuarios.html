@@ -71,13 +71,13 @@
                         </div>
                     </div>
                     <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                        <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
 
 
-                <table class="table" id="tablax">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Código</th>
@@ -130,28 +130,14 @@
 
                 </table>
                 <div class="table_fotter">
-                        <nav aria-label="Pagination">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item" th:classappend="${prev == 0 ? 'disabled' : ''}">
-                                    <a class="page-link" th:href="@{|/user/usuario?page=${prev}|}">Anterior</a>
-                                </li>
-                                <li class="page-item" th:each="page : ${pages}"
-                                    th:classappend="${current == page ? 'active' : ''}">
-                                    <a class="page-link" th:href="@{|/user/usuario?page=${page}|}"
-                                       th:text="${page}"></a>
-                                </li>
-                                <li class="page-item" th:classappend="${current == last ? 'disabled' : ''}">
-                                    <a class="page-link" th:href="@{|/user/usuario?page=${next}|}">Siguiente</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    <div class="col-md-2"></div>
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div class="pagination" id="paginador"></div>
                 </div>
             </div>
         </div>
     </section>
 </div>
-</div>
+<script src="/js/page.js"></script>
 <script>
     function alerta() {
         var opcion = confirm("¿Estás seguro de Eliminar el Registro?");

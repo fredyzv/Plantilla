@@ -44,7 +44,7 @@
 <!-- Navbar -->
 <div class="menu" th:replace="principal::navbar-left"></div>
 <!-- Fin Navbar -->
-<div class="d-flex" id="content-wrapper" style="width: auto; height: 100%;">
+<div class="body-vistas">
 
     <!-- Page Content -->
 
@@ -82,7 +82,7 @@
 
                 </div>
 
-                <table class="table" id="mytab">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Código</th>
@@ -122,19 +122,15 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
-                    <span class="showEntries">Mostrar 1 al 10 de 50 entradas</span>
-                    <div class="pagination">
-                        <button><</button>
-                        <button class="num">1</button>
-                        <button>></button>
-                    </div>
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div class="pagination" id="paginador"></div>
                 </div>
             </div>
         </div>
     </section>
 </div>
-</div>
 
+<script src="/js/page.js"></script>
 <script>
 
     function alerta() {
@@ -147,130 +143,7 @@
     }
 
 </script>
-<script >
-    entries = document.querySelector(".showEntries")
-    paginationBtns = document.querySelectorAll(".pagination button")
-    tabSize = document.getElementById("table_size")
 
-    var arrayLength = 0
-    var tablaSize = 10
-    var startIndex = 1
-    var endIndex = 0
-    var currentIndex = 1
-    var maxIndex = 0
-
-    showInfo()
-
-    function preLoadCalculations(){
-        array = getData
-        arrayLength = array.length
-        maxIndex = arrayLength / tablaSize
-        if ((arrayLength % tablaSize)>0){
-            maxIndex++
-        }
-    }
-function displayIndexBtn(){
-    const pagination = document.querySelector('.pagination')
-    pagination.innerHTML = ""
-    pagination.innerHTML = '<button onclick="prev()" class="prev"><</button>'
-
-    for (let i=1; i<=maxIndex; i++){
-        pagination.innerHTML += '<button onclick=paginationBtn('+i+') index="'+i+'">'+i+'</button>'
-    }
-
-    pagination.innerHTML += '<button onclick="next()" class="next">></button>'
-
-    highlightIndexBtn()
-}
-
-function highlightIndexBtn(){
-startIndex = ((currentIndex - 1)* tablaSize)+1
-    endIndex = (startIndex + tablaSize)-1
-
-    if (endIndex > arrayLength){
-        endIndex = arrayLength
-    }
-    if (maxIndex >= 2){
-        var nextBtn = document.querySelector(".next")
-        nextBtn.classList.add("act")
-    }
-    entries.textContent = `Showing ${startIndex} to ${endIndex} of ${arrayLength} entries`
-    paginationBtns.forEach(btn =>{
-        btn.classList.remove('active')
-        if (btn.getAttribute('index') === currentIndex.toString()){
-            btn.classList.add('active')
-        }
-    })
-
-    showInfo()
-}
-function showInfo(){
-    var tab_start = startIndex - 1
-    var tab_end = endIndex
-
-    if (getData > 0){
-        for (i=tab_start; i<tab_end; i++){
-            var staff = getData[i]
-            if (staff){
-                let createElement = ``
-            }
-        }
-    }
-}
-function next(){
-    var prevBtn = document.querySelector('.prev')
-    var nextBtn = document.querySelector('.next')
-
-    if (currentIndex <= maxIndex -1){
-        currentIndex++
-        prevBtn.classList.add("act")
-        highlightIndexBtn()
-    }
-    if (currentIndex > maxIndex -1){
-        nextBtn.classList.remove("act")
-    }
-}
-function prev(){
-    var prevBtn = document.querySelector(".prev")
-    if (currentIndex > 1){
-        currentIndex--
-        prevBtn.classList.add("act")
-        highlightIndexBtn()
-    }
-    if (currentIndex < 2){
-        prevBtn.classList.remove("act")
-    }
-}
-function paginationBtn(i){
-    currentIndex = i
-    var prevBtn = document.querySelector('.prev')
-    var nextBtn = document.querySelector('.next')
-    highlightIndexBtn()
-
-    if (currentIndex > maxIndex -1){
-        nextBtn.classList.remove('acts')
-    }
-    else {
-        nextBtn.classList.add("act")
-    }
-    if (currentIndex > 1){
-        prevBtn.classList.add("act")
-    }
-    if (currentIndex < 2){
-        prevBtn.classList.remove("act")
-    }
-}
-
-tabSize.add('change', ()=>{
-    var selectedValue = parseInt(tabSize.value)
-    tableSize = selectedValue
-    currentIndex = 1
-    startIndex = 1
-    displayIndexBtn()
-    })
-    displayIndexBtn()
-
-</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -91,6 +91,9 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr th:if="${lstEquipo==null}">
+                        <th  colspan="7">No hay equipo por el momento</th>
+                    </tr>
                     <tr th:each="e : ${lstEquipo}">
                         <td th:text="${e.nomequipo}"></td>
                         <td th:text="${e.dep}"></td>
@@ -124,7 +127,8 @@
                     </tbody>
                 </table>
                 <div class="table_fotter">
-                    <div th:if="${usuarioAct.codrol != 2}"  class="pagination" id="paginador"></div>
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div th:if="${usuarioAct.codrol != 2}" class="pagination" id="paginador"></div>
                 </div>
             </div>
         </div>
@@ -142,51 +146,7 @@
         }
     }
 </script>
-<script>
-    //Primera columna
-    /*const searchInput = document.getElementById('searchBox');
-    const rows = document.querySelectorAll('tbody tr');
-    //console.log(rows);
-    searchInput.addEventListener('keyup', function (event) {
-        //console.log(event);
-        const q = event.target.value.toLowerCase();
-        rows.forEach((row) => {
-            row.querySelector('th').textContent.toLowerCase().startsWith(q)
-                ? (row.style.display = 'table-row')
-                : (row.style.display = 'none');
-        });
 
-    });
-*/
-
-    //All columns
-    var searchBox = document.getElementById('searchBox');
-    searchBox.addEventListener('keyup', function () {
-        var keyword = this.value;
-        keyword = keyword.toUpperCase();
-        var table = document.getElementById('table');
-        var all_tr = table.getElementsByTagName('tr');
-        for (var i = 0; i < all_tr.length; i++) {
-            var all_columns = all_tr[i].getElementsByTagName('td');
-            for (var j = 0; j < all_columns.length; j++) {
-                if (all_columns[j]) {
-                    var column_value = all_columns[j].innerText || all_columns[j].textContent;
-                    column_value = column_value.toUpperCase();
-                    if (column_value.indexOf(keyword) > -1) {
-                        all_tr[i].style.display = '';
-                        break;
-                    } else {
-                        all_tr[i].style.display = 'none';
-                    }
-                }
-            }
-        }
-    })
-
-    /*$(document).ready(function (){
-        $('#example').dataTable();
-    });*/
-</script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

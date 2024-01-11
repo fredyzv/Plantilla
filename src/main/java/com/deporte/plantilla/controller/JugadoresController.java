@@ -98,6 +98,7 @@ public class JugadoresController {
         String doc = (String) session.getAttribute("doc");
         jugador = repoJ.findByDocumento(doc);
         model.addAttribute("jugador", jugador);
+
         if(jugador.getCodestado() == 2){
             model.addAttribute("lstAgentes", repoA.findByCodjugadorAndCodestado(jugador.getCodjugador(),1));
         }else{

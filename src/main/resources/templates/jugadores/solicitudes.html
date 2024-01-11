@@ -2,222 +2,202 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/style-nav-left.css" th:href="@{/css/style-nav-left.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-	<!-- Site Icons -->
-	<link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}" type="static/image/x-icon" />
-	<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png" th:href="@{/templates/images/apple-touch-icon.png}">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/images/favicon.ico" th:href="@{/templates/images/favicon.ico}"
+          type="static/image/x-icon"/>
+    <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png"
+          th:href="@{/templates/images/apple-touch-icon.png}">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-	<!-- Site CSS -->
-	<link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
-	<!-- Login CSS -->
-	<link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
-	<!-- Responsive CSS -->
-	<link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
-	<!-- color -->
-	<link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css" th:href="@{/css/colors/orange.css}" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" th:href="@{/css/style.css}"/>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="static/css/login.css" th:href="@{/css/login.css}"/>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/css/responsive.css" th:href="@{/css/responsive.css}"/>
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="static/css/colors/orange.css"
+          th:href="@{/css/colors/orange.css}"/>
 
-	<!-- Modernizer -->
-	<script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
+    <!-- Modernizer -->
+    <script src="static/js/modernizer.js" th:src="@{/js/modernizer.js}"></script>
 
-	<script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script src="static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 
-<title>Sistema de Baloncesto</title>
+    <title>Sistema de Baloncesto</title>
 </head>
 
-<body style="background-color: lavender;">
-<div class="nav-left" >
-	<nav >
-		<ul>
-			<li><a href="#" class="logo" >
-				<img src="/images/food.png" alt="">
-				<span class="nav-item" style="top: 0;">Atleta</span>
+<body>
+<div class="nav-left">
+    <nav>
+        <ul>
+            <li><a href="#" class="logo">
+                <img src="/images/food.png" alt="">
+                <span class="nav-item" style="top: 0;">Atleta</span>
 
-			</a></li>
+            </a></li>
 
-			<li><a href="/jugadores/inicio">
-				<i class="fas fa-home"></i>
-				<span class="nav-item">Home</span>
-			</a></li>
+            <li><a href="/jugadores/inicio">
+                <i class="fas fa-home"></i>
+                <span class="nav-item">Home</span>
+            </a></li>
 
-			<li><a href="/jugadores/stats">
-				<i class="fas fa-chart-bar"></i>
-				<span class="nav-item">Estadisticas</span>
-			</a></li>
+            <li><a href="/jugadores/stats">
+                <i class="fas fa-chart-bar"></i>
+                <span class="nav-item">Estadisticas</span>
+            </a></li>
 
-			<li><a href="/jugadores/solicitud">
-				<i class="fas fa-chart-bar"></i>
-				<span class="nav-item">Solicitudes</span>
-			</a></li>
+            <li><a href="/jugadores/solicitud">
+                <i class="fas fa-chart-bar"></i>
+                <span class="nav-item">Solicitudes</span>
+            </a></li>
 
-			<li><a href="/jugadores/perfil">
-				<i class="fas fa-user"></i>
-				<span class="nav-item">Perfil</span>
-			</a></li>
+            <li><a href="/jugadores/perfil">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Perfil</span>
+            </a></li>
 
-			<li><a href="#">
-				<i class="fas fa-cog"></i>
-				<span class="nav-item">Configuracion</span>
-			</a></li>
-			<li><a href="/logout" class="logout">
-				<i class="fas fa-sign-out-alt"></i>
-				<span class="nav-item">Cerrar sesión</span>
-			</a></li>
-		</ul>
-	</nav>
+            <li><a href="#">
+                <i class="fas fa-cog"></i>
+                <span class="nav-item">Avisos</span>
+            </a></li>
+            <li><a href="/logout" class="logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-item">Cerrar sesión</span>
+            </a></li>
+        </ul>
+    </nav>
 </div>
 
-	<div class="d-flex" id="content-wrapper" style="width: auto; height: 100%;">
-		<div>
-			<section class="bg-light py-3" style="padding-top: 3%;padding-left: 5%;">
-				<div class="container-inside" style="margin: auto;width: 98%;">
-					<div class="row">
-						<div class="col-lg-9 col-md-8">
-							<div class="etiqueta-usuario">
-								<h1 class="font-weight-bold mb-0" th:text="${jugador.nomjug +' ' + jugador.apejug}" >
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-								</h1>
-								<p class="lead text-muted" th:text="${jugador.documento}"></p>
-							</div>
-						</div>
-						<div class="col-lg-2 col-md-4 d-flex">
+<div class="body-vistas">
+    <!-- Page Content -->
+    <section class="section-content">
+        <div class="section-content-interno">
+            <h1 style="margin-left: 5%">Solicitudes</h1>
+            <div class="container-tabla">
+                <div class="table_header">
+                    <div class="buttons">
+                        <a href="" target="_blank" class="report">Reporte PDF</a>
+                    </div>
+                    <div class="input_search">
+                        <input type="search" placeholder="Buscar" id="searchBox">
+                        <i class="fa fa-search" id="search"></i>
+                    </div>
+                </div>
+                <table class="table" id="table">
+                    <thead>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Entrenador</th>
+                        <th>Departamento</th>
+                        <th>Provincia</th>
+                        <th>Distrito</th>
+                        <th>Fecha de Solicitud</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${lstAgentes.size()==0}">
+                        <th  colspan="9">No hay solicitudes por el momento</th>
+                    </tr>
+                    <tr th:each="u : ${lstAgentes}">
 
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
+                        <th th:text="${u.equipo.nomequipo}"></th>
+                        <th th:text="${u.equipo.usu.apellidos}"></th>
+                        <td th:text="${u.equipo.dep}"></td>
+                        <td th:text="${u.equipo.pro}"></td>
+                        <td th:text="${u.equipo.dis}"></td>
+                        <td th:text="${u.fecreg}"></td>
+                        <td th:text="${u.estado.estado}"></td>
+                        <td>
+                            <form action="/jugadores/aceptar" method="post">
+                                <input type="hidden" name="codequipo"
+                                       th:value="${u.codequipo}">
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/jugadores/declinar" method="post">
+                                <input type="hidden" name="codequipo"
+                                       th:value="${u.codequipo}">
+                                <button type="submit" class="btn btn-danger">Declinar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="table_fotter">
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
+                    </div>
+                    <div class="pagination" id="paginador"></div>
+                </div>
 
-			<!-- Page Content -->
-			<div id="content" class="bg-grey w-100">
-
-				<section style="padding: 1% 3%;">
-					<div class="container-tabla">
-						<div class="row">
-							<div class="col-lg-12 my-3">
-								<div class="card rounded-0">
-									<div class="card-header bg-light">
-										<h5 class="font-weight-bold mb-0">Solicitudes</h5>
-									</div>
-									<div class="card-body">
-										<section>
-											<div class="form-row">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Equipo</th>
-															<th>Entrenador</th>
-															<th>Departamento</th>
-															<th>Provincia</th>
-															<th>Distrito</th>
-															<th>Fecha de Solicitud</th>
-															<th>Estado</th>
-															<th>Acciones</th>
-															<th></th>
-															<th></th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:each="u : ${lstAgentes}">
-															<th th:text="${u.equipo.nomequipo}"></th>
-															<th th:text="${u.equipo.usu.apellidos}"></th>
-															<td th:text="${u.equipo.dep}"></td>
-															<td th:text="${u.equipo.pro}"></td>
-															<td th:text="${u.equipo.dis}"></td>
-															<td th:text="${u.fecreg}"></td>
-															<td th:text="${u.estado.estado}"></td>
-															<td>
-																<form action="/jugadores/aceptar" method="post">
-																	<input type="hidden" name="codequipo"
-																		th:value="${u.codequipo}">
-																	<button type="submit" class="btn btn-primary">Aceptar</button>
-																</form>
-															</td>
-															<td>
-																<form action="/jugadores/declinar" method="post">
-																	<input type="hidden" name="codequipo"
-																		th:value="${u.codequipo}">
-																	<button type="submit" class="btn btn-danger">Declinar</button>
-																</form>
-															</td>
-														</tr>
-													</tbody>
-
-												</table>
-												<div>
-													<strong th:text="${mensaje}"></strong>
-												</div>
-											</div>
-										</section>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-
-
-			</div>
-
-		</div>
-	</div>
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
-		integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
-		crossorigin="anonymous"></script>
-	<script>
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(ctx, {
-			type : 'bar',
-			data : {
-				labels : [ 'Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020' ],
-				datasets : [ {
-					label : 'Nuevos usuarios',
-					data : [ 50, 100, 150, 200 ],
-					backgroundColor : [ '#12C9E5', '#12C9E5', '#12C9E5',
-							'#111B54' ],
-					maxBarThickness : 30,
-					maxBarLength : 2
-				} ]
-			},
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : true
-						}
-					} ]
-				}
-			}
-		});
-	</script>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/js/page.js"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI="
+        crossorigin="anonymous"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Feb 2020', 'Mar 2020', 'Abr 2020', 'May 2020'],
+            datasets: [{
+                label: 'Nuevos usuarios',
+                data: [50, 100, 150, 200],
+                backgroundColor: ['#12C9E5', '#12C9E5', '#12C9E5',
+                    '#111B54'],
+                maxBarThickness: 30,
+                maxBarLength: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 </body>
 
 </html>

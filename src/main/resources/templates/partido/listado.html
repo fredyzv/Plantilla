@@ -70,11 +70,11 @@
                     </div>
 
                     <div class="input_search">
-                        <input type="search" placeholder="Buscar">
+                        <input type="search" placeholder="Buscar" id="searchBox">
                         <i class="fa fa-search" id="search"></i>
                     </div>
                 </div>
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                     <tr>
                         <th>Fecha <i class="fa fa-chevron-down"></i></th>
@@ -91,9 +91,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="u : ${lstPartido}">
-                        <th th:text="${u.fecpartido}"></th>
-                        <th th:if="${usuarioAct.codrol != 2}" th:text="${u.equipo.nomequipo}"></th>
-                        <th th:text="${u.equiporival}"></th>
+                        <td th:text="${u.fecpartido}"></td>
+                        <td th:if="${usuarioAct.codrol != 2}" th:text="${u.equipo.nomequipo}"></td>
+                        <td th:text="${u.equiporival}"></td>
                         <td th:text="${u.categoria.nomcategoria}"></td>
                         <td th:text="${u.temporada.nomtemporada}"></td>
                         <td th:text="${u.liga.nomliga}"></td>
@@ -135,19 +135,18 @@
 
                 </table>
                 <div class="table_fotter">
-                    <p>Aqui va la paginación</p>
-                </div>
+                    <span class="">Mostrar 5 registros por paginación</span>
+                    <div>
+                        <strong th:text="${mensaje}"></strong>
+                    </div>
+                    <div class="pagination" id="paginador"></div>
 
-                <div>
-                    <strong th:text="${mensaje}"></strong>
                 </div>
-
             </div>
         </div>
     </section>
 </div>
-</div>
-
+<script src="/js/page.js"></script>
 <script>
     function alerta() {
         var opcion = confirm("¿Estás seguro de Eliminar el Registro?");
