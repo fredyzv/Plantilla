@@ -91,10 +91,8 @@
                         <td th:text="${u.posicion.posicion}"></td>
                         <td th:if="${equipo != null and usuarioAct.codrol == 2}">
                             <form th:if="${usuarioAct.codrol != 3}" action="/agentes/solicitar" method="post" >
-                                <input type="hidden" name="codjugador"
-                                       th:value="${u.codjugador}">
-                                <button type="submit"
-                                        class="btn btn-primary">Solicitar
+                                <input type="hidden" name="codjugador" th:value="${u.codjugador}">
+                                <button type="submit" class="btn btn-primary">Solicitar
                                 </button>
                             </form>
                             <!--<form th:if="${usuarioAct.codrol != 3}" action="/agentes/cancelar" method="post">

@@ -70,6 +70,7 @@ public class AgentesController {
 
         if(repoA.findByCodjugadorAndCodequipoAndCodestado(codjug,codequ,1) != null){
             model.addAttribute("mensaje", "Ya Existe una solicitud a éste jugador");
+
         }else{
             try {
                 agentes.setCodjugador(codjug);
